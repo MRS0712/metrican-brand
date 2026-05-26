@@ -1,0 +1,1663 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MetriCAN — Brand Book v1.0</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+:root {
+  /* Primary — del logo */
+  --can-blue: #1F7AE0;
+  --can-blue-bright: #2A9DF4;
+  --can-blue-deep: #003570;
+  --can-blue-ink: #001A3D;
+
+  /* PCB Violet — color real del PCB del producto (referencia OSH Park / fab violeta) */
+  --volt: #4B2BA0;            /* PCB Violet — anchored a la plaqueta real */
+  --volt-bright: #7C3AED;     /* Para uso digital / dashboards */
+  --volt-glow: #A855F7;       /* Highlight / glow effects */
+
+  /* Neutrales */
+  --ink-0: #06070B;
+  --ink-1: #0B0D14;
+  --ink-2: #11141C;
+  --ink-3: #161A24;
+  --ink-4: #1F2430;
+  --ink-5: #2A3142;
+  --line: #232938;
+  --line-soft: #1A1F2B;
+  --mute: #6B7388;
+  --silver: #C8CED6;
+  --paper: #F4F6FA;
+  --paper-warm: #ECEEF3;
+
+  /* Estados */
+  --ok: #22D3A0;
+  --warn: #F5B544;
+  --crit: #FF5470;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+html, body {
+  background: var(--ink-0);
+  color: var(--paper);
+  font-family: 'Manrope', system-ui, sans-serif;
+  font-feature-settings: "ss01", "cv11";
+  font-size: 14px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+.display { font-family: 'Space Grotesk', sans-serif; letter-spacing: -0.02em; }
+.mono { font-family: 'JetBrains Mono', monospace; font-feature-settings: "zero", "ss01"; }
+
+/* PAGE — cada sección es una página de 1280x800 que se puede imprimir */
+.page {
+  width: 1280px;
+  min-height: 800px;
+  margin: 0 auto;
+  position: relative;
+  padding: 64px 80px;
+  border-bottom: 1px solid var(--line-soft);
+  background: var(--ink-0);
+  scroll-margin-top: 64px;
+}
+.page.alt { background: var(--ink-1); }
+.page.paper { background: var(--paper); color: var(--ink-1); }
+.page.paper .mute { color: #6B7388; }
+
+/* Header / chrome común */
+.page-chrome {
+  position: absolute;
+  top: 24px; left: 80px; right: 80px;
+  display: flex; align-items: center; justify-content: space-between;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--mute);
+}
+.page.paper .page-chrome { color: #6B7388; }
+.page-chrome .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--can-blue-bright); display: inline-block; margin-right: 6px; box-shadow: 0 0 8px var(--can-blue-bright); }
+.page-num { letter-spacing: 0.1em; }
+
+/* Tags */
+.tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--can-blue-bright);
+  background: rgba(31, 122, 224, 0.08);
+  border: 1px solid rgba(31, 122, 224, 0.25);
+  border-radius: 999px;
+}
+.tag.volt { color: var(--volt-bright); background: rgba(124, 58, 237, 0.08); border-color: rgba(124, 58, 237, 0.3); }
+.tag.ink { color: var(--ink-1); background: rgba(0,0,0,0.06); border-color: rgba(0,0,0,0.15); }
+
+/* COVER */
+.cover {
+  display: flex; flex-direction: column; justify-content: space-between;
+  min-height: 800px;
+  background:
+    radial-gradient(ellipse at 70% 30%, rgba(31, 122, 224, 0.25), transparent 50%),
+    radial-gradient(ellipse at 20% 80%, rgba(124, 58, 237, 0.18), transparent 55%),
+    var(--ink-0);
+  overflow: hidden;
+  position: relative;
+}
+.cover::before {
+  /* grid */
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+  pointer-events: none;
+}
+.cover-content { position: relative; z-index: 1; padding-top: 80px; }
+.cover h1 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 144px;
+  line-height: 0.92;
+  letter-spacing: -0.05em;
+  font-weight: 500;
+  margin-top: 32px;
+  margin-bottom: 24px;
+}
+.cover h1 .accent {
+  background: linear-gradient(180deg, #2A9DF4 0%, #1F7AE0 50%, #003570 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.cover .subtitle {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 28px;
+  font-weight: 300;
+  color: var(--silver);
+  max-width: 720px;
+  letter-spacing: -0.01em;
+}
+.cover-meta {
+  position: relative; z-index: 1;
+  display: flex; gap: 48px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--mute);
+  padding-bottom: 24px;
+}
+.cover-meta strong { color: var(--paper); font-weight: 500; display: block; margin-top: 4px; font-size: 13px; letter-spacing: 0.05em; text-transform: none; }
+.cover-corner {
+  position: absolute; top: 32px; right: 80px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--mute);
+  text-align: right;
+  z-index: 2;
+}
+.cover-corner strong { color: var(--can-blue-bright); display: block; font-weight: 500; }
+
+/* Section header */
+.section-title {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  align-items: end;
+  gap: 24px;
+  margin-bottom: 48px;
+}
+.section-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 56px;
+  font-weight: 400;
+  color: var(--can-blue);
+  line-height: 0.9;
+  opacity: 0.5;
+}
+.section-title h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 56px;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-weight: 500;
+}
+.section-title .lead {
+  grid-column: 2;
+  margin-top: 12px;
+  font-size: 16px;
+  color: var(--silver);
+  max-width: 640px;
+  line-height: 1.5;
+}
+.page.paper .section-num { color: var(--can-blue-deep); opacity: 0.4; }
+.page.paper .section-title h2 { color: var(--ink-1); }
+.page.paper .section-title .lead { color: var(--ink-5); }
+
+h3.kicker {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--mute);
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+h4 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 22px;
+  letter-spacing: -0.01em;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+p { color: var(--silver); }
+.page.paper p { color: var(--ink-5); }
+
+/* ============================== */
+/* TOC */
+.toc-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0;
+  margin-top: 32px;
+  border-top: 1px solid var(--line);
+}
+.toc-row {
+  display: grid;
+  grid-template-columns: 56px 1fr 80px;
+  align-items: center;
+  padding: 18px 8px;
+  border-bottom: 1px solid var(--line);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 20px;
+  letter-spacing: -0.01em;
+  color: var(--paper);
+  text-decoration: none;
+  cursor: pointer;
+}
+.toc-row:hover { background: rgba(31, 122, 224, 0.04); }
+.toc-row:hover .name { color: var(--can-blue-bright); }
+.toc-row:hover .pg { color: var(--can-blue-bright); }
+.toc-row.right { border-left: 1px solid var(--line); padding-left: 32px; }
+.toc-row .n { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--mute); letter-spacing: 0.1em; }
+.toc-row .pg { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--mute); text-align: right; }
+.toc-row .name { transition: color .15s; }
+.toc-row .name::after { content: ' →'; opacity: 0; transition: opacity .2s; color: var(--can-blue-bright); }
+.toc-row:hover .name::after { opacity: 1; }
+
+/* ============================== */
+/* ESSENCE — pillars */
+.pillars {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 32px;
+}
+.pillar {
+  padding: 28px;
+  background: var(--ink-2);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  min-height: 280px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+.pillar::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--can-blue), var(--volt));
+}
+.pillar .num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--can-blue-bright);
+  letter-spacing: 0.2em;
+}
+.pillar h4 {
+  font-size: 26px;
+  margin-top: 8px;
+}
+.pillar p { font-size: 14px; line-height: 1.55; }
+
+/* Manifest */
+.manifest {
+  margin-top: 48px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 32px;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  font-weight: 300;
+  max-width: 900px;
+  color: var(--silver);
+}
+.manifest strong { color: var(--paper); font-weight: 500; }
+.manifest .hl { color: var(--can-blue-bright); font-weight: 500; }
+.manifest .hl-v { color: var(--volt-bright); font-weight: 500; }
+
+/* ============================== */
+/* LOGO PAGES */
+.logo-stage {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 48px;
+  margin-top: 24px;
+}
+.logo-hero {
+  background: var(--paper);
+  border-radius: 6px;
+  padding: 80px 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 380px;
+  position: relative;
+}
+.logo-hero img { max-width: 100%; height: auto; }
+.logo-hero .corner {
+  position: absolute;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: rgba(0,0,0,0.35);
+  text-transform: uppercase;
+}
+.logo-hero .corner.tl { top: 16px; left: 16px; }
+.logo-hero .corner.tr { top: 16px; right: 16px; }
+.logo-hero .corner.bl { bottom: 16px; left: 16px; }
+.logo-hero .corner.br { bottom: 16px; right: 16px; }
+
+.logo-specs {
+  display: flex; flex-direction: column; gap: 16px;
+}
+.spec-row {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 16px;
+  align-items: baseline;
+}
+.spec-row .k {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--mute);
+}
+.spec-row .v {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--paper);
+}
+.spec-row .v small { display: block; font-size: 12px; font-weight: 400; color: var(--silver); margin-top: 4px; font-family: 'Manrope', sans-serif;}
+
+/* Logo variations grid */
+.logo-variations {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 32px;
+}
+.lv-card {
+  background: var(--paper);
+  border-radius: 4px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.lv-card.dark { background: var(--ink-3); border: 1px solid var(--line); }
+.lv-card.blue { background: var(--can-blue); }
+.lv-card.volt { background: linear-gradient(135deg, var(--volt) 0%, var(--can-blue-deep) 100%); }
+.lv-card.grid {
+  background:
+    radial-gradient(ellipse at 50% 50%, rgba(31, 122, 224, 0.15), transparent 60%),
+    var(--ink-0);
+}
+.lv-card.grid::before {
+  content: ''; position: absolute; inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+.lv-card img { max-width: 70%; max-height: 50%; position: relative; z-index: 1; }
+.lv-label {
+  position: absolute;
+  bottom: 12px;
+  left: 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.lv-card.paper .lv-label, .lv-card:not(.dark):not(.blue):not(.volt):not(.grid) .lv-label { color: rgba(0,0,0,0.5); }
+.lv-card.dark .lv-label, .lv-card.grid .lv-label { color: var(--mute); }
+.lv-card.blue .lv-label, .lv-card.volt .lv-label { color: rgba(255,255,255,0.7); }
+.lv-card.dark img, .lv-card.grid img { filter: brightness(0) saturate(100%) invert(1); }
+
+/* Clear space + min size diagrams */
+.diagram-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 32px;
+}
+.diagram {
+  background: var(--paper);
+  border-radius: 4px;
+  padding: 40px;
+  position: relative;
+  color: var(--ink-1);
+}
+.diagram h4 { color: var(--ink-1); margin-bottom: 16px; }
+.diagram .desc { color: var(--ink-5); font-size: 13px; max-width: 320px; }
+
+/* Don'ts grid */
+.donts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 32px;
+}
+.dont-card {
+  position: relative;
+  background: var(--paper);
+  border-radius: 4px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.dont-card .cross {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.dont-card .cross svg { width: 100%; height: 100%; opacity: 0.85; }
+.dont-card .lv-label { color: var(--crit); font-weight: 500;}
+.dont-card.dark { background: var(--ink-3); border: 1px solid var(--line); }
+.dont-card img { max-width: 70%; max-height: 50%; }
+
+/* COLOR PAGES */
+.palette-hero {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 8px;
+  margin-top: 24px;
+  height: 360px;
+}
+.swatch {
+  border-radius: 4px;
+  padding: 24px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+.swatch .name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 32px;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+}
+.swatch .role {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+.swatch .values {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  line-height: 1.7;
+  letter-spacing: 0.05em;
+}
+.swatch .values span { opacity: 0.7; display: inline-block; width: 36px; }
+.swatch.on-dark { color: var(--paper); }
+.swatch.on-light { color: var(--ink-0); }
+.swatch.on-dark .values, .swatch.on-dark .role { opacity: 0.85; }
+
+/* Secondary palette grid */
+.palette-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+  margin-top: 16px;
+}
+.swatch-sm {
+  border-radius: 4px;
+  padding: 16px;
+  height: 160px;
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.swatch-sm .name { font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 500; }
+.swatch-sm .hex { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.08em; }
+
+/* Ratios */
+.ratio-bar {
+  display: flex;
+  height: 56px;
+  margin-top: 32px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.ratio-seg {
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+}
+
+/* TYPE PAGES */
+.type-hero {
+  margin-top: 8px;
+  padding: 48px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.page.paper .type-hero { border-color: rgba(0,0,0,0.1); }
+.type-hero .display-sample {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 180px;
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+  font-weight: 500;
+}
+.type-hero .meta {
+  display: flex; gap: 32px;
+  margin-top: 24px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--mute);
+}
+
+.type-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 32px;
+  margin-top: 48px;
+}
+.type-block { border-top: 1px solid var(--line); padding-top: 16px; }
+.page.paper .type-block { border-color: rgba(0,0,0,0.15); }
+.type-block .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--mute);
+  margin-bottom: 16px;
+}
+.type-block .specimen-display { font-family: 'Space Grotesk', sans-serif; font-size: 48px; line-height: 1; letter-spacing: -0.02em; margin-bottom: 12px;}
+.type-block .specimen-body { font-family: 'Manrope', sans-serif; font-size: 32px; line-height: 1.1; font-weight: 500; margin-bottom: 12px; }
+.type-block .specimen-mono { font-family: 'JetBrains Mono', monospace; font-size: 26px; line-height: 1.1; margin-bottom: 12px; }
+.type-block .desc { font-size: 13px; color: var(--silver); line-height: 1.5; }
+.page.paper .type-block .desc { color: var(--ink-5); }
+.type-block .weights {
+  display: flex; gap: 12px; margin-top: 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--mute);
+  flex-wrap: wrap;
+}
+
+/* Scale */
+.scale-grid {
+  display: grid;
+  grid-template-columns: 100px 1fr 120px;
+  gap: 16px;
+  margin-top: 16px;
+  align-items: baseline;
+}
+.scale-grid > div {
+  padding: 14px 0;
+  border-top: 1px solid var(--line);
+}
+.page.paper .scale-grid > div { border-color: rgba(0,0,0,0.1); }
+.scale-grid .label { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--mute); letter-spacing: 0.1em;}
+.scale-grid .sample { font-family: 'Space Grotesk', sans-serif; letter-spacing: -0.02em; }
+.scale-grid .meta { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--mute); text-align: right; letter-spacing: 0.08em;}
+
+/* ICONOGRAPHY */
+.icon-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+  margin-top: 32px;
+}
+.icon-cell {
+  aspect-ratio: 1;
+  background: var(--ink-2);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 12px;
+  position: relative;
+}
+.icon-cell svg { width: 44px; height: 44px; stroke: var(--can-blue-bright); fill: none; stroke-width: 1.5; }
+.icon-cell .il {
+  margin-top: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  color: var(--mute);
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* VOICE */
+.voice-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 32px;
+}
+.voice-card {
+  padding: 24px;
+  border-radius: 4px;
+  background: var(--ink-2);
+  border: 1px solid var(--line);
+}
+.voice-card.yes { border-color: rgba(34, 211, 160, 0.3); background: rgba(34, 211, 160, 0.04); }
+.voice-card.no { border-color: rgba(255, 84, 112, 0.3); background: rgba(255, 84, 112, 0.04); }
+.voice-card .tag {
+  margin-bottom: 12px;
+}
+.voice-card.yes .tag { color: var(--ok); background: rgba(34, 211, 160, 0.1); border-color: rgba(34, 211, 160, 0.3); }
+.voice-card.no .tag { color: var(--crit); background: rgba(255, 84, 112, 0.1); border-color: rgba(255, 84, 112, 0.3); }
+.voice-card .quote {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 22px;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--paper);
+  margin-bottom: 8px;
+}
+.voice-card .note { font-size: 12px; color: var(--mute); }
+
+.voice-attrs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-top: 32px;
+}
+.attr {
+  padding: 16px;
+  background: var(--ink-2);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
+.attr .a { font-family: 'Space Grotesk', sans-serif; font-size: 16px; font-weight: 500; color: var(--paper); }
+.attr .b { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--mute); margin-top: 8px; letter-spacing: 0.1em; text-transform: uppercase; }
+.attr .b::before { content: '↳ '; }
+
+/* GRID & layout */
+.grid-vis {
+  margin-top: 24px;
+  background: var(--ink-2);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+}
+.grid-12 {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 12px;
+  height: 280px;
+}
+.grid-12 .col {
+  background: rgba(31, 122, 224, 0.1);
+  border-top: 1px solid rgba(31, 122, 224, 0.3);
+  border-bottom: 1px solid rgba(31, 122, 224, 0.3);
+  position: relative;
+}
+.grid-12 .col span {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--can-blue-bright);
+}
+
+/* APPLICATIONS */
+.app-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+}
+  gap: 16px;
+  margin-top: 32px;
+}
+.app-card {
+  background: var(--ink-2);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 32px;
+  min-height: 320px;
+  position: relative;
+  overflow: hidden;
+}
+.app-card .app-label {
+  position: absolute;
+  top: 16px; right: 20px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--mute);
+}
+
+/* DEVICE — fake board en violeta real del PCB */
+.board {
+  background: linear-gradient(135deg, #3A1F7A 0%, #1F0E4A 100%);
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+  min-height: 240px;
+  box-shadow: inset 0 0 60px rgba(0,0,0,0.4);
+}
+.board::before {
+  content: ''; position: absolute; inset: 0;
+  background-image:
+    repeating-linear-gradient(0deg, transparent 0 19px, rgba(255, 255, 255, 0.04) 19px 20px),
+    repeating-linear-gradient(90deg, transparent 0 19px, rgba(255, 255, 255, 0.04) 19px 20px);
+  pointer-events: none;
+}
+.board::after {
+  /* solder pads */
+  content: ''; position: absolute;
+  right: 24px; top: 24px;
+  width: 80px; height: 80px;
+  background-image: radial-gradient(circle at center, #E0C067 0 4px, transparent 5px);
+  background-size: 16px 16px;
+  opacity: 0.7;
+}
+.board .chip {
+  position: relative; z-index: 1;
+  display: inline-block;
+  padding: 12px 20px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 3px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: #FFFFFF;
+}
+.board .marking {
+  position: relative; z-index: 1;
+  margin-top: 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: rgba(255,255,255,0.55);
+  letter-spacing: 0.1em;
+  line-height: 1.6;
+}
+
+/* Business card — papel claro (default) */
+.bc {
+  background: var(--paper);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 4px;
+  width: 100%;
+  aspect-ratio: 1.7;
+  margin: 16px 0 0;
+  padding: 22px 24px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  color: var(--ink-1);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+}
+.bc::before {
+  content: ''; position: absolute; top: 0; right: 0; width: 55%; height: 100%;
+  background: linear-gradient(135deg, transparent 40%, rgba(31, 122, 224, 0.06) 80%, rgba(31, 122, 224, 0.14));
+}
+/* Dark variant */
+.bc.bc-dark {
+  background: var(--ink-1);
+  border: 1px solid var(--line);
+  color: var(--paper);
+}
+.bc.bc-dark::before {
+  background: radial-gradient(ellipse at top right, rgba(31, 122, 224, 0.22), transparent 65%);
+}
+.bc .bc-logo {
+  position: relative; z-index: 1;
+  height: 22px; width: auto;
+  display: block;
+  align-self: flex-start;
+  flex-shrink: 0;
+}
+.bc.bc-dark .bc-logo { filter: brightness(0) invert(1); opacity: 0.95; }
+.bc .bc-name {
+  position: relative; z-index: 1;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--ink-0);
+}
+.bc.bc-dark .bc-name { color: var(--paper); }
+.bc .bc-role { font-family: 'JetBrains Mono', monospace; font-size: 8.5px; color: var(--can-blue); letter-spacing: 0.2em; text-transform: uppercase; margin-top: 3px; }
+.bc.bc-dark .bc-role { color: var(--can-bright); }
+.bc .bc-meta { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: #4A5266; line-height: 1.7; letter-spacing: 0.05em; position: relative; z-index: 1; }
+.bc.bc-dark .bc-meta { color: var(--silver); }
+
+/* Footer/back cover */
+.back-cover {
+  background: var(--ink-0);
+  display: flex; flex-direction: column; justify-content: space-between;
+  min-height: 800px;
+  position: relative;
+  overflow: hidden;
+}
+.back-cover::before {
+  content: ''; position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 80% 90%, rgba(124, 58, 237, 0.15), transparent 50%),
+    radial-gradient(circle at 10% 20%, rgba(31, 122, 224, 0.12), transparent 50%);
+}
+.back-cover .big-mark {
+  position: relative; z-index: 1;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 240px;
+  line-height: 0.9;
+  letter-spacing: -0.06em;
+  font-weight: 500;
+  color: var(--paper);
+  margin-top: 80px;
+}
+.back-cover .big-mark .accent {
+  background: linear-gradient(180deg, #2A9DF4 0%, #1F7AE0 50%, #003570 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.back-cover .end-meta {
+  position: relative; z-index: 1;
+  display: flex; justify-content: space-between; align-items: flex-end;
+}
+.back-cover .end-meta .col {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--mute);
+  line-height: 1.8;
+}
+.back-cover .end-meta .col strong { color: var(--paper); font-weight: 500; }
+
+/* utilities */
+.row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
+.mt-24 { margin-top: 24px; } .mt-32 { margin-top: 32px; } .mt-48 { margin-top: 48px; } .mt-64 { margin-top: 64px; }
+
+/* Top bar */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(6, 7, 11, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line-soft);
+  padding: 14px 24px;
+  display: flex; align-items: center; justify-content: space-between;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--mute);
+}
+.topbar img { height: 18px; }
+.topbar .right { display: flex; gap: 24px; align-items: center;}
+.topbar .right .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--ok); display: inline-block; margin-right: 6px; box-shadow: 0 0 6px var(--ok); }
+
+@media print {
+  @page { size: A4 landscape; margin: 0; }
+  html, body {
+    background: white !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .topbar { display: none !important; }
+  .page {
+    width: 1280px !important;
+    min-height: 800px !important;
+    height: 800px !important;
+    box-shadow: none !important;
+    border-bottom: none !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+    transform: scale(0.877);
+    transform-origin: top left;
+    page-break-after: always;
+    break-after: page;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .page:last-child { page-break-after: auto; break-after: auto; }
+  .page * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div><img src="../assets/logo-metrican.png" alt="MetriCAN" /></div>
+  <div>Brand Book · v1.0 · 2026</div>
+  <div class="right"><span><span class="dot"></span>System online</span><span>12 pages</span></div>
+</div>
+
+<!-- ========================= PAGE 1 · COVER ========================= -->
+<section class="page cover" id="sec-cover" data-screen-label="01 Cover">
+  <div class="cover-corner">
+    Brand Guidelines<br>
+    <strong>v1.0 — Mayo 2026</strong>
+  </div>
+  <div class="cover-content">
+    <span class="tag"><span style="display:inline-block;width:4px;height:4px;background:var(--can-blue-bright);border-radius:50%;box-shadow:0 0 6px var(--can-blue-bright);"></span> Brand System · Manual de Marca</span>
+    <h1 class="display">
+      Metri<span class="accent">CAN</span><br>
+      <span style="font-size: 0.45em; color: var(--silver); font-weight: 300;">Identity & Brand System</span>
+    </h1>
+    <p class="subtitle">
+      El sistema visual y de comunicación de MetriCAN. Cómo se ve, cómo suena, y cómo se aplica en cada punto de contacto — desde la silkscreen del PCB hasta el panel de flota.
+    </p>
+  </div>
+  <div class="cover-meta">
+    <div>Documento<strong>METRICAN-BRD-001</strong></div>
+    <div>Versión<strong>1.0</strong></div>
+    <div>Vigencia<strong>2026 — 2028</strong></div>
+    <div>Estado<strong style="color: var(--ok);">● Activo</strong></div>
+  </div>
+</section>
+
+<!-- ========================= PAGE 2 · TOC ========================= -->
+<section class="page" id="sec-toc" data-screen-label="02 Contents">
+  <div class="page-chrome">
+    <span><span class="dot"></span>SECCIÓN 00 · ÍNDICE</span>
+    <span class="page-num">02 / 12</span>
+  </div>
+  <div class="section-title">
+    <div class="section-num">00</div>
+    <div>
+      <h2>Contenido</h2>
+      <p class="lead">Trece secciones organizadas en tres bloques: <strong style="color:var(--paper)">esencia</strong> (qué somos), <strong style="color:var(--paper)">sistema visual</strong> (cómo se ve) y <strong style="color:var(--paper)">aplicación</strong> (cómo se usa).</p>
+    </div>
+  </div>
+
+  <div class="toc-grid">
+    <a class="toc-row" href="#sec-01"><span class="n">01</span><span class="name">Esencia de marca</span><span class="pg">P. 03</span></a>
+    <a class="toc-row right" href="#sec-08"><span class="n">08</span><span class="name">Iconografía</span><span class="pg">P. 10</span></a>
+    <a class="toc-row" href="#sec-02"><span class="n">02</span><span class="name">El logo</span><span class="pg">P. 04</span></a>
+    <a class="toc-row right" href="#sec-09"><span class="n">09</span><span class="name">Voz y tono</span><span class="pg">P. 11</span></a>
+    <a class="toc-row" href="#sec-03"><span class="n">03</span><span class="name">Variantes de logo</span><span class="pg">P. 05</span></a>
+    <a class="toc-row right" href="#sec-10"><span class="n">10</span><span class="name">Aplicaciones</span><span class="pg">P. 12</span></a>
+    <a class="toc-row" href="#sec-04"><span class="n">04</span><span class="name">Usos incorrectos</span><span class="pg">P. 06</span></a>
+    <div class="toc-row right" style="visibility: hidden;"><span class="n">—</span><span class="name">—</span><span class="pg">—</span></div>
+    <a class="toc-row" href="#sec-05"><span class="n">05</span><span class="name">Paleta primaria</span><span class="pg">P. 07</span></a>
+    <div class="toc-row right" style="visibility: hidden;"><span class="n">—</span><span class="name">—</span><span class="pg">—</span></div>
+    <a class="toc-row" href="#sec-06"><span class="n">06</span><span class="name">Paleta extendida</span><span class="pg">P. 08</span></a>
+    <div class="toc-row right" style="visibility: hidden;"><span class="n">—</span><span class="name">—</span><span class="pg">—</span></div>
+    <a class="toc-row" href="#sec-07"><span class="n">07</span><span class="name">Tipografía</span><span class="pg">P. 09</span></a>
+    <div class="toc-row right" style="visibility: hidden;"><span class="n">—</span><span class="name">—</span><span class="pg">—</span></div>
+  </div>
+</section>
+
+<!-- ========================= PAGE 3 · ESSENCE ========================= -->
+<section class="page alt" id="sec-01" data-screen-label="03 Esencia">
+  <div class="page-chrome">
+    <span><span class="dot"></span>SECCIÓN 01 · ESENCIA DE MARCA</span>
+    <span class="page-num">03 / 12</span>
+  </div>
+  <div class="section-title">
+    <div class="section-num">01</div>
+    <div>
+      <h2>Esencia</h2>
+      <p class="lead">MetriCAN nace de la intersección entre <strong style="color:var(--can-blue-bright)">Metrics</strong> y <strong style="color:var(--can-blue-bright)">CAN bus</strong>. Convertimos el lenguaje crudo del vehículo en información operativa — con la precisión de un ingeniero y la claridad de un dashboard.</p>
+    </div>
+  </div>
+
+  <div class="manifest">
+    Cada vehículo es una <strong>red de datos viva</strong>.
+    Nosotros la <span class="hl">escuchamos</span>, la <span class="hl">decodificamos</span>,
+    le sumamos <span class="hl-v">tus propias variables auxiliares</span>
+    y la mandamos a donde tenga que estar —
+    sin que nadie tenga que poner las manos sobre el equipo.
+  </div>
+
+  <div class="pillars">
+    <div class="pillar">
+      <div>
+        <div class="num">— 01</div>
+        <h4>Precisión técnica</h4>
+        <p>Hablamos el idioma del bus CAN, del J1939 y del firmware. Cada dato que entregamos está respaldado por una decodificación correcta y verificable.</p>
+      </div>
+      <div class="tag">↳ Engineering-first</div>
+    </div>
+    <div class="pillar">
+      <div>
+        <div class="num">— 02</div>
+        <h4>Variables propias</h4>
+        <p>No te quedamos con las señales del CAN: a partir de ellas <strong style="color:var(--paper)">construís tus propias variables auxiliares</strong> — derivadas, calculadas, combinadas. Cada flota define los KPIs que importan.</p>
+      </div>
+      <div class="tag">↳ Custom aux vars</div>
+    </div>
+    <div class="pillar">
+      <div>
+        <div class="num">— 03</div>
+        <h4>Hardware con identidad</h4>
+        <p>El PCB de MetriCAN se fabrica en violeta — y ese violeta es marca. El producto físico no se esconde: se exhibe. Lo material y lo digital comparten paleta.</p>
+      </div>
+      <div class="tag volt">↳ Hardware = Brand</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= PAGE 4 · LOGO ========================= -->
+<section class="page" id="sec-02" data-screen-label="04 Logo">
+  <div class="page-chrome">
+    <span><span class="dot"></span>SECCIÓN 02 · LOGOTIPO PRINCIPAL</span>
+    <span class="page-num">04 / 12</span>
+  </div>
+  <div class="section-title">
+    <div class="section-num">02</div>
+    <div>
+      <h2>El logo</h2>
+      <p class="lead">El logotipo combina un símbolo de red entrelazada — dos buses CAN convergiendo — con el wordmark <strong style="color:var(--paper)">MetriCAN</strong>. El gradiente azul refuerza la idea de flujo de datos en tiempo real.</p>
+    </div>
+  </div>
+
+  <div class="logo-stage">
+    <div class="logo-hero">
+      <div class="corner tl">+</div><div class="corner tr">+</div><div class="corner bl">+</div><div class="corner br">+</div>
+      <div class="corner" style="top:50%;left:16px;transform:translateY(-50%);">A — Símbolo</div>
+      <div class="corner" style="top:50%;right:16px;transform:translateY(-50%);">B — Wordmark</div>
+      <img src="../assets/logo-metrican.png" alt="MetriCAN logo" />
+    </div>
+    <div class="logo-specs">
+      <div class="spec-row">
+        <span class="k">Tipo</span>
+        <span class="v">Combinado (símbolo + texto)<small>El símbolo puede usarse solo en contextos secundarios.</small></span>
+      </div>
+      <div class="spec-row">
+        <span class="k">Símbolo</span>
+        <span class="v">Network mark<small>Dos cables CAN entrelazados, terminaciones tipo bornes.</small></span>
+      </div>
+      <div class="spec-row">
+        <span class="k">Wordmark</span>
+        <span class="v">"Metri" + "CAN"<small>"Metri" en grafito, "CAN" en azul — refuerza el origen del nombre.</small></span>
+      </div>
+      <div class="spec-row">
+        <span class="k">Acabado</span>
+        <span class="v">Gradiente vertical<small>De azul profundo a azul brillante. Conserva el degradé incluso en versiones reducidas.</small></span>
+      </div>
+      <div class="spec-row" style="border-bottom: none;">
+        <span class="k">Archivo maestro</span>
+        <span class="v mono" style="font-size: 13px; color: var(--can-blue-bright);">/brand/logo-metrican.svg<small style="color:var(--mute);font-family:'JetBrains Mono',monospace;font-size:10px;">Curvas vectoriales editables — no rasterizar.</small></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="diagram-row">
+    <div class="diagram">
+      <h4>Área de protección</h4>
+      <p class="desc">Espacio en blanco mínimo que el logo necesita alrededor para no "tocar" otros elementos (textos, imágenes, bordes). Garantiza que se vea limpio y legible siempre.<br><br>La regla: <strong>X</strong> equivale a la altura de la letra “M”. Mantener al menos ese margen en cada lado.</p>
+      <div style="margin-top: 24px; position: relative; background: #ECEEF3; padding: 40px; border-radius: 3px;">
+        <div style="position: absolute; inset: 16px; border: 1px dashed rgba(31, 122, 224, 0.5);"></div>
+        <img src="../assets/logo-metrican.png" alt="" style="width:75%; display: block; margin: 0 auto;" />
+        <div style="position: absolute; top: 6px; left: 8px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--can-blue);">X</div>
+        <div style="position: absolute; bottom: 6px; right: 8px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--can-blue);">X</div>
+      </div>
+    </div>
+    <div class="diagram">
+      <h4>Tamaño mínimo</h4>
+      <p class="desc">No reproducir el logo por debajo de los siguientes umbrales para preservar legibilidad del wordmark y detalle del símbolo.</p>
+      <div style="margin-top: 24px; display: flex; gap: 32px; align-items: end;">
+        <div>
+          <img src="../assets/logo-metrican.png" alt="" style="height: 32px; display: block;" />
+          <div class="mono" style="font-size: 10px; color: var(--mute); margin-top: 12px; letter-spacing: 0.1em;">DIGITAL · 120 PX MIN</div>
+        </div>
+        <div>
+          <img src="../assets/logo-metrican.png" alt="" style="height: 22px; display: block;" />
+          <div class="mono" style="font-size: 10px; color: var(--mute); margin-top: 12px; letter-spacing: 0.1em;">PRINT · 25 MM MIN</div>
+        </div>
+        <div>
+          <img src="../assets/logo-metrican.png" alt="" style="height: 14px; display: block;" />
+          <div class="mono" style="font-size: 10px; color: var(--mute); margin-top: 12px; letter-spacing: 0.1em;">FAVICON · SOLO SÍMBOLO</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= PAGE 5 · LOGO VARIATIONS ========================= -->
+<section class="page alt" id="sec-03" data-screen-label="05 Variantes">
+  <div class="page-chrome">
+    <span><span class="dot"></span>SECCIÓN 03 · VARIANTES DE LOGO</span>
+    <span class="page-num">05 / 12</span>
+  </div>
+  <div class="section-title">
+    <div class="section-num">03</div>
+    <div>
+      <h2>Variantes</h2>
+      <p class="lead">Para cada fondo, una versión del logo. La primaria a color sobre fondo claro siempre tiene prioridad. Las versiones monocromas se reservan para impresión técnica y aplicaciones de un solo tono.</p>
+    </div>
+  </div>
+
+  <h3 class="kicker">— A · Versiones a color</h3>
+  <div class="logo-variations">
+    <div class="lv-card paper">
+      <img src="../assets/logo-metrican.png" alt="" />
+      <div class="lv-label">01 · Primary on light</div>
+    </div>
+    <div class="lv-card dark">
+      <img src="../assets/logo-metrican.png" alt="" />
+      <div class="lv-label">02 · Mono on dark</div>
+    </div>
+    <div class="lv-card grid">
+      <img src="../assets/logo-metrican.png" alt="" />
+      <div class="lv-label">03 · On grid / pattern</div>
+    </div>
+  </div>
+
+  <h3 class="kicker mt-48">— B · Sobre color de marca</h3>
+  <div class="logo-variations">
+    <div class="lv-card blue">
+      <img src="../assets/logo-metrican.png" alt="" style="filter: brightness(0) invert(1);" />
+      <div class="lv-label">04 · On CAN Blue</div>
+    </div>
+    <div class="lv-card volt">
+      <img src="../assets/logo-metrican.png" alt="" style="filter: brightness(0) invert(1);" />
+      <div class="lv-label">05 · On Volt gradient</div>
+    </div>
+    <div class="lv-card" style="background: var(--can-blue-deep);">
+      <img src="../assets/logo-metrican.png" alt="" style="filter: brightness(0) invert(1);" />
+      <div class="lv-label" style="color: rgba(255,255,255,0.6);">06 · On Deep Blue</div>
+    </div>
+  </div>
+
+  <h3 class="kicker mt-48">— C · Símbolo aislado</h3>
+  <div class="logo-variations" style="grid-template-columns: repeat(4, 1fr);">
+    <div class="lv-card paper" style="height: 140px;">
+      <img src="../assets/logo-metrican.png" alt="" style="max-height: 70%; object-fit: contain; object-position: left; clip-path: inset(0 70% 0 0);" />
+      <div class="lv-label">07 · Mark / paper</div>
+    </div>
+    <div class="lv-card dark" style="height: 140px;">
+      <img src="../assets/logo-metrican.png" alt="" style="max-height: 70%; object-fit: contain; object-position: left; clip-path: inset(0 70% 0 0);" />
+      <div class="lv-label">08 · Mark / dark</div>
+    </div>
+    <div class="lv-card blue" style="height: 140px;">
+      <img src="../assets/logo-metrican.png" alt="" style="filter: brightness(0) invert(1); max-height: 70%; object-fit: contain; object-position: left; clip-path: inset(0 70% 0 0);" />
+      <div class="lv-label">09 · Mark / blue</div>
+    </div>
+    <div class="lv-card" style="background: var(--ink-2); border: 1px solid var(--line); height: 140px;">
+      <img src="../assets/logo-metrican.png" alt="" style="max-height: 70%; object-fit: contain; object-position: left; clip-path: inset(0 70% 0 0); filter: brightness(0) saturate(100%) invert(57%) sepia(89%) saturate(1956%) hue-rotate(196deg) brightness(99%) contrast(89%);" />
+      <div class="lv-label">10 · Mark / accent</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= PAGE 6 · DON'TS ========================= -->
+<section class="page" id="sec-04" data-screen-label="06 Don'ts">
+  <div class="page-chrome">
+    <span><span class="dot"></span>SECCIÓN 04 · USOS INCORRECTOS</span>
+    <span class="page-num">06 / 12</span>
+  </div>
+  <div class="section-title">
+    <div class="section-num">04</div>
+    <div>
+      <h2>No hacer</h2>
+      <p class="lead">El logo es una unidad. No se rota, no se estira, no se recompone, no se mete dentro de formas, no se cambia de color salvo en las variantes oficiales. Toda alteración rompe el sistema y debe corregirse.</p>
+    </div>
+  </div>
+
+  <div class="donts-grid">
+    <div class="dont-card">
+      <img src="../assets/logo-metrican.png" alt="" style="transform: rotate(-12deg);" />
+      <div class="cross"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="6" y1="6" x2="94" y2="94" stroke="#FF5470" stroke-width="1.5"/></svg></div>
+      <div class="lv-label">01 · No rotar</div>
+    </div>
+    <div class="dont-card">
+      <img src="../assets/logo-metrican.png" alt="" style="transform: scaleY(0.55);" />
+      <div class="cross"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="6" y1="6" x2="94" y2="94" stroke="#FF5470" stroke-width="1.5"/></svg></div>
+      <div class="lv-label">02 · No deformar</div>
+    </div>
+    <div class="dont-card" style="background: #4ade80;">
+      <img src="../assets/logo-metrican.png" alt="" />
+      <div class="cross"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="6" y1="6" x2="94" y2="94" stroke="#FF5470" stroke-width="1.5"/></svg></div>
+      <div class="lv-label">03 · No usar fondos arbitrarios</div>
+    </div>
+    <div class="dont-card">
+      <img src="../assets/logo-metrican.png" alt="" style="filter: hue-rotate(120deg);" />
+      <div class="cross"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="6" y1="6" x2="94" y2="94" stroke="#FF5470" stroke-width="1.5"/></svg></div>
+      <div class="lv-label">04 · No alterar color</div>
+    </div>
+    <div class="dont-card">
+      <img src="../assets/logo-metrican.png" alt="" style="filter: blur(2px) drop-shadow(0 4px 12px rgba(0,0,0,0.5));" />
+      <div class="cross"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="6" y1="6" x2="94" y2="94" stroke="#FF5470" stroke-width="1.5"/></svg></div>
+      <div class="lv-label">05 · No agregar efectos</div>
+    </div>
+    <div class="dont-card dark">
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <img src="../assets/logo-metrican.png" alt="" style="height: 28px; filter: brightness(0) invert(1);" />
+        <span style="color: var(--paper); font-family: 'Space Grotesk', sans-serif; font-size: 18px; border-left: 1px solid var(--mute); padding-left: 12px;">TELEMETRY</span>
+      </div>
+      <div class="cross"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="6" y1="6" x2="94" y2="94" stroke="#FF5470" stroke-width="1.5"/></svg></div>
+      <div class="lv-label">06 · No combinar con otros marcadores</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= PAGE 7 · COLOR PRIMARY ========================= -->
+<section class="page alt" id="sec-05" data-screen-label="07 Paleta Primaria">
+  <div class="page-chrome">
+    <span><span class="dot"></span>SECCIÓN 05 · PALETA PRIMARIA</span>
+    <span class="page-num">07 / 12</span>
+  </div>
+  <div class="section-title">
+    <div class="section-num">05</div>
+    <div>
+      <h2>Paleta primaria</h2>
+      <p class="lead">El sistema arranca con un azul de marca derivado del logo y un grafito profundo como base. Es la combinación que aparece en todas las piezas — desde la silkscreen del PCB hasta el pitch deck.</p>
+    </div>
+  </div>
+
+  <div class="palette-hero">
+    <div class="swatch on-dark" style="background: linear-gradient(180deg, #2A9DF4 0%, #1F7AE0 50%, #003570 100%);">
+      <div>
+        <div class="role">Primary · 01</div>
+        <div class="name display">CAN Blue</div>
+      </div>
+      <div class="values mono">
+        <div><span>HEX</span> #1F7AE0</div>
+        <div><span>RGB</span> 31 · 122 · 224</div>
+        <div><span>CMYK</span> 84 · 53 · 0 · 0</div>
+        <div><span>PMS</span> 2386 C (aprox.)</div>
+      </div>
+    </div>
+    <div class="swatch on-dark" style="background: var(--ink-0);">
+      <div>
+        <div class="role">Primary · 02</div>
+        <div class="name display">Graphite</div>
+      </div>
+      <div class="values mono">
+        <div><span>HEX</span> #06070B</div>
+        <div><span>RGB</span> 6 · 7 · 11</div>
+        <div><span>CMYK</span> 80 · 76 · 64 · 90</div>
+        <div><span>PMS</span> Black 6 C</div>
+      </div>
+    </div>
+    <div class="swatch on-light" style="background: var(--paper);">
+      <div>
+        <div class="role">Primary · 03</div>
+        <div class="name display">Paper</div>
+      </div>
+      <div class="values mono">
+        <div><span>HEX</span> #F4F6FA</div>
+        <div><span>RGB</span> 244 · 246 · 250</div>
+        <div><span>CMYK</span> 3 · 2 · 0 · 0</div>
+        <div><span>PMS</span> Cool Gray 1 C</div>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="kicker mt-48">— Proporciones de uso recomendadas</h3>
+  <div class="ratio-bar">
+    <div class="ratio-seg" style="background: var(--ink-0); color: var(--paper); flex: 60;">GRAPHITE · 60%</div>
+    <div class="ratio-seg" style="background: var(--paper); color: var(--ink-0); flex: 25;">PAPER · 25%</div>
+    <div class="ratio-seg" style="background: var(--can-blue); color: white; flex: 15;">CAN BLUE · 15%</div>
+  </div>
+  <p style="margin-top: 16px; font-size: 13px; color: var(--mute); max-width: 720px;">
+    El azul es señalético, no estructural. Funciona como acento para resaltar marca, dato clave o estado activo. La base del sistema es el contraste grafito ↔ papel.
+  </p>
+</section>
+
+<!-- ========================= PAGE 8 · COLOR EXTENDED ========================= -->
+<section class="page" id="sec-06" data-screen-label="08 Paleta Extendida">
+  <div class="page-chrome">
+    <span><span class="dot"></span>SECCIÓN 06 · PALETA EXTENDIDA</span>
+    <span class="page-num">08 / 12</span>
+  </div>
+  <div class="section-title">
+    <div class="section-num">06</div>
+    <div>
+      <h2>Paleta extendida</h2>
+      <p class="lead">Acentos para dashboards, diferenciación de canales (CAN1, CAN2), y estados operativos. El <strong style="color:var(--volt-bright)">PCB Violet</strong> es el color real del PCB de MetriCAN — la plaqueta del producto se fabrica en violeta. Convertimos ese hecho material en un anclaje de marca: <em>el color del hardware es el color de la marca</em>.</p>
+    </div>
+  </div>
+
+  <h3 class="kicker">— A · Acentos tech</h3>
+  <div class="palette-grid" style="grid-template-columns: repeat(4, 1fr);">
+    <div class="swatch-sm on-dark" style="background: var(--volt);">
+      <div><div class="name">PCB Violet</div><div style="font-size:10px; opacity:.7; margin-top:4px; letter-spacing:0.15em;" class="mono">HARDWARE · BRAND</div></div>
+      <div class="hex">#4B2BA0</div>
+    </div>
+    <div class="swatch-sm on-dark" style="background: var(--volt-bright);">
+      <div><div class="name">Violet Electric</div><div style="font-size:10px; opacity:.7; margin-top:4px; letter-spacing:0.15em;" class="mono">UI · DIGITAL</div></div>
+      <div class="hex">#7C3AED</div>
+    </div>
+    <div class="swatch-sm on-dark" style="background: var(--can-blue-bright);">
+      <div><div class="name">CAN Sky</div><div style="font-size:10px; opacity:.7; margin-top:4px; letter-spacing:0.15em;" class="mono">CAN2 · UI</div></div>
+      <div class="hex">#2A9DF4</div>
+    </div>
+    <div class="swatch-sm on-dark" style="background: var(--can-blue-deep);">
+      <div><div class="name">Deep Blue</div><div style="font-size:10px; opacity:.7; margin-top:4px; letter-spacing:0.15em;" class="mono">DEPTH · INK</div></div>
+      <div class="hex">#003570</div>
+    </div>
+  </div>
+
+  <h3 class="kicker mt-48">— B · Neutrales (escala grafito)</h3>
+  <div class="palette-grid">
+    <div class="swatch-sm on-dark" style="background: #06070B;"><div><div class="name">Ink 0</div></div><div class="hex">#06070B</div></div>
+    <div class="swatch-sm on-dark" style="background: #11141C;"><div><div class="name">Ink 2</div></div><div class="hex">#11141C</div></div>
+    <div class="swatch-sm on-dark" style="background: #1F2430;"><div><div class="name">Ink 4</div></div><div class="hex">#1F2430</div></div>
+    <div class="swatch-sm on-dark" style="background: #6B7388;"><div><div class="name">Mute</div></div><div class="hex">#6B7388</div></div>
+    <div class="swatch-sm on-light" style="background: #C8CED6;"><div><div class="name">Silver</div></div><div class="hex">#C8CED6</div></div>
+    <div class="swatch-sm on-light" style="background: #F4F6FA;"><div><div class="name">Paper</div></div><div class="hex">#F4F6FA</div></div>
+  </div>
+
+  <h3 class="kicker mt-48">— C · Estados operativos (telemetría)</h3>
+  <div class="palette-grid" style="grid-template-columns: repeat(3, 1fr);">
+    <div class="swatch-sm on-dark" style="background: var(--ok); color: var(--ink-0);">
+      <div><div class="name" style="color:var(--ink-0)">OK · Healthy</div><div style="font-size:10px; margin-top:4px; letter-spacing:0.15em; color: rgba(0,0,0,0.7);" class="mono">CAN ACTIVO · BUS OK</div></div>
+      <div class="hex" style="color: var(--ink-0)">#22D3A0</div>
+    </div>
+    <div class="swatch-sm on-dark" style="background: var(--warn); color: var(--ink-0);">
+      <div><div class="name" style="color:var(--ink-0)">Warn</div><div style="font-size:10px; margin-top:4px; letter-spacing:0.15em; color: rgba(0,0,0,0.7);" class="mono">SC · DBC OUTDATED</div></div>
+      <div class="hex" style="color: var(--ink-0)">#F5B544</div>
+    </div>
+    <div class="swatch-sm on-dark" style="background: var(--crit);">
+      <div><div class="name">Critical</div><div style="font-size:10px; opacity:.85; margin-top:4px; letter-spacing:0.15em;" class="mono">BUS OFF · TX ERR</div></div>
+      <div class="hex">#FF5470</div>
+    </div>
+  </div>
+
+  <p style="margin-top: 32px; font-size: 13px; color: var(--mute); max-width: 720px;">
+    Los colores de estado <strong style="color:var(--paper)">solo se usan funcionalmente</strong> en UI/UX o documentación técnica. Nunca como color de marca, fondo, o acento decorativo.
+  </p>
+</section>
+
+<!-- ========================= PAGE 9 · TYPOGRAPHY ========================= -->
+<section class="page alt" id="sec-07" data-screen-label="09 Tipografía">
+  <div class="page-chrome">
+    <span><span class="dot"></span>SECCIÓN 07 · TIPOGRAFÍA</span>
+    <span class="page-num">09 / 12</span>
+  </div>
+  <div class="section-title">
+    <div class="section-num">07</div>
+    <div>
+      <h2>Tipografía</h2>
+      <p class="lead">Tres familias open-source, montables en cualquier stack — desde web hasta documentación técnica. Cada una con un rol específico: voz (display), cuerpo (lectura), datos (mono).</p>
+    </div>
+  </div>
+
+  <div class="type-hero">
+    <div class="display-sample">Aa <span style="color: var(--can-blue-bright)">Bb</span> Cc</div>
+    <div class="meta">
+      <span>Space Grotesk</span>
+      <span>· 7 weights</span>
+      <span>· Variable axis</span>
+      <span>· OFL License</span>
+    </div>
+  </div>
+
+  <div class="type-pair">
+    <div class="type-block">
+      <div class="label">— A · DISPLAY</div>
+      <div class="specimen-display">Space Grotesk</div>
+      <div class="desc">Para títulos, headlines, números grandes y todo lo que tenga que respirar. Tiene un carácter geométrico distintivo sin caer en la generalidad de Inter o Roboto.</div>
+      <div class="weights"><span>300 Light</span><span>400 Regular</span><span>500 Medium</span><span>600 Semibold</span><span>700 Bold</span></div>
+    </div>
+    <div class="type-block">
+      <div class="label">— B · BODY</div>
+      <div class="specimen-body">Manrope</div>
+      <div class="desc">Cuerpo de texto, párrafos, descripciones, UI. Alta legibilidad en pantalla y print, con una construcción ligeramente técnica que casa con la Space Grotesk.</div>
+      <div class="weights"><span>300</span><span>400</span><span>500</span><span>600</span><span>700</span><span>800</span></div>
+    </div>
+    <div class="type-block">
+      <div class="label">— C · TECHNICAL / DATA</div>
+      <div class="specimen-mono">JetBrains Mono</div>
+      <div class="desc">Para telemetría, código, valores, IDs de dispositivo, identificadores CAN, todo lo que requiera tabular widths o sensación de terminal.</div>
+      <div class="weights"><span>400</span><span>500</span><span>700</span></div>
+    </div>
+  </div>
+
+  <h3 class="kicker mt-48">— Escala tipográfica</h3>
+  <div class="scale-grid">
+    <div class="label">DISPLAY XL</div><div class="sample" style="font-size: 72px; font-weight: 500;">Telemetría</div><div class="meta">72 / 0.92 / -0.04em</div>
+    <div class="label">DISPLAY L</div><div class="sample" style="font-size: 48px; font-weight: 500;">Telemetría</div><div class="meta">48 / 1.0 / -0.03em</div>
+    <div class="label">H1</div><div class="sample" style="font-size: 32px; font-weight: 500;">Telemetría vehicular</div><div class="meta">32 / 1.1 / -0.02em</div>
+    <div class="label">H2</div><div class="sample" style="font-size: 22px; font-weight: 500;">Telemetría vehicular</div><div class="meta">22 / 1.2 / -0.01em</div>
+    <div class="label">BODY</div><div class="sample" style="font-family: 'Manrope', sans-serif; font-size: 15px; font-weight: 400;">Decodificación de mensajes CAN en tiempo real, vía 2 controladores MCP2515 independientes.</div><div class="meta">15 / 1.55 / Manrope</div>
+    <div class="label">CAPTION</div><div class="sample" style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--mute);">CAN1 · 250 KBPS · J1939</div><div class="meta">11 / mono / +15%</div>
+  </div>
+</section>
+
+<!-- ========================= PAGE 10 · ICONOGRAPHY ========================= -->
+<section class="page" id="sec-08" data-screen-label="10 Iconografía">
+  <div class="page-chrome">
+    <span><span class="dot"></span>SECCIÓN 08 · ICONOGRAFÍA</span>
+    <span class="page-num">10 / 12</span>
+  </div>
+  <div class="section-title">
+    <div class="section-num">08</div>
+    <div>
+      <h2>Iconografía</h2>
+      <p class="lead">Set propio basado en líneas de <strong style="color:var(--paper)">1.5 px</strong> sobre grilla de 24 px, con esquinas redondeadas suaves. Inspirado en la silkscreen del PCB: técnica, pero respirable. Recomendamos derivar nuevos íconos del set base — nunca mezclar con packs externos.</p>
+    </div>
+  </div>
+
+  <div class="icon-grid">
+    <div class="icon-cell">
+      <svg viewBox="0 0 24 24"><path d="M3 12h4l2-5 6 10 2-5h4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="il">CAN Bus</div>
+    </div>
+    <div class="icon-cell">
+      <svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="12" rx="2"/><circle cx="8" cy="12" r="1.2" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.2" fill="currentColor" stroke="none"/><circle cx="16" cy="12" r="1.2" fill="currentColor" stroke="none"/></svg>
+      <div class="il">ECU</div>
+    </div>
+    <div class="icon-cell">
+      <svg viewBox="0 0 24 24"><path d="M12 2v6m0 8v6M2 12h6m8 0h6" stroke-linecap="round"/><circle cx="12" cy="12" r="3"/></svg>
+      <div class="il">OTA</div>
+    </div>
+    <div class="icon-cell">
+      <svg viewBox="0 0 24 24"><path d="M4 18l4-6 4 4 4-8 4 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="il">Telemetría</div>
+    </div>
+    <div class="icon-cell">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2" stroke-linecap="round"/></svg>
+      <div class="il">Horómetro</div>
+    </div>
+    <div class="icon-cell">
+      <svg viewBox="0 0 24 24"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z" stroke-linejoin="round"/></svg>
+      <div class="il">Energía</div>
+    </div>
+    <div class="icon-cell">
+      <svg viewBox="0 0 24 24"><rect x="3" y="8" width="14" height="8" rx="1"/><path d="M17 11h3v2h-3"/><path d="M6 12h2m2 0h2" stroke-linecap="round"/></svg>
+      <div class="il">Battery</div>
+    </div>
+    <div class="icon-cell">
+      <svg viewBox="0 0 24 24"><path d="M6 4h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><path d="M9 4v16M15 4v16M4 9h16M4 15h16"/></svg>
+      <div class="il">PCB</div>
+    </div>
+    <div class="icon-cell">
+      <svg viewBox="0 0 24 24"><path d="M3 12c2-5 7-5 9 0s7 5 9 0"/><circle cx="3" cy="12" r="1.5"/><circle cx="21" cy="12" r="1.5"/></svg>
+      <div class="il">Network</div>
+    </div>
+    <div class="icon-cell">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/></svg>
+      <div class="il">Sensor</div>
+    </div>
+    <div class="icon-cell">
+      <svg viewBox="0 0 24 24"><path d="M5 17h2l1-3h8l1 3h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/><path d="M5 14V8h12l3 6"/></svg>
+      <div class="il">Vehículo</div>
+    </div>
+    <div class="icon-cell">
+      <svg viewBox="0 0 24 24"><path d="M2 16a8 8 0 0 1 8-8h4a8 8 0 0 1 8 8" stroke-linecap="round"/><circle cx="12" cy="16" r="1.5" fill="currentColor" stroke="none"/></svg>
+      <div class="il">Wireless</div>
+    </div>
+  </div>
+
+  <div class="row-3 mt-48">
+    <div>
+      <h3 class="kicker">— Construcción</h3>
+      <p style="font-size: 13px;">Grilla de 24 px, padding interno de 2 px. Stroke 1.5 px (puede subir a 2 px en tamaños grandes).</p>
+    </div>
+    <div>
+      <h3 class="kicker">— Esquinas</h3>
+      <p style="font-size: 13px;">Round-cap, round-join. Radio interno 2 px. Cero esquinas vivas, cero estrellas, cero glyphs decorativos.</p>
+    </div>
+    <div>
+      <h3 class="kicker">— Color</h3>
+      <p style="font-size: 13px;">Monocromos por defecto. Tinte de marca solo cuando son icono-ancla del mensaje (1 por sección).</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= PAGE 11 · VOICE ========================= -->
+<section class="page alt" id="sec-09" data-screen-label="11 Voz y tono">
+  <div class="page-chrome">
+    <span><span class="dot"></span>SECCIÓN 09 · VOZ Y TONO</span>
+    <span class="page-num">11 / 12</span>
+  </div>
+  <div class="section-title">
+    <div class="section-num">09</div>
+    <div>
+      <h2>Voz y tono</h2>
+      <p class="lead">Hablamos como ingenieros que respetan al lector. Precisos, sin jerga inútil. Concretos, sin marketing inflado. Cuando algo es complejo, lo nombramos así — y después lo explicamos bien.</p>
+    </div>
+  </div>
+
+  <div class="voice-attrs">
+    <div class="attr"><div class="a">Preciso</div><div class="b">no vago</div></div>
+    <div class="attr"><div class="a">Concreto</div><div class="b">no abstracto</div></div>
+    <div class="attr"><div class="a">Confiado</div><div class="b">no arrogante</div></div>
+    <div class="attr"><div class="a">Humano</div><div class="b">no robótico</div></div>
+  </div>
+
+  <div class="voice-grid">
+    <div class="voice-card yes">
+      <span class="tag">✓ Sí</span>
+      <div class="quote">"Decodifica J1939 y protocolos OEM en 2 canales CAN simultáneos, con perfiles configurables por flota."</div>
+      <div class="note">Específico. Cuantifica. Nombra estándares. Respeta al lector técnico.</div>
+    </div>
+    <div class="voice-card no">
+      <span class="tag">✗ No</span>
+      <div class="quote">"La solución más avanzada del mercado para revolucionar tu negocio."</div>
+      <div class="note">Vacío. Superlativos sin sustento. No dice qué hace ni para quién.</div>
+    </div>
+    <div class="voice-card yes">
+      <span class="tag">✓ Sí</span>
+      <div class="quote">"Actualizá firmware y configuración en toda la flota desde el panel — sin que un técnico tenga que ir al vehículo."</div>
+      <div class="note">Beneficio operativo claro. Lenguaje cotidiano. Habla el problema real.</div>
+    </div>
+    <div class="voice-card no">
+      <span class="tag">✗ No</span>
+      <div class="quote">"Empoderamos a las flotas con tecnología disruptiva 360°."</div>
+      <div class="note">Buzzwords. No hay verbo concreto. Promete sin definir qué entrega.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= PAGE 12 · APPLICATIONS ========================= -->
+<section class="page alt" id="sec-10" data-screen-label="12 Aplicaciones">
+  <div class="page-chrome">
+    <span><span class="dot"></span>SECCIÓN 10 · APLICACIONES</span>
+    <span class="page-num">12 / 12</span>
+  </div>
+  <div class="section-title">
+    <div class="section-num">10</div>
+    <div>
+      <h2>Aplicaciones</h2>
+      <p class="lead">Tres puntos de contacto canon: silkscreen del PCB, tarjeta personal y header de página web. Son <strong style="color:var(--paper)">demostraciones</strong> de cómo el sistema visual se traduce a cada formato — no son piezas finales con copy oficial.</p>
+    </div>
+  </div>
+
+  <div class="app-grid">
+    <div class="app-card board">
+      <div class="app-label" style="color: rgba(255,255,255,0.55);">A · PCB Silkscreen · #4B2BA0</div>
+      <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; position: relative; z-index: 1;">
+        <span class="chip">METRICAN</span>
+        <span class="chip">2CANBUS v2.02</span>
+        <span class="chip">REV.B</span>
+      </div>
+      <div class="marking">
+        FCC ID — TBD<br>
+        BATCH — 2026-Q1<br>
+        SN — XX-XXXXXX
+      </div>
+    </div>
+    <div class="app-card" style="display:flex; flex-direction: column; justify-content: space-between;">
+      <div class="app-label">B · Tarjeta personal · papel</div>
+      <div class="bc">
+        <img src="../assets/logo-metrican.png" alt="" class="bc-logo" />
+        <div>
+          <div class="bc-name">Nombre Apellido</div>
+          <div class="bc-role">Rol / Área</div>
+        </div>
+        <div class="bc-meta">
+          +56 2 0000 0000<br>
+          contacto@metrican.cl · metrican.cl
+        </div>
+      </div>
+    </div>
+    <div class="app-card" style="display:flex; flex-direction: column; justify-content: space-between;">
+      <div class="app-label">C · Tarjeta personal · oscura</div>
+      <div class="bc bc-dark">
+        <img src="../assets/logo-metrican.png" alt="" class="bc-logo" />
+        <div>
+          <div class="bc-name">Nombre Apellido</div>
+          <div class="bc-role">Rol / Área</div>
+        </div>
+        <div class="bc-meta">
+          +56 2 0000 0000<br>
+          contacto@metrican.cl · metrican.cl
+        </div>
+      </div>
+    </div>
+    <div class="app-card" style="grid-column: span 3; min-height: 280px; background: var(--ink-1); padding: 0; overflow: hidden;">
+      <div class="app-label" style="top: 16px; left: 24px; right: auto;">D · Web — ejemplo de header de sección</div>
+      <div style="position: absolute; top: 16px; right: 24px; font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--warn); background: rgba(245, 181, 68, 0.08); padding: 4px 10px; border: 1px solid rgba(245, 181, 68, 0.3); border-radius: 999px;">✳ Demo — copy no oficial</div>
+      <div style="padding: 64px 48px 48px; display: flex; gap: 48px; align-items: end;">
+        <div style="flex: 1;">
+          <span class="tag">↳ Header demo</span>
+          <h3 style="font-family:'Space Grotesk',sans-serif; font-size: 56px; line-height: 0.95; letter-spacing: -0.03em; font-weight: 500; margin-top: 16px;">
+            Título principal de la página.
+          </h3>
+          <p style="font-size: 16px; color: var(--silver); max-width: 480px; margin-top: 16px;">Espíritu del lockup en uso real: tag monospace arriba, título Space Grotesk grande, párrafo Manrope, métricas mono a la derecha. Reemplazar copy por el real al implementar.</p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 12px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--mute); letter-spacing: 0.1em; padding-bottom: 8px;">
+          <div>● Métrica 01</div>
+          <div>● Métrica 02</div>
+          <div>● Métrica 03</div>
+          <div>● Métrica 04</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= BACK COVER ========================= -->
+<section class="page back-cover" id="sec-back" data-screen-label="13 Back cover">
+  <div style="position: relative; z-index: 1; padding-top: 32px;">
+    <span class="tag">— FIN DEL DOCUMENTO</span>
+  </div>
+  <div class="big-mark">
+    Metri<span class="accent">CAN.</span>
+  </div>
+  <div class="end-meta">
+    <div class="col">
+      Documento<br>
+      <strong>METRICAN-BRD-001</strong>
+    </div>
+    <div class="col" style="text-align: center;">
+      Mantener actualizado en<br>
+      <strong>/brand/metrican-brandbook</strong>
+    </div>
+    <div class="col" style="text-align: right;">
+      © MetriCAN 2026<br>
+      <strong>v1.0 — Vivo</strong>
+    </div>
+  </div>
+</section>
+
+<script>
+(async function autoPrint() {
+  try {
+    if (document.fonts && document.fonts.ready) await document.fonts.ready;
+    await new Promise(r => setTimeout(r, 500));
+    window.print();
+  } catch (e) { console.error(e); }
+})();
+</script>
+
+</body>
+</html>

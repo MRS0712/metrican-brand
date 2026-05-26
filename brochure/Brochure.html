@@ -1,0 +1,1088 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MetriCAN — Brochure de producto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --can-blue: #1F7AE0;
+  --can-bright: #2A9DF4;
+  --can-deep: #003570;
+  --volt: #4B2BA0;
+  --volt-bright: #7C3AED;
+  --volt-glow: #A855F7;
+  --volt-deep: #2A1463;
+  --ink-0: #06070B;
+  --ink-1: #0B0D14;
+  --ink-2: #11141C;
+  --ink-3: #161A24;
+  --line: #232938;
+  --line-light: #E2E5EC;
+  --mute: #6B7388;
+  --mute-paper: #6B7388;
+  --silver: #C8CED6;
+  --paper: #F4F6FA;
+  --paper-warm: #ECEEF3;
+  --ink-text: #14161D;
+  --ok: #22D3A0;
+  --warn: #F5B544;
+  --crit: #FF5470;
+  --solder: #E0C067;
+  --silk-white: rgba(255,255,255,0.85);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  background: #2A2E3A;
+  color: var(--paper);
+  font-family: 'Manrope', system-ui, sans-serif;
+  font-feature-settings: "ss01", "cv11";
+  font-size: 14px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+.display { font-family: 'Space Grotesk', sans-serif; letter-spacing: -0.025em; }
+.mono { font-family: 'JetBrains Mono', monospace; font-feature-settings: "zero"; }
+
+.stage { padding: 40px 0; display: flex; flex-direction: column; align-items: center; gap: 32px; }
+.page {
+  width: 1240px;
+  height: 1754px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.32);
+  border-radius: 2px;
+  display: flex;
+  flex-direction: column;
+}
+.page.dark { background: var(--ink-0); color: var(--paper); }
+.page.paper { background: var(--paper); color: var(--ink-text); }
+.page.dark::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+.page > * { position: relative; z-index: 1; }
+
+/* Header / footer */
+.p-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 32px 64px 0;
+}
+.p-header .brand-mark img { height: 24px; }
+.page.dark .p-header .brand-mark img { filter: brightness(0) invert(1); }
+.p-header .meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--mute);
+  text-align: right;
+  line-height: 1.7;
+}
+.p-header .meta strong { color: var(--can-bright); font-weight: 500; }
+.page.paper .p-header .meta { color: #6B7388; }
+.page.paper .p-header .meta strong { color: var(--can-blue); }
+
+.p-footer {
+  margin: 32px 64px 24px;
+  padding-top: 16px;
+  display: flex; justify-content: space-between; align-items: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+}
+.page.dark .p-footer { border-top: 1px solid var(--line); color: var(--mute); }
+.page.paper .p-footer { border-top: 1px solid var(--line-light); color: var(--mute-paper); }
+.p-footer .web { color: var(--can-bright); font-weight: 500; }
+.page.paper .p-footer .web { color: var(--can-blue); }
+
+/* Tags */
+.tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+  border-radius: 999px;
+}
+.tag.blue { color: var(--can-bright); background: rgba(31, 122, 224, 0.08); border: 1px solid rgba(31, 122, 224, 0.3); }
+.tag.volt { color: var(--volt-glow); background: rgba(124, 58, 237, 0.1); border: 1px solid rgba(124, 58, 237, 0.35); }
+.tag .dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; box-shadow: 0 0 8px currentColor; }
+
+/* ============================================ */
+/* PAGE 1 · COVER                                */
+/* ============================================ */
+.cover-body {
+  padding: 28px 64px 32px;
+  display: grid;
+  grid-template-columns: 1fr 500px;
+  gap: 48px;
+  align-items: stretch;
+  flex: 1;
+}
+.cover-left { display: flex; flex-direction: column; justify-content: center; }
+.cover-logotype {
+  margin-bottom: 28px;
+}
+.cover-logotype img {
+  height: 72px;
+  width: auto;
+  display: block;
+  filter: brightness(0) invert(1);
+}
+.cover-kicker {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--can-bright);
+  margin-bottom: 18px;
+}
+.cover-h1 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 52px; line-height: 0.98; letter-spacing: -0.035em; font-weight: 500;
+}
+.cover-h1 em { color: var(--volt-glow); font-style: normal; font-weight: 400; }
+.cover-lead {
+  font-family: 'Manrope', sans-serif;
+  font-size: 19px; font-weight: 300; line-height: 1.45;
+  color: var(--silver);
+  margin-top: 22px;
+  letter-spacing: -0.005em;
+}
+.cover-lead strong { color: var(--paper); font-weight: 500; }
+
+.cover-product {
+  margin-top: 32px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+  display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap;
+}
+.cover-product .lbl { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--mute); }
+.cover-product .name { font-family: 'Space Grotesk', sans-serif; font-size: 32px; font-weight: 500; letter-spacing: -0.02em; color: var(--paper); }
+.cover-product .name em { font-style: normal; color: var(--volt-glow); font-weight: 500; }
+.cover-product .name sup { font-size: 14px; color: var(--volt-glow); vertical-align: top; margin-left: 4px; }
+.cover-product .v { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--can-bright); letter-spacing: 0.1em; }
+
+/* PCB hero — decorative product render, NO background */
+.cover-pcb {
+  width: 100%;
+  min-height: 900px;
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+}
+.cover-pcb img {
+  max-height: 96%;
+  max-width: 92%;
+  filter:
+    drop-shadow(0 30px 80px rgba(75, 43, 160, 0.6))
+    drop-shadow(0 10px 30px rgba(0, 0, 0, 0.6));
+  position: relative;
+  z-index: 1;
+}
+
+/* Info cards (live in left column under content) */
+.cover-info {
+  margin-top: 28px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.cover-info-card {
+  background: rgba(11, 13, 20, 0.5);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 18px 20px;
+}
+.cover-info-card h3 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--can-bright);
+  margin-bottom: 12px;
+}
+.cover-info-card.volt h3 { color: var(--volt-glow); }
+.cover-info-card ul {
+  list-style: none;
+  display: flex; flex-direction: column; gap: 6px;
+}
+.cover-info-card li {
+  font-size: 12px;
+  color: var(--silver);
+  padding-left: 14px;
+  position: relative;
+  line-height: 1.45;
+}
+.cover-info-card li::before {
+  content: ''; position: absolute; left: 0; top: 7px;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--can-bright);
+  box-shadow: 0 0 5px rgba(42, 157, 244, 0.5);
+}
+.cover-info-card.volt li::before { background: var(--volt-glow); box-shadow: 0 0 5px rgba(168, 85, 247, 0.55); }
+.cover-info-card li strong { color: var(--paper); font-weight: 500; }
+
+/* Stats strip */
+.cover-strip {
+  position: absolute;
+  bottom: 92px; left: 64px; right: 64px;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+  padding: 20px 0 0;
+  border-top: 1px solid var(--line);
+}
+.cover-strip .stat .k {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mute);
+}
+.cover-strip .stat .v {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 26px; font-weight: 500; letter-spacing: -0.02em;
+  color: var(--paper);
+  margin-top: 4px;
+}
+.cover-strip .stat .v small { font-size: 13px; color: var(--mute); font-weight: 400; margin-left: 4px; }
+
+/* ============================================ */
+/* PAGE 2 · FUNCIONALIDADES                      */
+/* ============================================ */
+.fn-title {
+  padding: 80px 64px 24px;
+  border-bottom: 1px solid var(--line-light);
+}
+.fn-title .kicker {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--can-blue);
+  margin-bottom: 14px;
+}
+.fn-title h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 56px; line-height: 0.95; letter-spacing: -0.035em; font-weight: 500;
+  color: var(--ink-text);
+  max-width: 880px;
+}
+.fn-title h2 .accent { color: var(--volt); }
+.fn-title p { font-size: 16px; color: #4A5266; margin-top: 18px; max-width: 720px; line-height: 1.55; }
+
+.fn-grid {
+  padding: 0 64px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+}
+.fn-cell {
+  padding: 28px 20px 28px 0;
+  border-bottom: 1px solid var(--line-light);
+  border-right: 1px solid var(--line-light);
+  min-height: 220px;
+  position: relative;
+  display: flex; flex-direction: column;
+}
+.fn-cell:nth-child(4n) { border-right: none; padding-right: 0; }
+.fn-cell:not(:nth-child(4n+1)) { padding-left: 20px; }
+.fn-cell:nth-last-child(-n+4) { border-bottom: none; }
+
+.fn-cell .ico {
+  width: 36px; height: 36px;
+  color: var(--can-blue);
+  margin-bottom: 14px;
+}
+.fn-cell .ico svg { width: 100%; height: 100%; stroke: currentColor; fill: none; stroke-width: 1.5; }
+.fn-cell .name {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--mute-paper);
+  margin-bottom: 8px;
+}
+.fn-cell h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 19px; font-weight: 500; letter-spacing: -0.012em;
+  color: var(--ink-text);
+  margin-bottom: 8px;
+  line-height: 1.15;
+}
+.fn-cell p { font-size: 12.5px; color: #4A5266; line-height: 1.5; flex: 1; }
+
+.fn-cell.highlight {
+  background: linear-gradient(135deg, rgba(75, 43, 160, 0.05), rgba(124, 58, 237, 0.04));
+}
+.fn-cell.highlight .ico { color: var(--volt); }
+.fn-cell.highlight h3 { color: var(--volt); }
+.fn-cell.highlight::after {
+  content: '★ KILLER';
+  position: absolute; top: 12px; right: 4px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8px; letter-spacing: 0.2em;
+  color: var(--volt);
+  background: white;
+  padding: 3px 8px;
+  border: 1px solid rgba(75, 43, 160, 0.3);
+  border-radius: 999px;
+  font-weight: 500;
+}
+.fn-cell .example {
+  margin-top: 10px;
+  padding: 8px 10px;
+  background: white;
+  border-left: 2px solid var(--volt);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--volt);
+  letter-spacing: 0.02em;
+  line-height: 1.5;
+}
+.fn-cell .example span { color: var(--ink-text); }
+
+/* Variables ejemplo block */
+.fn-example-block {
+  margin: 36px 64px 0;
+  padding: 28px 32px;
+  background: white;
+  border: 1px solid var(--line-light);
+  border-left: 4px solid var(--volt);
+  border-radius: 4px;
+}
+.fn-example-block .head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  margin-bottom: 6px;
+}
+.fn-example-block h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 22px; letter-spacing: -0.018em; font-weight: 500;
+  color: var(--volt);
+}
+.fn-example-block .head .ctx {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--mute-paper);
+}
+.fn-example-block .lead { font-size: 13.5px; color: #4A5266; margin-bottom: 18px; line-height: 1.55; max-width: 820px; }
+.fn-example-block .lead strong { color: var(--ink-text); font-weight: 500; }
+
+.fn-vars {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+.fn-var {
+  padding: 14px 16px;
+  background: var(--paper-warm);
+  border-radius: 3px;
+  border-top: 2px solid var(--volt-bright);
+}
+.fn-var .name {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11.5px; letter-spacing: 0.02em;
+  color: var(--volt);
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.fn-var .what {
+  font-family: 'Manrope', sans-serif;
+  font-size: 11.5px;
+  color: #4A5266;
+  line-height: 1.45;
+}
+.fn-var .what strong { color: var(--ink-text); font-weight: 500; }
+
+/* ============================================ */
+/* PAGE 3 · ARQUITECTURA                         */
+/* ============================================ */
+.arch-title { padding: 80px 64px 24px; }
+.arch-title .kicker {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--volt-glow);
+  margin-bottom: 14px;
+}
+.arch-title h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 56px; line-height: 0.95; letter-spacing: -0.035em; font-weight: 500;
+}
+.arch-title h2 em { color: var(--can-bright); font-style: normal; font-weight: 400; }
+.arch-title h2 strong { color: var(--volt-glow); font-weight: 400; }
+.arch-title p { font-size: 15px; color: var(--silver); margin-top: 16px; max-width: 880px; line-height: 1.55; }
+.arch-title p strong { color: var(--paper); font-weight: 500; }
+
+/* Two-flow diagram */
+.arch-diagram {
+  margin: 28px 64px 0;
+  background: var(--ink-2);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 32px;
+}
+.arch-diagram .flow-row {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  align-items: stretch;
+  gap: 20px;
+  padding: 18px 0;
+}
+.arch-diagram .flow-row + .flow-row { border-top: 1px dashed var(--line); margin-top: 4px; padding-top: 22px; }
+.arch-diagram .flow-tag {
+  display: flex; flex-direction: column; justify-content: center;
+}
+.arch-diagram .flow-tag .num {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 44px; line-height: 1; letter-spacing: -0.04em;
+  font-weight: 500;
+  color: var(--can-bright);
+}
+.arch-diagram .flow-tag.volt .num { color: var(--volt-glow); }
+.arch-diagram .flow-tag .role {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--mute);
+  margin-top: 4px;
+}
+.arch-diagram .chain {
+  display: grid;
+  grid-template-columns: 1fr 36px 1fr 36px 1fr 36px 1fr;
+  gap: 0;
+  align-items: stretch;
+}
+.arch-node {
+  background: var(--ink-1);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 16px 14px;
+  display: flex; flex-direction: column; gap: 6px;
+  min-height: 110px;
+}
+.arch-node.metrican { border-color: rgba(124, 58, 237, 0.35); background: linear-gradient(135deg, rgba(75, 43, 160, 0.1), rgba(0,0,0,0.2)); }
+.arch-node.cust { border-color: rgba(31, 122, 224, 0.3); }
+.arch-node .nh {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--mute);
+  display: flex; justify-content: space-between;
+}
+.arch-node.metrican .nh .badge { color: var(--volt-glow); }
+.arch-node.cust .nh .badge { color: var(--can-bright); }
+.arch-node h4 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 17px; letter-spacing: -0.01em; font-weight: 500;
+  color: var(--paper);
+  line-height: 1.1;
+}
+.arch-node .nm {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; color: var(--silver);
+  letter-spacing: 0.04em;
+}
+.arch-arrow {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  position: relative;
+}
+.arch-arrow .lbl {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--mute);
+  margin-bottom: 4px;
+}
+.arch-arrow .ln { width: 100%; height: 1px; background: linear-gradient(90deg, var(--can-blue), var(--volt-bright)); position: relative; }
+.arch-arrow .ln::after { content: ''; position: absolute; right: 0; top: 50%; transform: translateY(-50%); border-left: 6px solid var(--volt-bright); border-top: 4px solid transparent; border-bottom: 4px solid transparent; }
+
+/* Independence callout */
+.arch-callout {
+  margin: 24px 64px 0;
+  padding: 28px 32px;
+  background: linear-gradient(135deg, rgba(255, 84, 112, 0.06), rgba(75, 43, 160, 0.05));
+  border: 1px solid rgba(255, 84, 112, 0.25);
+  border-radius: 4px;
+  display: grid; grid-template-columns: 28px 1fr; gap: 20px; align-items: start;
+}
+.arch-callout .icon {
+  width: 24px; height: 24px;
+  background: var(--warn);
+  color: var(--ink-0);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700; font-size: 14px;
+  flex-shrink: 0;
+}
+.arch-callout .text {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 20px; line-height: 1.3; letter-spacing: -0.015em; font-weight: 400;
+  color: var(--paper);
+}
+.arch-callout .text strong { color: var(--warn); font-weight: 500; }
+.arch-callout .text em { color: var(--volt-glow); font-style: normal; font-weight: 500; }
+
+/* Configurator tool block */
+.arch-config {
+  margin: 28px 64px 0;
+  background: var(--ink-2);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 28px 32px;
+}
+.arch-config h3 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--volt-glow);
+  margin-bottom: 8px;
+}
+.arch-config h4 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 26px; letter-spacing: -0.02em; font-weight: 500;
+  color: var(--paper);
+  margin-bottom: 18px;
+}
+.arch-config-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.arch-config-item {
+  padding: 16px 20px;
+  background: var(--ink-1);
+  border-left: 2px solid var(--volt-bright);
+  border-radius: 0 4px 4px 0;
+}
+.arch-config-item .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--volt-glow);
+  margin-bottom: 6px;
+}
+.arch-config-item h5 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 16px; font-weight: 500; letter-spacing: -0.01em;
+  color: var(--paper);
+  margin-bottom: 6px;
+}
+.arch-config-item p { font-size: 12px; color: var(--silver); line-height: 1.5; }
+
+/* ============================================ */
+/* PAGE 4 · SPECS                                */
+/* ============================================ */
+.sp-title {
+  padding: 60px 64px 16px;
+  border-bottom: 1px solid var(--line-light);
+}
+.sp-title .kicker {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--can-blue);
+  margin-bottom: 12px;
+}
+.sp-title h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 52px; line-height: 0.98; letter-spacing: -0.03em; font-weight: 500;
+  color: var(--ink-text);
+}
+.sp-title p { margin-top: 12px; font-size: 15px; color: #4A5266; max-width: 760px; line-height: 1.55; }
+
+.sp-table-wrap { padding: 24px 64px 0; }
+.sp-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+.sp-table thead th {
+  text-align: left;
+  padding: 12px 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--ink-text);
+  background: var(--paper-warm);
+  font-weight: 500;
+  border-bottom: 2px solid var(--can-blue);
+}
+.sp-table thead th:first-child { width: 24%; }
+.sp-table thead th:nth-child(2) { width: 38%; }
+.sp-table thead th:nth-child(3) { width: 38%; }
+.sp-table tbody tr { border-bottom: 1px solid var(--line-light); }
+.sp-table tbody tr:hover { background: rgba(31, 122, 224, 0.025); }
+.sp-table tbody td { padding: 13px 16px; vertical-align: top; color: #2A3142; line-height: 1.5; }
+.sp-table tbody td.attr {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px; font-weight: 500; letter-spacing: -0.01em;
+  color: var(--ink-text);
+}
+.sp-table tbody td.attr small {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--mute-paper);
+  margin-top: 2px;
+  font-weight: 400;
+}
+.sp-table tbody td.benefit strong { color: var(--ink-text); font-weight: 500; }
+.sp-table tbody tr.volt td.attr { color: var(--volt); }
+.sp-table tbody tr.volt { background: rgba(75, 43, 160, 0.04); }
+.sp-table tbody tr.volt .pill {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--volt);
+  background: white;
+  padding: 2px 6px;
+  border: 1px solid rgba(75, 43, 160, 0.3);
+  border-radius: 999px;
+  margin-left: 6px;
+  font-weight: 500;
+}
+.sp-cta {
+  margin: 28px 64px 0;
+  padding: 26px 32px;
+  background: linear-gradient(135deg, rgba(31, 122, 224, 0.06), rgba(75, 43, 160, 0.04));
+  border: 1px solid rgba(31, 122, 224, 0.22);
+  border-radius: 4px;
+  display: grid; grid-template-columns: 1fr auto; gap: 28px; align-items: center;
+}
+.sp-cta h3 { font-family: 'Space Grotesk', sans-serif; font-size: 22px; letter-spacing: -0.015em; font-weight: 500; color: var(--ink-text); margin-bottom: 4px; }
+.sp-cta p { font-size: 13px; color: #4A5266; }
+.sp-cta .btn { background: var(--can-blue); color: white; padding: 14px 24px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; border-radius: 3px; border: 1px solid var(--can-bright); white-space: nowrap; }
+
+.sp-contact {
+  margin: 24px 64px 0;
+  padding-top: 22px;
+  border-top: 1px solid var(--line-light);
+  display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 24px;
+}
+.sp-contact .col .k { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mute-paper); margin-bottom: 8px; }
+.sp-contact .col .v { font-family: 'Space Grotesk', sans-serif; font-size: 14px; color: var(--ink-text); font-weight: 500; letter-spacing: -0.005em; }
+.sp-contact .col .v.mono { font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.04em; }
+
+/* Push footer to bottom of page */
+.p-footer { margin-top: auto; }
+
+@media print {
+  body { background: white; padding: 0; }
+  .stage { padding: 0; gap: 0; }
+  .page { box-shadow: none; page-break-after: always; border-radius: 0; min-height: auto !important; }
+  .page:last-child { page-break-after: auto; }
+}
+</style>
+</head>
+<body>
+
+<div class="stage">
+
+  <!-- ========================================================== -->
+  <!-- PAGE 1 · COVER                                              -->
+  <!-- ========================================================== -->
+  <section class="page dark" data-screen-label="01 Portada">
+    <div class="p-header">
+      <div class="brand-mark"><img src="../assets/logo-metrican.png" alt="MetriCAN" style="height: 18px; opacity: 0.85;" /></div>
+      <div class="meta">PRODUCTOS<br><strong>EDGE DEVICE</strong></div>
+    </div>
+
+    <div class="cover-body">
+      <div class="cover-left">
+        <div class="cover-logotype">
+          <img src="../assets/logo-metrican.png" alt="MetriCAN" />
+        </div>
+        <div class="cover-kicker">— Edge device para lectura del bus CAN</div>
+        <h1 class="cover-h1">El dispositivo que <em>lee, procesa y entrega</em> los datos del bus CAN — donde tu sistema los necesite.</h1>
+        <p class="cover-lead">MetriCAN se instala en el equipo, lee <strong>hasta 2 líneas CAN</strong> simultáneas, construye tus <strong>variables auxiliares personalizadas</strong>, y emite un resumen estructurado por serial — listo para integrarse con la <strong>gateway que ya uses</strong>.</p>
+
+        <div class="cover-product">
+          <span class="lbl">MODELO</span>
+          <span class="name">MetriCAN <em>Full</em></span>
+          <span class="v">Versión actual · 2026</span>
+        </div>
+
+        <div class="cover-info">
+          <div class="cover-info-card">
+            <h3>— I/O del dispositivo</h3>
+            <ul>
+              <li>Hasta <strong>2 líneas CAN</strong> simultáneas</li>
+              <li><strong>1-Wire</strong> · iButton + temperatura</li>
+              <li><strong>Puertos serie</strong> para periféricos</li>
+              <li><strong>RS485</strong> para integraciones industriales</li>
+              <li><strong>2× Relés</strong> con reglas desde variables</li>
+            </ul>
+          </div>
+          <div class="cover-info-card volt">
+            <h3>— Conectividad inalámbrica</h3>
+            <ul>
+              <li><strong>WiFi</strong> para actualizaciones OTA remotas</li>
+              <li><strong>BLE</strong> para Configurator Tool sin cables</li>
+              <li>Web de gestión para perfiles y campañas</li>
+              <li>Setup en sitio desde aplicación PC</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="cover-pcb">
+        <img src="../assets/pcb-metrican-transparent.png" alt="MetriCAN PCB" />
+      </div>
+    </div>
+
+        <div class="p-footer">
+      <span>metrican.cl</span>
+      <span class="web">— Página 1 / 4 —</span>
+      <span>MetriCAN · Edge Device</span>
+    </div>
+  </section>
+
+
+  <!-- ========================================================== -->
+  <!-- PAGE 2 · FUNCIONALIDADES                                    -->
+  <!-- ========================================================== -->
+  <section class="page paper" data-screen-label="02 Funcionalidades">
+    <div class="p-header">
+      <div class="brand-mark"><img src="../assets/logo-metrican.png" alt="MetriCAN" /></div>
+      <div class="meta">FUNCIONALIDADES<br><strong>I/O · CONECTIVIDAD · LÓGICA</strong></div>
+    </div>
+
+    <div class="fn-title">
+      <div class="kicker">— Capacidades del dispositivo</div>
+      <h2>Todo lo que MetriCAN<br />pone en tu equipo<span class="accent">.</span></h2>
+      <p>Las funcionalidades agrupadas por <strong>capacidad</strong>, no por componente. <strong>Vehículos, maquinaria, generadores, sistemas industriales</strong> — donde haya CAN, MetriCAN se integra.</p>
+    </div>
+
+    <div class="fn-grid">
+
+      <div class="fn-cell">
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M3 12h4l2-5 6 10 2-5h4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="name">01 · CAN BUS</div>
+        <h3>Lectura CAN ×2</h3>
+        <p>Dos canales CAN simultáneos. Lectura de J1939, FMS, protocolos OEM o custom. Decodificación por archivos DBC editables.</p>
+      </div>
+
+      <div class="fn-cell">
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3v3M12 17v4M5 12H3M21 12h-2M6 6l2 2M16 16l2 2M6 18l2-2M16 8l2-2" stroke-linecap="round"/><circle cx="12" cy="12" r="3"/></svg></div>
+        <div class="name">02 · 1-WIRE</div>
+        <h3>iButton + temperatura</h3>
+        <p>Identificación de conductor por iButton y sensores de temperatura externos sobre el mismo bus 1-Wire.</p>
+      </div>
+
+      <div class="fn-cell">
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h12" stroke-linecap="round"/><circle cx="20" cy="18" r="1.5" fill="currentColor" stroke="none"/></svg></div>
+        <div class="name">03 · UART / SERIE</div>
+        <h3>Puertos serie</h3>
+        <p>Conexión de periféricos serie adicionales para integración local — displays, sensores específicos, otros dispositivos conectados al sistema.</p>
+      </div>
+
+      <div class="fn-cell">
+        <div class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="14" height="8" rx="1"/><path d="M17 11h3v2h-3M7 12h2m2 0h2" stroke-linecap="round"/></svg></div>
+        <div class="name">04 · RS485</div>
+        <h3>Bus industrial</h3>
+        <p>RS485 para integración de protocolos industriales (Modbus RTU) y sensores adicionales. Half-duplex, DE/RE automático.</p>
+      </div>
+
+      <div class="fn-cell highlight">
+        <div class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="16" height="10" rx="2"/><path d="M19 11h3M14 16v3M8 16v3" stroke-linecap="round"/></svg></div>
+        <div class="name">05 · RELÉS</div>
+        <h3>Accionamiento con reglas</h3>
+        <p>2 relés configurables que disparan a partir de <strong>reglas sobre variables</strong> — umbrales, combinaciones, eventos. Vos definís la lógica, sin programar.</p>
+      </div>
+
+      <div class="fn-cell highlight">
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M4 10h6l2-5 2 5h6M4 14h6l2 5 2-5h6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="name">06 · CUSTOM AUX VARS</div>
+        <h3>Variables auxiliares</h3>
+        <p>Construí variables nuevas a partir de las señales CAN — derivadas, combinadas, calculadas. Definí los KPIs que tu operación necesita.</p>
+      </div>
+
+      <div class="fn-cell">
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M2 12a10 10 0 0 1 20 0M5 14a7 7 0 0 1 14 0M8 16a4 4 0 0 1 8 0" stroke-linecap="round"/><circle cx="12" cy="18" r="1.5" fill="currentColor" stroke="none"/></svg></div>
+        <div class="name">07 · WiFi</div>
+        <h3>OTA remoto</h3>
+        <p>Actualización de firmware, configuración y perfiles por aire vía WiFi. El equipo se mantiene al día sin desmontar.</p>
+      </div>
+
+      <div class="fn-cell">
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M9 5l6 14-3-3-3 3V5l6 5-3-3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="name">08 · BLE</div>
+        <h3>Configurator Tool</h3>
+        <p>Configuración local sin cables vía Bluetooth desde la herramienta <strong>Configurator Tool</strong> de MetriCAN (PC).</p>
+      </div>
+
+    </div>
+
+    <!-- Aux vars example -->
+    <div class="fn-example-block">
+      <div class="head">
+        <h3>★ Ejemplo · Desglose energético</h3>
+        <span class="ctx">Caso de uso · una industria entre muchas</span>
+      </div>
+      <p class="lead">A partir de las señales del CAN, MetriCAN te permite construir las <strong>variables que tu operación necesita</strong>. Un ejemplo en vehículos eléctricos: descomponer la energía del bus en partes que se puedan analizar por separado. La <strong>misma lógica</strong> aplica a generación, procesos productivos, refrigeración industrial, agro o cualquier sistema sobre CAN.</p>
+      <div class="fn-vars">
+        <div class="fn-var">
+          <div class="name">energia_total</div>
+          <div class="what">Toda la energía que entra y sale del sistema.</div>
+        </div>
+        <div class="fn-var">
+          <div class="name">energia_traccion</div>
+          <div class="what">La que efectivamente <strong>hace el trabajo</strong> del sistema.</div>
+        </div>
+        <div class="fn-var">
+          <div class="name">energia_regen</div>
+          <div class="what">La que se <strong>recupera</strong> al frenar.</div>
+        </div>
+        <div class="fn-var">
+          <div class="name">energia_auxiliar</div>
+          <div class="what">HVAC, climatización, electrónica de a bordo.</div>
+        </div>
+        <div class="fn-var">
+          <div class="name">eficiencia_km_kwh</div>
+          <div class="what">Rendimiento real por unidad de energía.</div>
+        </div>
+        <div class="fn-var">
+          <div class="name">tiempo_ralenti</div>
+          <div class="what">Cuánto estuvo encendido sin moverse.</div>
+        </div>
+        <div class="fn-var">
+          <div class="name">indice_regen</div>
+          <div class="what">Qué fracción del consumo se recupera.</div>
+        </div>
+        <div class="fn-var">
+          <div class="name">… lo que necesites</div>
+          <div class="what">Cualquier variable derivada que sirva a <strong>tu caso</strong>.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="p-footer">
+      <span>metrican.cl</span>
+      <span class="web">— Página 2 / 4 —</span>
+      <span>MetriCAN · Funcionalidades</span>
+    </div>
+  </section>
+
+
+  <!-- ========================================================== -->
+  <!-- PAGE 3 · ARQUITECTURA                                       -->
+  <!-- ========================================================== -->
+  <section class="page dark" data-screen-label="03 Arquitectura">
+    <div class="p-header">
+      <div class="brand-mark"><img src="../assets/logo-metrican.png" alt="MetriCAN" /></div>
+      <div class="meta">ARQUITECTURA<br><strong>DOS FLUJOS INDEPENDIENTES</strong></div>
+    </div>
+
+    <div class="arch-title">
+      <div class="kicker">— Cómo se integra en tu stack</div>
+      <h2>Los <em>datos</em> van a tu gateway.<br />La <strong>configuración</strong> va a MetriCAN.</h2>
+      <p>MetriCAN <strong>no es una plataforma de telemetría</strong>. El dato sale por serial al dispositivo gateway que tu sistema ya tiene (datalogger, modem 4G/LTE, AVL, PLC). La web de MetriCAN sirve <strong>solo para configurar y actualizar los equipos</strong> — los flujos están separados, deliberadamente.</p>
+    </div>
+
+    <!-- Two flows diagram -->
+    <div class="arch-diagram">
+
+      <!-- FLOW 01: DATA -->
+      <div class="flow-row">
+        <div class="flow-tag">
+          <div class="num">01</div>
+          <div class="role">Flujo de datos<br>(operación)</div>
+        </div>
+        <div class="chain">
+          <div class="arch-node">
+            <div class="nh"><span>→ INPUT</span><span>EQUIPO</span></div>
+            <h4>Bus CAN</h4>
+            <div class="nm">Señales crudas · J1939 / OEM / DBC</div>
+          </div>
+          <div class="arch-arrow"><span class="lbl">CAN</span><div class="ln"></div></div>
+          <div class="arch-node metrican">
+            <div class="nh"><span>● PROCESS</span><span class="badge">METRICAN</span></div>
+            <h4>Edge device</h4>
+            <div class="nm">Decodifica + variables aux. + resumen @ freq. configurable</div>
+          </div>
+          <div class="arch-arrow"><span class="lbl">UART</span><div class="ln"></div></div>
+          <div class="arch-node cust">
+            <div class="nh"><span>← OUTPUT</span><span class="badge">3RD PARTY</span></div>
+            <h4>Gateway</h4>
+            <div class="nm">Datalogger · modem · AVL · PLC</div>
+          </div>
+          <div class="arch-arrow"><span class="lbl">4G/LTE</span><div class="ln"></div></div>
+          <div class="arch-node cust">
+            <div class="nh"><span>← OUTPUT</span><span class="badge">CLIENTE</span></div>
+            <h4>Plataforma propia</h4>
+            <div class="nm">Telemetría · análisis · BI</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FLOW 02: CONFIG -->
+      <div class="flow-row">
+        <div class="flow-tag volt">
+          <div class="num">02</div>
+          <div class="role">Flujo de config<br>(OTA · setup)</div>
+        </div>
+        <div class="chain">
+          <div class="arch-node metrican">
+            <div class="nh"><span>● PANEL</span><span class="badge">METRICAN WEB</span></div>
+            <h4>Web de gestión</h4>
+            <div class="nm">Perfiles, DBC, variables aux., despliegue OTA</div>
+          </div>
+          <div class="arch-arrow"><span class="lbl">WiFi</span><div class="ln"></div></div>
+          <div class="arch-node metrican">
+            <div class="nh"><span>↔ OTA</span><span class="badge">REMOTO</span></div>
+            <h4>Actualización</h4>
+            <div class="nm">Firmware · config · perfiles completos</div>
+          </div>
+          <div class="arch-arrow"><span class="lbl">→</span><div class="ln"></div></div>
+          <div class="arch-node">
+            <div class="nh"><span>● DEVICE</span><span>EN SITIO</span></div>
+            <h4>MetriCAN device</h4>
+            <div class="nm">Recibe y aplica la nueva config</div>
+          </div>
+          <div class="arch-arrow"><span class="lbl">BLE</span><div class="ln"></div></div>
+          <div class="arch-node metrican">
+            <div class="nh"><span>● LOCAL</span><span class="badge">CONFIGURATOR</span></div>
+            <h4>PC tool (sin cables)</h4>
+            <div class="nm">Setup técnico en sitio · BLE</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Independence callout -->
+    <div class="arch-callout">
+      <div class="icon">!</div>
+      <div class="text">
+        Los dos flujos son <strong>independientes</strong>. La telemetría operativa <em>nunca</em> pasa por la web de MetriCAN — vos mantenés control total de tus datos en la gateway / plataforma que ya uses.
+      </div>
+    </div>
+
+    <!-- Configurator tool detail -->
+    <div class="arch-config">
+      <h3>— Herramienta de configuración</h3>
+      <h4>Configurator Tool · aplicación PC de MetriCAN</h4>
+      <div class="arch-config-grid">
+        <div class="arch-config-item">
+          <div class="label">— Setup técnico</div>
+          <h5>Flash de firmware</h5>
+          <p>Carga inicial del firmware vía USB o BLE. Sin necesidad de programador externo.</p>
+        </div>
+        <div class="arch-config-item">
+          <div class="label">— Config local</div>
+          <h5>Edición de perfiles</h5>
+          <p>Define DBCs, variables auxiliares, reglas de relés y frecuencias de salida. En vivo, sin tocar la nube.</p>
+        </div>
+        <div class="arch-config-item">
+          <div class="label">— Diagnóstico</div>
+          <h5>Monitor serial + BLE</h5>
+          <p>Inspección en vivo del bus CAN, de las variables calculadas y de la salida del dispositivo durante la instalación.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="p-footer">
+      <span>metrican.cl</span>
+      <span class="web">— Página 3 / 4 —</span>
+      <span>MetriCAN · Arquitectura</span>
+    </div>
+  </section>
+
+
+  <!-- ========================================================== -->
+  <!-- PAGE 4 · SPECS                                              -->
+  <!-- ========================================================== -->
+  <section class="page paper" data-screen-label="04 Especificaciones">
+    <div class="p-header">
+      <div class="brand-mark"><img src="../assets/logo-metrican.png" alt="MetriCAN" /></div>
+      <div class="meta">ESPECIFICACIONES<br><strong>FUNCIÓN · DESCRIPCIÓN · BENEFICIO</strong></div>
+    </div>
+
+    <div class="sp-title">
+      <div class="kicker">— Tabla de capacidades</div>
+      <h2>Especificaciones.</h2>
+      <p>Capacidades del equipo, descripción técnica y beneficio operativo. Pensada para que un ingeniero técnico y un responsable comercial puedan leer la misma fila y entender lo mismo.</p>
+    </div>
+
+    <div class="sp-table-wrap">
+      <table class="sp-table">
+        <thead>
+          <tr><th>Función</th><th>Descripción técnica</th><th>Beneficio operativo</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="attr">Lectura CAN ×2<small>2 canales simultáneos</small></td>
+            <td>Dos buses CAN independientes con decodificación según archivos DBC editables. Soporta J1939, FMS, OEM y custom.</td>
+            <td>Cubrí <strong>2 buses en paralelo</strong> (redes principales y auxiliares, sistemas independientes, equipos encadenados) sin perder muestras.</td>
+          </tr>
+
+          <tr>
+            <td class="attr">1-Wire<small>iButton + temperatura</small></td>
+            <td>Bus 1-Wire para identificación de conductor (iButton DS1990A) y sensores de temperatura externos sobre el mismo cable.</td>
+            <td>Trazabilidad operativa por conductor <strong>+ medición ambiental</strong> con un solo bus.</td>
+          </tr>
+
+          <tr>
+            <td class="attr">Puertos serie<small>UART · integración local</small></td>
+            <td>Puertos serie adicionales para conectar periféricos al equipo (displays, sensores específicos, dispositivos auxiliares).</td>
+            <td>Integrá <strong>otros equipos que ya tengas</strong> al mismo nodo, sin agregar hardware.</td>
+          </tr>
+
+          <tr>
+            <td class="attr">RS485<small>Half-duplex · Modbus RTU</small></td>
+            <td>RS485 con DE/RE automático. Compatible con Modbus RTU master/slave y otros protocolos industriales.</td>
+            <td>Conectá <strong>sensores industriales y equipos Modbus</strong> directo al dispositivo.</td>
+          </tr>
+
+          <tr class="volt">
+            <td class="attr">Relés con reglas<small>2× 10A · accionamiento lógico</small> <span class="pill">★ Killer</span></td>
+            <td>2 relés configurables que se accionan en base a <strong>reglas sobre variables</strong> — umbrales, combinaciones, eventos definidos por perfil.</td>
+            <td>Automatizá acciones (encendido, parada, alertas físicas) <strong>desde el contexto del equipo</strong>, sin escribir código.</td>
+          </tr>
+
+          <tr class="volt">
+            <td class="attr">Variables auxiliares<small>Custom · derivadas</small> <span class="pill">★ Killer</span></td>
+            <td>Construcción de variables nuevas a partir de las señales CAN: combinadas, calculadas, derivadas.</td>
+            <td><strong>Tu operación define sus propios KPIs</strong> — energía útil, eficiencia, índices operativos — sin esperar al fabricante.</td>
+          </tr>
+
+          <tr>
+            <td class="attr">Frecuencia configurable<small>Por entrada / variable</small></td>
+            <td>Cada entrada o variable derivada tiene su propia frecuencia de muestreo y reporte, configurable independientemente.</td>
+            <td>Optimizá <strong>volumen de datos y costos de transmisión</strong> según la criticidad de cada señal.</td>
+          </tr>
+
+          <tr>
+            <td class="attr">Salida resumida<small>Trama serial → gateway</small></td>
+            <td>El dispositivo emite un resumen estructurado por serial a la frecuencia configurada por cada entrada. Trama propia, parseable, extensible.</td>
+            <td><strong>Se integra con el gateway que ya uses</strong> — modem 4G, datalogger, AVL, PLC, etc. No quedas atado a MetriCAN para el dato.</td>
+          </tr>
+
+          <tr>
+            <td class="attr">WiFi · OTA<small>Actualización por aire</small></td>
+            <td>WiFi 2.4 GHz para descarga de firmware, configuración y perfiles desde la web de gestión MetriCAN.</td>
+            <td>Una campaña nueva sale a 200 unidades <strong>en una mañana</strong>. Cero visitas técnicas.</td>
+          </tr>
+
+          <tr>
+            <td class="attr">BLE · Configurator Tool<small>Config local sin cables</small></td>
+            <td>Bluetooth Low Energy para conexión local desde el Configurator Tool (aplicación PC de MetriCAN). Setup, diagnóstico y monitor en vivo.</td>
+            <td>El técnico configura el equipo <strong>en sitio, sin abrir el gabinete</strong>.</td>
+          </tr>
+
+          <tr>
+            <td class="attr">Alimentación<small>Industrial</small></td>
+            <td>9—32 V DC · protección reversa y sobretensión · consumo &lt;1.5 W idle.</td>
+            <td>Compatible con <strong>cualquier sistema</strong> de alimentación industrial (12V, 24V, 48V típicos).</td>
+          </tr>
+
+          <tr>
+            <td class="attr">Watchdog hardware<small>Independiente del firmware</small></td>
+            <td>Watchdog independiente del MCU principal. Garantiza reset ante cualquier hang del firmware.</td>
+            <td><strong>El equipo nunca queda colgado</strong> — vital para sistemas operando 24/7.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="sp-cta">
+      <div>
+        <h3>¿Querés evaluar MetriCAN en tu operación?</h3>
+        <p>Te enviamos una unidad, definimos juntos los DBCs y variables aux. de tu caso, y hacemos la primera integración con tu gateway en 48 hs.</p>
+      </div>
+      <div class="btn">Solicitar evaluación →</div>
+    </div>
+
+    <div class="sp-contact">
+      <div class="col"><div class="k">Web</div><div class="v">metrican.cl</div></div>
+      <div class="col"><div class="k">Comercial</div><div class="v mono">contacto@metrican.cl</div></div>
+      <div class="col"><div class="k">Soporte</div><div class="v mono">soporte@metrican.cl</div></div>
+      <div class="col"><div class="k">Origen</div><div class="v">Santiago · Chile</div></div>
+    </div>
+  </section>
+
+</div>
+
+</body>
+</html>
