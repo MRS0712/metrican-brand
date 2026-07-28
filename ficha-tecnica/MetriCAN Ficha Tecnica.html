@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MetriCAN — Ficha Técnica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+doc-page:not(:defined){visibility:hidden}
+:root{--blue:#1F7AE0;--blue-br:#2A9DF4;--deep:#003570;--ink:#0B0D14;--ink2:#11141C;--line:#D7DDE6;--line-soft:#E7EBF1;--mute:#6B7388;--mute2:#959DAD;--paper2:#F4F6FA;--ok:#1F9D6B}
+*{box-sizing:border-box;margin:0;padding:0}
+.page{font-family:'Manrope',system-ui,sans-serif;color:var(--ink);background:#fff;padding:13mm 13mm 11mm;display:flex;flex-direction:column;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+.display{font-family:'Space Grotesk',sans-serif;letter-spacing:-0.02em}
+.mono{font-family:'JetBrains Mono',monospace}
+a{color:var(--blue);text-decoration:none}a:hover{color:var(--blue-br)}
+
+.hd{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding-bottom:9px;border-bottom:1px solid var(--line)}
+.hd img{height:22px}
+.hd .mid{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--mute);padding-top:5px}
+.hd .mid b{color:var(--ink2);font-weight:600}
+.hd .rt{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--mute);text-align:right;line-height:1.65}
+.hd .rt b{color:var(--ink2);font-weight:600}
+.rule{height:2px;background:linear-gradient(90deg,var(--blue) 0,var(--blue-br) 18%,var(--line-soft) 18%,var(--line-soft) 100%)}
+.kick{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);font-weight:600}
+
+.protos.apps{display:grid;grid-template-columns:repeat(3,1fr)}
+.title{margin-top:12px;display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center}
+.title h1{font-family:'Space Grotesk',sans-serif;font-size:33px;font-weight:600;letter-spacing:-0.03em;line-height:1;margin-top:6px}
+.title h1 sup{font-size:12px;color:var(--blue);vertical-align:super}
+.title .sub{font-family:'Space Grotesk',sans-serif;font-size:13.5px;font-weight:400;color:var(--mute);margin-top:6px;letter-spacing:-0.01em}
+.lead{font-size:12px;line-height:1.55;color:var(--ink2);margin-top:9px;text-wrap:pretty}
+.lead b{font-weight:700}
+.pshot{width:52mm;display:flex;align-items:center;justify-content:center}
+.pshot img{max-height:258px;max-width:100%;object-fit:contain;filter:drop-shadow(0 7px 20px rgba(11,13,20,.2))}
+
+.qs{display:grid;grid-template-columns:repeat(6,minmax(max-content,1fr));margin-top:12px;border:1px solid var(--line);border-radius:3px;overflow:hidden}
+.qs .c{padding:8px 9px;border-right:1px solid var(--line-soft);background:var(--paper2)}
+.qs .c:last-child{border-right:0}
+.qs .k{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--mute)}
+.qs .v{font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:600;color:var(--deep);letter-spacing:-0.02em;margin-top:5px;line-height:1;white-space:nowrap}
+.qs .v small{font-size:11px;font-weight:500;color:var(--mute);letter-spacing:0}
+
+.sec{margin-top:9px}
+.sec h2{font-family:'Space Grotesk',sans-serif;font-size:14.5px;font-weight:600;letter-spacing:-0.01em;margin-top:4px}
+.sec .note{font-size:12px;line-height:1.55;color:var(--mute);margin-top:6px;text-wrap:pretty}
+.sec .note b{font-weight:700;color:var(--ink2)}
+
+.tbl{width:100%;border-collapse:collapse;margin-top:8px}
+.tbl thead th{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;color:#fff;background:var(--deep);padding:8px 11px;text-align:left}
+.tbl tbody th{width:42mm;font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;text-align:left;padding:4.5px 11px;border-bottom:1px solid var(--line-soft);color:var(--ink);vertical-align:top;background:var(--paper2)}
+.tbl tbody td{font-size:12px;line-height:1.4;padding:4.5px 11px;border-bottom:1px solid var(--line-soft);color:var(--ink2);vertical-align:top}
+.tbl tbody td b{font-weight:700;color:var(--ink)}
+.tbl tbody td .mono{font-size:11.5px;color:var(--deep)}
+
+.protos{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.proto{border:1px solid var(--line);border-radius:3px;padding:8px 13px;background:var(--paper2)}
+.proto .p{font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;color:var(--deep)}
+.proto .s{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-top:3px}
+
+.vars{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:9px}
+.var{border:1px solid var(--line);border-radius:3px;padding:8px 11px;background:var(--paper2)}
+.var .vn{font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:600;color:var(--blue)}
+.var .vw{font-size:11px;line-height:1.45;color:var(--mute);margin-top:5px}
+
+.flow{display:grid;grid-template-columns:1fr 20px 1fr 20px 1fr;margin-top:8px}
+.fb{border:1px solid var(--line);border-radius:3px;padding:9px 12px;background:var(--paper2)}
+.fb.mid{border-color:var(--blue);background:rgba(31,122,224,.04)}
+.fb .t{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--mute)}
+.fb h4{font-family:'Space Grotesk',sans-serif;font-size:13.5px;font-weight:600;margin-top:4px;letter-spacing:-0.01em}
+.fb.mid h4{color:var(--blue)}
+.fb p{font-size:11px;line-height:1.45;color:var(--mute);margin-top:5px}
+.arw{display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--blue)}
+
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px}
+.box{border:1px solid var(--line);border-radius:3px;padding:10px 12px;background:var(--paper2)}
+.box .h{font-family:'JetBrains Mono',monospace;font-size:7.2px;letter-spacing:.16em;text-transform:uppercase;color:var(--blue);font-weight:600;margin-bottom:6px}
+.box ul{list-style:none;display:flex;flex-direction:column;gap:5px}
+.box li{display:block;position:relative;padding-left:11px;font-size:9px;line-height:1.45;color:var(--ink2)}
+.box li::before{content:'';position:absolute;left:0;top:5px;width:4px;height:4px;border-radius:50%;background:var(--blue)}
+.box li b{font-weight:700;color:var(--ink)}
+
+.cta{margin-top:9px;border:1.5px solid var(--blue);border-radius:3px;background:rgba(31,122,224,.04);padding:9px 14px;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center}
+.cta h3{font-family:'Space Grotesk',sans-serif;font-size:13.5px;font-weight:600;letter-spacing:-0.01em}
+.cta p{font-size:11.5px;line-height:1.5;color:var(--mute);margin-top:5px;max-width:108mm}
+.cta .info{display:flex;flex-direction:column;gap:6px;text-align:right}
+.cta .info .k{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--mute)}
+.cta .info .v{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;color:var(--deep)}
+
+.ft{margin-top:auto;padding-top:9px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--mute2)}
+.ft b{color:var(--mute)}
+.dot{width:5px;height:5px;border-radius:50%;background:var(--blue);display:inline-block;margin-right:6px;vertical-align:middle}
+</style>
+</head>
+<body>
+<doc-page size="a4">
+
+<section class="page" data-screen-label="Ficha 1">
+  <div class="hd">
+    <img src="../assets/logo-metrican.png" alt="MetriCAN" />
+    <div class="mid">Ficha Técnica · <b>Dispositivo de telemetría CAN bus</b></div>
+    <div class="rt">DOC <b>DS-MC-2026</b><br />REV <b>05 · JUL 2026</b></div>
+  </div>
+  <div class="rule"></div>
+
+  <div class="title">
+    <div>
+      <div class="kick">— Telemetría CAN bus</div>
+      <h1 class="display">MetriCAN<sup>®</sup></h1>
+      <div class="sub">Lee, procesa y entrega los datos del bus CAN — donde tu sistema los necesite.</div>
+      <p class="lead">MetriCAN se instala en el equipo, lee <b>hasta 2 líneas CAN simultáneas</b>, construye las <b>variables auxiliares</b> que tu operación necesita y emite un reporte estructurado por puerto serie hacia el gateway que ya tienes. Los datos salen <b>limpios y ya procesados en el propio dispositivo</b>.</p>
+    </div>
+    <div class="pshot"><img src="../assets/pcb-metrican-transparent.png" alt="Placa MetriCAN" /></div>
+  </div>
+
+  <div class="sec">
+    <div class="kick">— 01 / Especificaciones</div>
+    <h2 class="display">Tabla técnica</h2>
+    <table class="tbl">
+      <thead><tr><th>Parámetro</th><th>Especificación</th></tr></thead>
+      <tbody>
+        <tr><th>Dimensiones</th><td><b>130 × 69 × 28 mm</b> (13 × 6,9 × 2,8 cm)</td></tr>
+        <tr><th>Conector</th><td><b>Molex de 24 pines</b> — alimentación, buses y E/S en un <b>arnés rotulado</b></td></tr>
+        <tr><th>Alimentación</th><td><b>9–32 V DC</b> desde la red de a bordo · protección contra inversión de polaridad y sobretensión</td></tr>
+        <tr><th>Consumo</th><td><b>1,5 W</b> típico en reposo · modo de bajo consumo soportado</td></tr>
+        <tr><th>Temperatura de operación</th><td><b>−40 °C a +85 °C</b> (ambiente)</td></tr>
+        <tr><th>Interfaces CAN</th><td><b>2 canales independientes</b> · ISO 11898 · filtrado por hardware</td></tr>
+        <tr><th>Salidas de relé</th><td><b>2 relés configurables</b> · <span class="mono">10 A @ 30 V DC</span></td></tr>
+        <tr><th>RS485</th><td>Half-duplex con <b>Modbus RTU</b> (maestro/esclavo) y control de dirección automático</td></tr>
+        <tr><th>1-Wire</th><td>iButton para identificación de conductor y sensores de temperatura externos</td></tr>
+        <tr><th>Puertos serie</th><td><b>4 × RS232</b> para periféricos, equipos externos y salida de datos al gateway. Las variables recibidas por RS232 se pueden <b>incorporar al sistema</b> junto a las del CAN</td></tr>
+        <tr><th>Conectividad inalámbrica</th><td><b>WiFi 2,4 GHz</b> para OTA y diagnóstico · <b>Bluetooth</b> para configuración local</td></tr>
+        <tr><th>Actualización remota</th><td><b>OTA</b> de firmware, configuración y perfiles, versionados y desplegables por campaña</td></tr>
+        <tr><th>Indicadores</th><td>LED de estado para diagnóstico en terreno</td></tr>
+        <tr><th>Confiabilidad</th><td>Vigilancia de ejecución independiente con <b>reinicio automático</b> ante bloqueo de firmware</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sec">
+    <div class="kick">— 02 / Protocolos soportados</div>
+    <h2 class="display">Protocolos soportados</h2>
+    <div class="protos">
+      <div class="proto"><div class="p">J1939</div><div class="s">SAE · FMS</div></div>
+      <div class="proto"><div class="p">OBD-II</div><div class="s">ISO 15765</div></div>
+      <div class="proto"><div class="p">CAN propietario</div><div class="s">DBC propio</div></div>
+      <div class="proto"><div class="p">J1708 / J1587</div><div class="s">SAE legacy</div></div>
+      <div class="proto"><div class="p">Modbus RTU</div><div class="s">RS485</div></div>
+      <div class="proto"><div class="p">1-Wire</div><div class="s">iButton · Temp.</div></div>
+    </div>
+  </div>
+
+  <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Ficha Técnica</div><div>Página 1 de 2</div></div>
+</section>
+
+<section class="page" data-screen-label="Ficha 2">
+  <div class="hd">
+    <img src="../assets/logo-metrican.png" alt="MetriCAN" />
+    <div class="mid">Ficha Técnica · <b>Funcionalidades e integración</b></div>
+    <div class="rt">DOC <b>DS-MC-2026</b><br />REV <b>05 · JUL 2026</b></div>
+  </div>
+  <div class="rule"></div>
+
+  <div class="sec">
+    <div class="kick">— 03 / Funcionalidades</div>
+    <h2 class="display">Qué hace el equipo</h2>
+    <table class="tbl">
+      <thead><tr><th>Funcionalidad</th><th>Descripción</th></tr></thead>
+      <tbody>
+        <tr><th>Lectura CAN ×2</th><td>Dos canales simultáneos sobre protocolos estándar o definidos por <b>DBC propietario</b></td></tr>
+        <tr><th>Decodificación por DBC</th><td>Permite <b>cargar un archivo DBC</b> en el dispositivo y <b>decodificar las variables directamente desde el CAN</b>, entregando cada señal en su unidad real</td></tr>
+        <tr><th>Variables auxiliares</th><td>Cálculo a bordo de variables derivadas y combinadas definidas por el usuario</td></tr>
+        <tr><th>Cruce con variables AVL</th><td>Integra las variables del <b>AVL o gateway</b> (posición, odómetro, estados) con las señales CAN en una <b>única trama</b></td></tr>
+        <tr><th>Identificación de conductor</th><td>Lectura de iButton para asociar operación, turno y comportamiento a cada persona</td></tr>
+        <tr><th>Sensores externos</th><td>Temperatura por 1-Wire y equipos industriales por Modbus RTU sobre RS485</td></tr>
+        <tr><th>Reporte al gateway</th><td>Entrega periódica por serie al datalogger, modem, AVL o PLC, con <b>frecuencia configurable</b></td></tr>
+        <tr><th>Reglas, acciones y alertas</th><td>Define reglas sobre <b>todas las variables del sistema</b> (CAN, auxiliares, entradas y AVL) para generar <b>accionamientos de relé o alertas</b></td></tr>
+        <tr><th>Configuración local</th><td><b>MetriCAN Configurator</b> (PC), conectado <b>por cable o por BLE</b>: lectura, edición, creación, guardado y carga de archivos <b>DBC</b>, y monitor de señales en vivo</td></tr>
+        <tr><th>Gestión remota</th><td>Despliegue OTA por campaña, versionado y reversión de configuraciones, diagnóstico a distancia</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sec">
+    <div class="kick">— 04 / Variables auxiliares configurables</div>
+    <h2 class="display">Los KPIs los define el cliente</h2>
+    <p class="note">Una variable auxiliar es un dato <b>que el bus no entrega directamente</b>: se construye combinando señales CAN, valores del AVL y sensores externos mediante operaciones, acumuladores y condiciones. Se definen desde <b>MetriCAN Configurator</b> y se calculan <b>a bordo</b>.</p>
+    <div class="vars">
+      <div class="var"><div class="vn">energia_total</div><div class="vw">Integra la potencia del pack (tensión × corriente) en el tiempo para entregar los <b>kWh consumidos y regenerados</b> por el vehículo eléctrico.</div></div>
+      <div class="var"><div class="vn">autonomia_estimada</div><div class="vw">Cruza el estado de carga con el consumo promedio reciente para estimar los <b>km restantes</b> en tiempo real.</div></div>
+      <div class="var"><div class="vn">tiempo_ralenti</div><div class="vw">Cuánto estuvo encendido sin moverse.</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="kick">— 05 / Integración</div>
+    <h2 class="display">Cómo se conecta al stack</h2>
+    <div class="flow">
+      <div class="fb"><div class="t">Origen</div><h4>Equipo</h4><p>Vehículo, maquinaria, generador o sistema industrial con bus CAN.</p></div>
+      <div class="arw">→</div>
+      <div class="fb mid"><div class="t">Procesamiento</div><h4>MetriCAN</h4><p>Decodifica, calcula las variables auxiliares y cruza los datos del AVL.</p></div>
+      <div class="arw">→</div>
+      <div class="fb"><div class="t">Destino</div><h4>Gateway</h4><p>Recibe el reporte por serie y lo envía a la plataforma en uso.</p></div>
+    </div>
+  </div>
+
+  <div class="cta">
+    <div>
+      <h3 class="display">Solicita una unidad de evaluación</h3>
+      <p>Conócelo funcionando en tu propia operación, con acompañamiento técnico en cada etapa.</p>
+    </div>
+    <div class="info">
+      <div><div class="k">Comercial</div><div class="v">contacto@metrican.cl</div></div>
+      <div><div class="k">Soporte</div><div class="v">soporte@metrican.cl</div></div>
+    </div>
+  </div>
+
+  <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Santiago · Chile</div><div>DS-MC-2026 · REV 05</div><div>Página 2 de 2</div></div>
+</section>
+
+</doc-page>
+<script src="doc-page.js"></script>
+</body>
+</html>

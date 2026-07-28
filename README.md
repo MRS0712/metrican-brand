@@ -15,6 +15,9 @@ brand/
 ├── brochure/
 │   ├── Brochure.html            ← interactivo
 │   └── Brochure - print.html    ← versión para imprimir/PDF (vertical A4)
+├── ficha-tecnica/
+│   ├── MetriCAN Ficha Tecnica.html  ← ficha técnica del producto (2 páginas A4)
+│   └── doc-page.js                  ← motor de paginación/impresión (requerido)
 └── assets/
     ├── logo-metrican.png        ← logotipo horizontal
     ├── pcb-metrican.png         ← render PCB (fondo blanco)
@@ -22,7 +25,8 @@ brand/
 ```
 
 Los HTML están autocontenidos (fuentes desde Google Fonts CDN). Se abren con
-doble click en cualquier navegador moderno.
+doble click en cualquier navegador moderno. La `ficha-tecnica/` referencia los
+mismos `assets/` de la raíz por ruta relativa (`../assets/`), sin duplicar imágenes.
 
 ---
 
