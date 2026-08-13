@@ -20,6 +20,26 @@ CHROME="${CHROME:-$(command -v chromium || command -v chromium-browser || comman
 [ -n "$CHROME" ] || { echo "No hay chromium/chrome instalado" >&2; exit 1; }
 mkdir -p "$SALIDA"
 
+# ── Dossier: ficha + manual encuadernados en un solo PDF ───────────────────
+#
+# Son dos documentos con dos públicos y dos ciclos de vida distintos, y por eso
+# viven separados. Pero al cliente que recibe una unidad se le manda UNA cosa.
+# Esto los une al final, en el PDF, sin duplicar una sola línea de fuente.
+#
+# Cada pieza conserva su numeración y su código de documento en el pie
+# (DS-MC-2026, MI-MC-2026): es un dossier de dos secciones, no un documento
+# de seis páginas — y así se lee.
+if [ "${1:-}" = "--dossier" ]; then
+  command -v pdfunite >/dev/null || { echo "falta pdfunite (poppler-utils)" >&2; exit 1; }
+  bash "$0" "$RAIZ/ficha-tecnica/MetriCAN Ficha Tecnica.html" \
+            "$RAIZ/manual-instalacion/MetriCAN Manual de Instalacion.html" >/dev/null
+  destino="$SALIDA/MetriCAN_Dossier_Tecnico.pdf"
+  pdfunite "$SALIDA/MetriCAN_Ficha_Tecnica.pdf" \
+           "$SALIDA/MetriCAN_Manual_de_Instalacion.pdf" "$destino"
+  echo "$destino — $(pdfinfo "$destino" | awk '/^Pages/{print $2}') páginas (ficha + manual)"
+  exit 0
+fi
+
 # Sin argumentos: todos los HTML de documento del repo. Se excluyen los
 # `- print.html` del brand book y el brochure, que son variantes de impresión
 # de piezas antiguas con su propio flujo.

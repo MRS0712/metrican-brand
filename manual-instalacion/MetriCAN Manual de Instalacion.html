@@ -202,7 +202,11 @@
   <div class="sec">
     <div class="kick">— 06 / Puertos serie</div>
     <h2 class="display">Cuál va al gateway</h2>
-    <p class="note">El equipo expone <b>cuatro puertos serie</b>. El parámetro de configuración <span class="mono">uart_out</span> decide por cuál sale la trama de datos hacia el AVL, datalogger, modem o PLC.</p>
+    <p class="note">El equipo expone <b>cuatro puertos serie, todos en nivel RS232</b>. El parámetro de configuración <span class="mono">uart_out</span> decide por cuál sale la trama de datos hacia el AVL, datalogger, modem o PLC.</p>
+    <div class="adv danger">
+      <div class="t">Peligro · Nivel eléctrico</div>
+      <p>Los cuatro puertos son <b>RS232</b>, no TTL. Conectar un periférico de <b>3,3 V o 5 V TTL</b> directamente a estas líneas <b>daña el periférico, el MetriCAN o ambos</b>. Si el equipo a conectar es TTL, intercala un conversor de nivel RS232 ↔ TTL.</p>
+    </div>
     <table class="tbl cols tight">
       <thead><tr><th>Puerto</th><th>uart_out</th><th>Uso habitual</th></tr></thead>
       <tbody>
