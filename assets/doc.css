@@ -185,3 +185,53 @@ a{color:var(--blue);text-decoration:none}a:hover{color:var(--blue-br)}
 
 /* Muestra de color de cable, para la tabla de pines */
 .wire{display:inline-block;width:9px;height:9px;border-radius:2px;border:1px solid var(--line);vertical-align:-1px;margin-right:5px}
+
+/* ============================================================================
+   RITMO DE MANUAL — .page.manual
+   ----------------------------------------------------------------------------
+   La ficha técnica es densa a propósito: son dos páginas que tienen que caber
+   todo, y se leen sentado. Un manual de instalación se lee de pie, con una mano
+   ocupada y mala luz, y esa misma densidad lo vuelve ilegible.
+   Misma marca, otro ritmo: menos por página, tipografía mayor, más aire.
+   ========================================================================== */
+.page.manual{padding:14mm 14mm 11mm}
+.page.manual .sec{margin-top:15px}
+.page.manual .sec h2{font-size:16.5px;margin-top:5px}
+.page.manual .sec .note{font-size:12.5px;line-height:1.6;margin-top:7px}
+.page.manual .kick{font-size:10px;letter-spacing:.19em}
+.page.manual .tbl tbody th,
+.page.manual .tbl tbody td{font-size:12.5px;line-height:1.5;padding:6.5px 12px}
+.page.manual .tbl.tight tbody td{font-size:11.8px;padding:5px 11px}
+.page.manual .tbl thead th{font-size:10px;padding:9px 12px}
+.page.manual .step{font-size:12.5px;line-height:1.6;padding-left:30px}
+.page.manual .step .sh{font-size:13.5px;margin-bottom:3px}
+.page.manual .steps{gap:11px;margin-top:12px}
+.page.manual .adv{padding:10px 14px;margin-top:12px}
+.page.manual .adv p{font-size:12.5px;line-height:1.55}
+.page.manual .box li{font-size:11.5px;line-height:1.55}
+.page.manual .box .h{font-size:8.4px}
+.page.manual .chk{gap:9px 20px;margin-top:12px}
+.page.manual .chk .i{font-size:12.5px;line-height:1.6;padding-left:20px}
+.page.manual .chk .i::before{width:13px;height:13px;top:2px}
+/* El diagrama del conector es la pieza que más se mira: en un manual va grande */
+.page.manual .pad{min-height:34px;font-size:8.6px;padding:7px 2px}
+.page.manual .pad .gp{font-size:7px}
+.page.manual .pad .sg{font-size:9px}
+.page.manual .pinout .idx div{font-size:7.6px}
+.page.manual .pinout .vista{font-size:9.5px;margin-top:9px}
+
+/* `.pinout.grande` — el diagrama con una página para él solo.
+   Es la hoja que el instalador va a fotografiar con el teléfono y mirar a
+   contraluz dentro de una cabina: acá el tamaño no es estética, es si se lee
+   o no se lee. */
+.pinout.grande .grid{gap:3px}
+.pinout.grande .pad{min-height:64px;padding:10px 3px;border-radius:3px}
+.pinout.grande .pad .gp{font-size:9px;margin-bottom:3px}
+.pinout.grande .pad .sg{font-size:12px}
+.pinout.grande .idx{gap:3px;margin-bottom:4px}
+.pinout.grande .idx div{font-size:9.5px;font-weight:600;color:var(--mute)}
+.pinout.grande .vista{font-size:11px;margin-top:12px;letter-spacing:.15em}
+/* Leyenda de colores de cable */
+.leyenda{margin-top:14px;display:grid;grid-template-columns:repeat(5,1fr);gap:7px 14px}
+.leyenda .l{display:flex;align-items:center;font-size:11px;color:var(--ink2)}
+.leyenda .l .wire{width:13px;height:13px;margin-right:7px;flex:0 0 auto}

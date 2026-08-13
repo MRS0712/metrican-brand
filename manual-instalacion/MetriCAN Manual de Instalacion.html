@@ -12,12 +12,12 @@
 <body>
 <doc-page size="a4">
 
-<!-- ══════════════════════════ PÁGINA 1 ══════════════════════════ -->
-<section class="page" data-screen-label="Portada · Conector">
+<!-- ═══════════════════ 1 · PORTADA E INSTALACIÓN EN 6 PASOS ═══════════════════ -->
+<section class="page manual" data-screen-label="1 · Inicio rápido">
   <div class="hd">
     <img src="../assets/logo-metrican.png" alt="MetriCAN" />
-    <div class="mid">Manual de Instalación · <b>Dispositivo de telemetría CAN bus</b></div>
-    <div class="rt">DOC <b>MI-MC-2026</b><br />REV <b>01 · AGO 2026</b></div>
+    <div class="mid">Manual de Instalación</div>
+    <div class="rt">DOC <b>MI-MC-2026</b><br />REV <b>02 · AGO 2026</b></div>
   </div>
   <div class="rule"></div>
 
@@ -26,7 +26,6 @@
       <div class="kick">— Instalación en terreno</div>
       <h1 class="display">Manual de instalación</h1>
       <div class="sub">Del arnés al primer dato en el gateway.</div>
-      <p class="lead">Este manual cubre el <b>montaje y el cableado</b> de una unidad MetriCAN en el vehículo o equipo: alimentación, buses CAN, puertos serie, RS485, 1-Wire, entrada digital y relés. Termina con la <b>verificación del primer encendido</b>, para no bajarse de la máquina sin saber si quedó funcionando.</p>
     </div>
     <div class="pshot"><img src="../assets/pcb-metrican-transparent.png" alt="Placa MetriCAN" /></div>
   </div>
@@ -34,46 +33,69 @@
   <div class="aplica">
     <div class="a"><div class="k">Firmware</div><div class="v">v2.6.0</div></div>
     <div class="a"><div class="k">Configurador</div><div class="v">v2.1.0</div></div>
-    <div class="a"><div class="k">Conector</div><div class="v">Molex 24</div></div>
     <div class="a"><div class="k">Alimentación</div><div class="v">9–32 V DC</div></div>
-    <div class="a"><div class="k">Documento</div><div class="v">REV 01</div></div>
+    <div class="a"><div class="k">Temperatura</div><div class="v">−40 / +85 °C</div></div>
   </div>
 
   <div class="sec">
-    <div class="kick">— 01 / Antes de empezar</div>
-    <h2 class="display">Qué necesitas a mano</h2>
+    <div class="kick">— 01 / Instalación en seis pasos</div>
+    <h2 class="display">El recorrido completo</h2>
+    <div class="steps">
+      <div class="step"><span class="sh">Monta la unidad</span>Punto seco, fuera de la trayectoria de agua y lejos del calor directo.</div>
+      <div class="step"><span class="sh">Alimenta y aterriza</span>Cable <b>BAT/IGN</b> a un punto permanente de <b>9–32 V DC</b> con fusible. <b>GND</b> a masa de chasis limpia.</div>
+      <div class="step"><span class="sh">Conecta el bus CAN</span>En derivación sobre el bus existente. <b>Nunca lo cortes.</b></div>
+      <div class="step"><span class="sh">Conecta el gateway</span>Al puerto <b>UART_1</b>, que es la salida de datos por defecto. TX contra RX.</div>
+      <div class="step"><span class="sh">Energiza y lee el LED</span>Parpadeo lento = recibiendo datos del bus. Es el estado que buscas.</div>
+      <div class="step"><span class="sh">Verifica y registra</span>Abre <b>Variables en Vivo</b> en el Configurador y anota el equipo instalado.</div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="kick">— 02 / Qué necesitas</div>
+    <h2 class="display">Antes de subir a la máquina</h2>
     <div class="two">
       <div class="box">
         <div class="h">Del equipo</div>
         <ul>
-          <li>Unidad MetriCAN — <b>130 × 69 × 28 mm</b></li>
-          <li>Arnés Molex de 24 pines, <b>con todos los cables rotulados</b></li>
-          <li>Fusible de línea para la alimentación</li>
-          <li>PC con <b>MetriCAN Configurator v2.1.0</b> — cable o BLE</li>
+          <li>Unidad MetriCAN y su arnés Molex de 24 pines</li>
+          <li>Fusible de línea</li>
+          <li>PC con <b>MetriCAN Configurator v2.1.0</b></li>
         </ul>
       </div>
       <div class="box">
-        <div class="h">Del vehículo o equipo</div>
+        <div class="h">Del vehículo</div>
         <ul>
-          <li>Punto de alimentación permanente de <b>9 a 32 V DC</b></li>
+          <li>Alimentación permanente de 9 a 32 V DC</li>
           <li>Masa de chasis en buen estado</li>
-          <li>Acceso al bus CAN a intervenir — <b>sin cortarlo</b></li>
-          <li>El archivo <b>DBC</b> del bus, si es propietario</li>
+          <li>Acceso al bus CAN a intervenir</li>
         </ul>
       </div>
     </div>
-    <div class="adv warn">
-      <div class="t">Atención · Antes de conectar</div>
-      <p>Trabaja siempre con la <b>alimentación desconectada</b>. Verifica la polaridad antes de energizar: el equipo protege contra inversión, pero la protección es un seguro, no un permiso. Temperatura de operación: <b>−40 °C a +85 °C</b>. Monta la unidad en un punto seco, fuera de la trayectoria de agua y lejos de fuentes de calor directo.</p>
-    </div>
   </div>
 
-  <div class="sec">
-    <div class="kick">— 02 / El conector</div>
-    <h2 class="display">Distribución de los 24 contactos</h2>
-    <p class="note">Los contactos se distribuyen en <b>dos filas de doce</b>. El color indicado es el <b>color real del cable</b> en el arnés, y cada cable viene además rotulado con su función.</p>
+  <div class="adv warn">
+    <div class="t">Antes de conectar</div>
+    <p>Trabaja con la <b>alimentación desconectada</b> y verifica la polaridad antes de energizar.</p>
+  </div>
 
-    <div class="pinout">
+  <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Manual de Instalación</div><div>Página 1 de 6</div></div>
+</section>
+
+<!-- ═══════════════════ 2 · EL CONECTOR ═══════════════════ -->
+<section class="page manual" data-screen-label="2 · Conector">
+  <div class="hd">
+    <img src="../assets/logo-metrican.png" alt="MetriCAN" />
+    <div class="mid">Manual de Instalación · <b>El conector</b></div>
+    <div class="rt">DOC <b>MI-MC-2026</b><br />REV <b>02 · AGO 2026</b></div>
+  </div>
+  <div class="rule"></div>
+
+  <div class="sec">
+    <div class="kick">— 03 / El conector</div>
+    <h2 class="display">24 contactos en dos filas</h2>
+    <p class="note">El color mostrado es el <b>color real del cable</b>. Cada cable viene además <b>rotulado con su función</b>.</p>
+
+    <div class="pinout grande">
       <div class="idx">
         <div>01</div><div>02</div><div>03</div><div>04</div><div>05</div><div>06</div>
         <div>07</div><div>08</div><div>09</div><div>10</div><div>11</div><div>12</div>
@@ -107,149 +129,196 @@
         <div class="pad light" style="background:var(--w-naranjo)"><span><span class="gp">RELE_1</span><span class="sg">NC</span></span></div>
       </div>
       <div class="vista">▲ Vista mirando el conector del equipo</div>
+
+      <div class="leyenda">
+        <div class="l"><span class="wire" style="background:var(--w-rojo)"></span>Rojo — alimentación</div>
+        <div class="l"><span class="wire" style="background:var(--w-negro)"></span>Negro — masa</div>
+        <div class="l"><span class="wire" style="background:var(--w-azul)"></span>Azul — CAN H y RX serie</div>
+        <div class="l"><span class="wire" style="background:var(--w-naranjo)"></span>Naranjo — CAN L, 485 B y NC</div>
+        <div class="l"><span class="wire" style="background:var(--w-blanco)"></span>Blanco — TX serie</div>
+        <div class="l"><span class="wire" style="background:var(--w-gris)"></span>Gris — 485 A y común de relé</div>
+        <div class="l"><span class="wire" style="background:var(--w-verde)"></span>Verde — NO de relé</div>
+        <div class="l"><span class="wire" style="background:var(--w-morado)"></span>Morado — 1-Wire</div>
+        <div class="l"><span class="wire" style="background:var(--w-amarillo)"></span>Amarillo — entrada digital</div>
+      </div>
     </div>
 
     <div class="adv danger">
       <div class="t">Peligro · Orientación</div>
-      <p>El diagrama está dibujado <b>mirando el conector del equipo</b>. Visto desde el lado del arnés, el orden de las columnas se invierte como en un espejo. <b>Guíate siempre por el rótulo del cable</b>, no por la posición: el rótulo no se puede leer al revés.</p>
+      <p>Visto desde el lado del arnés, las columnas se invierten como en un espejo. <b>Guíate por el rótulo del cable</b>, no por la posición.</p>
     </div>
   </div>
 
-  <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Manual de Instalación</div><div>Página 1 de 4</div></div>
+  <div class="sec">
+    <div class="kick">— Esquema de conexión</div>
+    <h2 class="display">Dónde queda el equipo</h2>
+    <p class="note">MetriCAN se intercala <b>en paralelo</b> entre el bus del vehículo y el gateway que ya está instalado. No reemplaza a ninguno de los dos.</p>
+    <div class="flow">
+      <div class="fb">
+        <div class="t">Origen</div>
+        <h4>Bus CAN del vehículo</h4>
+        <p>CAN_1 y CAN_2 en derivación. El bus sigue intacto.</p>
+      </div>
+      <div class="arw">→</div>
+      <div class="fb mid">
+        <div class="t">Aquí</div>
+        <h4>MetriCAN</h4>
+        <p>Decodifica, calcula las variables y arma la trama a bordo.</p>
+      </div>
+      <div class="arw">→</div>
+      <div class="fb">
+        <div class="t">Destino</div>
+        <h4>Gateway · AVL</h4>
+        <p>Por UART_1 en RS232. Datos ya procesados.</p>
+      </div>
+    </div>
+    <div class="two" style="margin-top:10px">
+      <div class="box">
+        <div class="h">Alimentación</div>
+        <ul>
+          <li><b>BAT/IGN</b> a punto permanente con fusible</li>
+          <li><b>GND</b> a masa de chasis</li>
+        </ul>
+      </div>
+      <div class="box">
+        <div class="h">Opcionales</div>
+        <ul>
+          <li><b>1-Wire</b> — iButton y temperatura</li>
+          <li><b>RS485</b> — sensores Modbus · <b>INPUT</b> — ignición</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Manual de Instalación</div><div>MI-MC-2026 · REV 02</div><div>Página 2 de 6</div></div>
 </section>
 
-<!-- ══════════════════════════ PÁGINA 2 ══════════════════════════ -->
-<section class="page" data-screen-label="Tabla de pines">
+<!-- ═══════════════════ 3 · TABLA DE CONTACTOS ═══════════════════ -->
+<section class="page manual" data-screen-label="3 · Tabla de contactos">
   <div class="hd">
     <img src="../assets/logo-metrican.png" alt="MetriCAN" />
     <div class="mid">Manual de Instalación · <b>Tabla de contactos</b></div>
-    <div class="rt">DOC <b>MI-MC-2026</b><br />REV <b>01 · AGO 2026</b></div>
+    <div class="rt">DOC <b>MI-MC-2026</b><br />REV <b>02 · AGO 2026</b></div>
   </div>
   <div class="rule"></div>
 
   <div class="sec">
-    <div class="kick">— 03 / Tabla de contactos</div>
-    <h2 class="display">Los 24 contactos, uno por uno</h2>
-    <p class="note">La referencia <b>A</b>/<b>B</b> designa la fila superior e inferior del diagrama y es una <b>convención de este documento</b> para poder nombrar cada contacto. No es la numeración del fabricante del conector: en terreno, la referencia válida es el <b>rótulo del cable</b>.</p>
+    <div class="kick">— 04 / Tabla de contactos</div>
+    <h2 class="display">Los 24, uno por uno</h2>
+    <p class="note"><b>A</b> es la fila superior del diagrama y <b>B</b> la inferior. Es una referencia de este documento para poder nombrar cada contacto: en terreno manda el <b>rótulo del cable</b>.</p>
     <table class="tbl cols tight">
-      <thead><tr><th>Ref.</th><th>Señal</th><th>Color de cable</th><th>Función</th></tr></thead>
+      <thead><tr><th>Ref.</th><th>Señal</th><th>Color</th><th>Función</th></tr></thead>
       <tbody>
-        <tr><td>A11</td><td><b>PWR</b> (rotulado BAT/IGN)</td><td><span class="wire" style="background:var(--w-rojo)"></span>Rojo</td><td>Alimentación dedicada del equipo, <b>9–32 V DC</b> permanente</td></tr>
-        <tr><td>B10</td><td><b>GND</b></td><td><span class="wire" style="background:var(--w-negro)"></span>Negro</td><td>Masa de referencia — común a alimentación, buses y E/S</td></tr>
-        <tr><td>A07</td><td><b>CAN_1 · CAN H</b></td><td><span class="wire" style="background:var(--w-azul)"></span>Azul</td><td>Línea alta del bus CAN 1</td></tr>
-        <tr><td>B07</td><td><b>CAN_1 · CAN L</b></td><td><span class="wire" style="background:var(--w-naranjo)"></span>Naranjo</td><td>Línea baja del bus CAN 1</td></tr>
-        <tr><td>A06</td><td><b>CAN_2 · CAN H</b></td><td><span class="wire" style="background:var(--w-azul)"></span>Azul</td><td>Línea alta del bus CAN 2 — canal independiente</td></tr>
-        <tr><td>B06</td><td><b>CAN_2 · CAN L</b></td><td><span class="wire" style="background:var(--w-naranjo)"></span>Naranjo</td><td>Línea baja del bus CAN 2</td></tr>
-        <tr><td>B03</td><td><b>UART_1 · TX</b></td><td><span class="wire" style="background:var(--w-blanco)"></span>Blanco</td><td>Transmisión serie — <b>salida de datos al gateway por defecto</b></td></tr>
-        <tr><td>B04</td><td><b>UART_1 · RX</b></td><td><span class="wire" style="background:var(--w-azul)"></span>Azul</td><td>Recepción serie — comandos y tramas del AVL</td></tr>
-        <tr><td>A02</td><td><b>UART_2 · TX</b></td><td><span class="wire" style="background:var(--w-blanco)"></span>Blanco</td><td>Transmisión del segundo puerto serie</td></tr>
-        <tr><td>A03</td><td><b>UART_2 · RX</b></td><td><span class="wire" style="background:var(--w-azul)"></span>Azul</td><td>Recepción del segundo puerto serie</td></tr>
-        <tr><td>A08</td><td><b>UART_3(A) · TX</b></td><td><span class="wire" style="background:var(--w-blanco)"></span>Blanco</td><td>Transmisión del tercer puerto serie</td></tr>
-        <tr><td>B08</td><td><b>UART_3(A) · RX</b></td><td><span class="wire" style="background:var(--w-azul)"></span>Azul</td><td>Recepción del tercer puerto serie</td></tr>
-        <tr><td>A09</td><td><b>UART_4(B) · TX</b></td><td><span class="wire" style="background:var(--w-blanco)"></span>Blanco</td><td>Transmisión del cuarto puerto serie</td></tr>
-        <tr><td>B09</td><td><b>UART_4(B) · RX</b></td><td><span class="wire" style="background:var(--w-azul)"></span>Azul</td><td>Recepción del cuarto puerto serie</td></tr>
-        <tr><td>A05</td><td><b>485 B</b></td><td><span class="wire" style="background:var(--w-naranjo)"></span>Naranjo</td><td>Línea B del bus RS485 — Modbus RTU</td></tr>
-        <tr><td>B05</td><td><b>485 A</b></td><td><span class="wire" style="background:var(--w-gris)"></span>Gris</td><td>Línea A del bus RS485</td></tr>
-        <tr><td>A04</td><td><b>1-WIRE</b></td><td><span class="wire" style="background:var(--w-morado)"></span>Morado</td><td>Bus 1-Wire — iButton y sensores de temperatura</td></tr>
-        <tr><td>A10</td><td><b>INPUT</b></td><td><span class="wire" style="background:var(--w-amarillo)"></span>Amarillo</td><td>Entrada digital de propósito general — ignición u otra señal</td></tr>
-        <tr><td>A12</td><td><b>RELE_1 · COMÚN</b></td><td><span class="wire" style="background:var(--w-gris)"></span>Gris</td><td>Contacto común del relé 1</td></tr>
-        <tr><td>B11</td><td><b>RELE_1 · NO</b></td><td><span class="wire" style="background:var(--w-verde)"></span>Verde</td><td>Normalmente abierto del relé 1</td></tr>
-        <tr><td>B12</td><td><b>RELE_1 · NC</b></td><td><span class="wire" style="background:var(--w-naranjo)"></span>Naranjo</td><td>Normalmente cerrado del relé 1</td></tr>
-        <tr><td>B01</td><td><b>RELE_2 · COMÚN</b></td><td><span class="wire" style="background:var(--w-gris)"></span>Gris</td><td>Contacto común del relé 2</td></tr>
-        <tr><td>A01</td><td><b>RELE_2 · NO</b></td><td><span class="wire" style="background:var(--w-verde)"></span>Verde</td><td>Normalmente abierto del relé 2</td></tr>
-        <tr><td>B02</td><td><b>RELE_2 · NC</b></td><td><span class="wire" style="background:var(--w-naranjo)"></span>Naranjo</td><td>Normalmente cerrado del relé 2</td></tr>
+        <tr><td>A11</td><td><b>PWR</b> · rotulado BAT/IGN</td><td><span class="wire" style="background:var(--w-rojo)"></span>Rojo</td><td>Alimentación del equipo, 9–32 V DC permanente</td></tr>
+        <tr><td>B10</td><td><b>GND</b></td><td><span class="wire" style="background:var(--w-negro)"></span>Negro</td><td>Masa común de alimentación, buses y E/S</td></tr>
+        <tr><td>A07 · B07</td><td><b>CAN_1</b> · CAN H / CAN L</td><td><span class="wire" style="background:var(--w-azul)"></span>Azul · <span class="wire" style="background:var(--w-naranjo)"></span>Naranjo</td><td>Bus CAN 1</td></tr>
+        <tr><td>A06 · B06</td><td><b>CAN_2</b> · CAN H / CAN L</td><td><span class="wire" style="background:var(--w-azul)"></span>Azul · <span class="wire" style="background:var(--w-naranjo)"></span>Naranjo</td><td>Bus CAN 2 — canal independiente</td></tr>
+        <tr><td>B03 · B04</td><td><b>UART_1</b> · TX / RX</td><td><span class="wire" style="background:var(--w-blanco)"></span>Blanco · <span class="wire" style="background:var(--w-azul)"></span>Azul</td><td><b>Salida de datos al gateway por defecto</b></td></tr>
+        <tr><td>A02 · A03</td><td><b>UART_2</b> · TX / RX</td><td><span class="wire" style="background:var(--w-blanco)"></span>Blanco · <span class="wire" style="background:var(--w-azul)"></span>Azul</td><td>Segundo puerto serie</td></tr>
+        <tr><td>A08 · B08</td><td><b>UART_3(A)</b> · TX / RX</td><td><span class="wire" style="background:var(--w-blanco)"></span>Blanco · <span class="wire" style="background:var(--w-azul)"></span>Azul</td><td>Tercer puerto serie</td></tr>
+        <tr><td>A09 · B09</td><td><b>UART_4(B)</b> · TX / RX</td><td><span class="wire" style="background:var(--w-blanco)"></span>Blanco · <span class="wire" style="background:var(--w-azul)"></span>Azul</td><td>Cuarto puerto serie</td></tr>
+        <tr><td>A05 · B05</td><td><b>RS485</b> · 485 B / 485 A</td><td><span class="wire" style="background:var(--w-naranjo)"></span>Naranjo · <span class="wire" style="background:var(--w-gris)"></span>Gris</td><td>Bus RS485 — Modbus RTU</td></tr>
+        <tr><td>A04</td><td><b>1-WIRE</b></td><td><span class="wire" style="background:var(--w-morado)"></span>Morado</td><td>iButton y sensores de temperatura</td></tr>
+        <tr><td>A10</td><td><b>INPUT</b></td><td><span class="wire" style="background:var(--w-amarillo)"></span>Amarillo</td><td>Entrada digital — ignición u otra señal</td></tr>
+        <tr><td>A12 · B11 · B12</td><td><b>RELE_1</b> · COMÚN / NO / NC</td><td><span class="wire" style="background:var(--w-gris)"></span><span class="wire" style="background:var(--w-verde)"></span><span class="wire" style="background:var(--w-naranjo)"></span></td><td>Relé 1 — 10 A @ 30 V DC</td></tr>
+        <tr><td>B01 · A01 · B02</td><td><b>RELE_2</b> · COMÚN / NO / NC</td><td><span class="wire" style="background:var(--w-gris)"></span><span class="wire" style="background:var(--w-verde)"></span><span class="wire" style="background:var(--w-naranjo)"></span></td><td>Relé 2 — 10 A @ 30 V DC</td></tr>
       </tbody>
     </table>
   </div>
 
-  <div class="sec">
-    <div class="kick">— 04 / Alimentación</div>
-    <h2 class="display">PWR y GND</h2>
-    <div class="steps">
-      <div class="step"><span class="sh">Toma un punto permanente de 9 a 32 V DC</span>El cable rotulado <b>BAT/IGN</b> es la alimentación dedicada del MetriCAN. Pese al rótulo, <b>no es la señal de ignición</b>: para detectar ignición se usa la entrada <b>INPUT</b> (sección 09).</div>
-      <div class="step"><span class="sh">Instala el fusible de línea</span>Lo más cerca posible del punto de toma, nunca junto al equipo.</div>
-      <div class="step"><span class="sh">Conecta GND a masa de chasis</span>Punto limpio, sin pintura ni óxido. Una masa deficiente se manifiesta como lecturas CAN intermitentes, no como falta de alimentación — y por eso se diagnostica tarde.</div>
-      <div class="step"><span class="sh">Verifica la polaridad antes de energizar</span>Consumo típico en reposo: <b>1,5 W</b>. Un consumo muy por encima de eso al energizar es señal de detenerse y revisar.</div>
-    </div>
-  </div>
-
-  <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Manual de Instalación</div><div>MI-MC-2026 · REV 01</div><div>Página 2 de 4</div></div>
+  <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Manual de Instalación</div><div>MI-MC-2026 · REV 02</div><div>Página 3 de 6</div></div>
 </section>
 
-<!-- ══════════════════════════ PÁGINA 3 ══════════════════════════ -->
-<section class="page" data-screen-label="Buses y E/S">
+<!-- ═══════════════════ 4 · ALIMENTACIÓN Y CAN ═══════════════════ -->
+<section class="page manual" data-screen-label="4 · Alimentación y CAN">
   <div class="hd">
     <img src="../assets/logo-metrican.png" alt="MetriCAN" />
-    <div class="mid">Manual de Instalación · <b>Buses y entradas / salidas</b></div>
-    <div class="rt">DOC <b>MI-MC-2026</b><br />REV <b>01 · AGO 2026</b></div>
+    <div class="mid">Manual de Instalación · <b>Alimentación y bus CAN</b></div>
+    <div class="rt">DOC <b>MI-MC-2026</b><br />REV <b>02 · AGO 2026</b></div>
   </div>
   <div class="rule"></div>
 
   <div class="sec">
-    <div class="kick">— 05 / Buses CAN</div>
+    <div class="kick">— 05 / Alimentación</div>
+    <h2 class="display">PWR y GND</h2>
+    <div class="steps">
+      <div class="step"><span class="sh">Toma un punto permanente de 9 a 32 V DC</span>El cable <b>BAT/IGN</b> es la alimentación del equipo. Pese al rótulo, <b>no es la señal de ignición</b>: para eso está la entrada <b>INPUT</b>.</div>
+      <div class="step"><span class="sh">Fusible junto al punto de toma</span>Nunca junto al equipo.</div>
+      <div class="step"><span class="sh">GND a masa de chasis</span>Punto sin pintura ni óxido. Una masa deficiente se manifiesta como <b>lecturas intermitentes</b>, no como falta de alimentación — y por eso se diagnostica tarde.</div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="kick">— 06 / Bus CAN</div>
     <h2 class="display">CAN_1 y CAN_2</h2>
-    <p class="note">Los dos canales son <b>independientes</b> y se leen en simultáneo. Cada uno se conecta <b>en paralelo</b> al bus existente: MetriCAN escucha, no interrumpe el tramo.</p>
+    <p class="note">Los dos canales son independientes y se leen en simultáneo. Cada uno se conecta <b>en paralelo</b> al bus existente, con el ramal más corto posible.</p>
     <div class="adv danger">
       <div class="t">Peligro · No cortes el bus</div>
-      <p>Nunca abras el par CAN para intercalar el equipo. Un bus interrumpido deja sin comunicación a los módulos del vehículo. La conexión es <b>en derivación</b>, con el ramal más corto que la instalación permita.</p>
+      <p>Nunca abras el par CAN para intercalar el equipo. Un bus interrumpido deja sin comunicación a los módulos del vehículo.</p>
     </div>
     <div class="adv">
       <div class="t">Terminación</div>
-      <p>El bus del vehículo ya trae sus <b>dos resistencias de 120 Ω</b> en los extremos. No agregues una tercera: la impedancia cae y aparecen errores de trama que se confunden con un problema de cableado.</p>
+      <p>El bus ya trae sus <b>dos resistencias de 120 Ω</b>. No agregues una tercera.</p>
     </div>
   </div>
 
+  <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Manual de Instalación</div><div>MI-MC-2026 · REV 02</div><div>Página 4 de 6</div></div>
+</section>
+
+<!-- ═══════════════════ 5 · SERIE, SENSORES Y RELÉS ═══════════════════ -->
+<section class="page manual" data-screen-label="5 · Serie y relés">
+  <div class="hd">
+    <img src="../assets/logo-metrican.png" alt="MetriCAN" />
+    <div class="mid">Manual de Instalación · <b>Serie, sensores y relés</b></div>
+    <div class="rt">DOC <b>MI-MC-2026</b><br />REV <b>02 · AGO 2026</b></div>
+  </div>
+  <div class="rule"></div>
+
   <div class="sec">
-    <div class="kick">— 06 / Puertos serie</div>
+    <div class="kick">— 07 / Puertos serie</div>
     <h2 class="display">Cuál va al gateway</h2>
-    <p class="note">El equipo expone <b>cuatro puertos serie, todos en nivel RS232</b>. El parámetro de configuración <span class="mono">uart_out</span> decide por cuál sale la trama de datos hacia el AVL, datalogger, modem o PLC.</p>
-    <div class="adv danger">
-      <div class="t">Peligro · Nivel eléctrico</div>
-      <p>Los cuatro puertos son <b>RS232</b>, no TTL. Conectar un periférico de <b>3,3 V o 5 V TTL</b> directamente a estas líneas <b>daña el periférico, el MetriCAN o ambos</b>. Si el equipo a conectar es TTL, intercala un conversor de nivel RS232 ↔ TTL.</p>
-    </div>
+    <p class="note">Cuatro puertos, todos en nivel <b>RS232</b>. El parámetro <span class="mono">uart_out</span> decide por cuál sale la trama hacia el AVL, datalogger, modem o PLC.</p>
     <table class="tbl cols tight">
-      <thead><tr><th>Puerto</th><th>uart_out</th><th>Uso habitual</th></tr></thead>
+      <thead><tr><th>Puerto</th><th>uart_out</th><th>Uso</th></tr></thead>
       <tbody>
-        <tr><td>UART_1</td><td><span class="mono">"1"</span></td><td><b>Salida al gateway por defecto</b> — es el valor que traen todas las configuraciones de fábrica. También es el canal de comandos y telemetría</td></tr>
-        <tr><td>UART_2</td><td><span class="mono">"2"</span></td><td>Periférico adicional o salida alternativa</td></tr>
-        <tr><td>UART_3(A)</td><td><span class="mono">"3"</span></td><td>Periférico sobre el expansor serie — canal A</td></tr>
-        <tr><td>UART_4(B)</td><td><span class="mono">"4"</span></td><td>Periférico sobre el expansor serie — canal B</td></tr>
+        <tr><td>UART_1</td><td><span class="mono">"1"</span></td><td><b>Salida al gateway por defecto</b> — el valor de fábrica</td></tr>
+        <tr><td>UART_2</td><td><span class="mono">"2"</span></td><td>Periférico o salida alternativa</td></tr>
+        <tr><td>UART_3(A)</td><td><span class="mono">"3"</span></td><td>Periférico adicional</td></tr>
+        <tr><td>UART_4(B)</td><td><span class="mono">"4"</span></td><td>Periférico adicional</td></tr>
       </tbody>
     </table>
-    <div class="adv">
-      <div class="t">Regla de cableado</div>
-      <p>El <b>TX del MetriCAN va al RX del equipo receptor</b>, y el RX del MetriCAN al TX del equipo. Las dos masas deben estar unidas. Si no ves datos y el LED indica actividad CAN, lo primero que se revisa es que TX y RX no estén cruzados al revés.</p>
+    <div class="adv danger">
+      <div class="t">Peligro · Nivel eléctrico</div>
+      <p>Los cuatro puertos son <b>RS232, no TTL</b>. Conectar un periférico de 3,3 V o 5 V TTL daña el periférico, el MetriCAN o ambos. Intercala un conversor de nivel.</p>
     </div>
+    <p class="note">El <b>TX del MetriCAN va al RX del receptor</b> y viceversa, con las masas unidas.</p>
   </div>
 
   <div class="sec">
-    <div class="kick">— 07 / RS485 · 08 / 1-Wire · 09 / Entrada digital</div>
-    <h2 class="display">Sensores y señales externas</h2>
+    <div class="kick">— 08 / Sensores y entrada digital</div>
+    <h2 class="display">RS485, 1-Wire e INPUT</h2>
     <div class="three">
       <div class="box">
         <div class="h">RS485 · Modbus RTU</div>
         <ul>
           <li><b>485 A</b> y <b>485 B</b>, half-duplex</li>
-          <li>Control de dirección automático</li>
-          <li>Respeta la polaridad A/B del equipo esclavo</li>
-          <li>Terminación sólo en los extremos del bus</li>
+          <li>Respeta la polaridad del esclavo</li>
+          <li>Terminación sólo en los extremos</li>
         </ul>
       </div>
       <div class="box">
         <div class="h">1-Wire · iButton</div>
         <ul>
-          <li>Un solo cable de datos, morado</li>
-          <li>Lector de <b>iButton</b> para identificar al conductor</li>
-          <li>Sensores de <b>temperatura</b> externos</li>
-          <li>Comparte la masa del equipo</li>
+          <li>Un solo cable de datos</li>
+          <li>iButton para identificar conductor</li>
+          <li>Sensores de temperatura</li>
         </ul>
       </div>
       <div class="box">
         <div class="h">INPUT · Entrada digital</div>
         <ul>
-          <li>Entrada de propósito general</li>
-          <li>Uso típico: detectar la <b>ignición</b></li>
-          <li>Sirve para cualquier otra señal digital</li>
+          <li>Uso típico: detectar la ignición</li>
+          <li>Sirve para cualquier señal digital</li>
           <li>Se declara en el Configurador</li>
         </ul>
       </div>
@@ -257,97 +326,70 @@
   </div>
 
   <div class="sec">
-    <div class="kick">— 10 / Relés</div>
+    <div class="kick">— 09 / Relés</div>
     <h2 class="display">RELE_1 y RELE_2</h2>
-    <p class="note">Dos salidas de relé configurables, <b>10 A @ 30 V DC</b>. Cada una entrega los tres contactos: <b>COMÚN</b>, <b>NO</b> (normalmente abierto) y <b>NC</b> (normalmente cerrado). Con el equipo sin energía, el común queda unido al NC.</p>
+    <p class="note">Dos salidas configurables de <b>10 A @ 30 V DC</b>, cada una con <b>COMÚN</b>, <b>NO</b> y <b>NC</b>. Con el equipo sin energía, el común queda unido al NC.</p>
     <div class="adv warn">
       <div class="t">Atención · Corte de funciones del vehículo</div>
-      <p>Si el relé va a cortar una función del vehículo, cablea por el <b>NC</b> de modo que la pérdida de alimentación del MetriCAN <b>no deje la función cortada</b>. Las reglas que gobiernan cada relé se definen en el Configurador, con <b>debounce</b> y <b>hold mínimo</b> para evitar accionamientos por un parpadeo de la señal.</p>
+      <p>Si el relé corta una función del vehículo, cablea por el <b>NC</b> para que la pérdida de alimentación del MetriCAN no deje esa función cortada.</p>
     </div>
   </div>
 
-  <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Manual de Instalación</div><div>MI-MC-2026 · REV 01</div><div>Página 3 de 4</div></div>
+  <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Manual de Instalación</div><div>MI-MC-2026 · REV 02</div><div>Página 5 de 6</div></div>
 </section>
 
-<!-- ══════════════════════════ PÁGINA 4 ══════════════════════════ -->
-<section class="page" data-screen-label="Puesta en marcha">
+<!-- ═══════════════════ 6 · PUESTA EN MARCHA ═══════════════════ -->
+<section class="page manual" data-screen-label="6 · Puesta en marcha">
   <div class="hd">
     <img src="../assets/logo-metrican.png" alt="MetriCAN" />
     <div class="mid">Manual de Instalación · <b>Puesta en marcha</b></div>
-    <div class="rt">DOC <b>MI-MC-2026</b><br />REV <b>01 · AGO 2026</b></div>
+    <div class="rt">DOC <b>MI-MC-2026</b><br />REV <b>02 · AGO 2026</b></div>
   </div>
   <div class="rule"></div>
 
   <div class="sec">
-    <div class="kick">— 11 / Primer encendido</div>
+    <div class="kick">— 10 / El LED de estado</div>
     <h2 class="display">Lee el LED antes de bajarte</h2>
-    <p class="note">El LED de estado dice en qué está el equipo sin necesidad de conectar un PC. Estos son los cuatro patrones, en orden de prioridad: si hay una actualización en curso, ese patrón manda sobre los demás.</p>
     <table class="tbl cols tight">
       <thead><tr><th>Patrón</th><th>Significado</th><th>Qué hacer</th></tr></thead>
       <tbody>
-        <tr><td>Fijo encendido</td><td>Equipo operativo, <b>sin tráfico CAN</b> en los últimos 3 segundos</td><td>Normal con el vehículo detenido. Si persiste con el vehículo en marcha, revisa el cableado CAN</td></tr>
-        <tr><td>Parpadeo lento<br />500 ms</td><td><b>Recibiendo datos del bus CAN</b></td><td>Es el estado esperado en operación. Nada que hacer</td></tr>
-        <tr><td>Doble destello<br />cada segundo</td><td>Conectando a <b>WiFi</b></td><td>Sólo en puesta a punto o diagnóstico. Si no termina de conectar, revisa la red configurada</td></tr>
-        <tr><td>Parpadeo rápido<br />100 ms</td><td><b>Actualización en curso</b></td><td>No cortes la alimentación hasta que el patrón cambie</td></tr>
+        <tr><td>Fijo</td><td>Operativo, sin tráfico CAN</td><td>Normal con el vehículo detenido. Si persiste en marcha, revisa CAN H / CAN L y la masa</td></tr>
+        <tr><td>Lento · 500 ms</td><td><b>Recibiendo datos del bus</b></td><td>Es el estado esperado. Nada que hacer</td></tr>
+        <tr><td>Doble destello</td><td>Conectando a WiFi</td><td>Sólo en diagnóstico. Si no conecta, revisa la red configurada</td></tr>
+        <tr><td>Rápido · 100 ms</td><td>Actualización en curso</td><td>No cortes la alimentación hasta que cambie</td></tr>
+        <tr><td>Apagado</td><td>Sin alimentación</td><td>Fusible y polaridad. El LED no depende de la configuración</td></tr>
       </tbody>
     </table>
   </div>
 
   <div class="sec">
-    <div class="kick">— 12 / Verificación</div>
-    <h2 class="display">Confirma con el Configurador</h2>
-    <div class="steps">
-      <div class="step"><span class="sh">Conecta el Configurador</span>Por cable al puerto de mantenimiento o por <b>BLE</b>, sin abrir el tablero.</div>
-      <div class="step"><span class="sh">Abre <b>Variables en Vivo</b></span>Debes ver las señales del bus actualizándose. Si la lista está vacía, el equipo alimenta pero no lee: revisa CAN H / CAN L y la masa.</div>
-      <div class="step"><span class="sh">Confirma la salida al gateway</span>Verifica que <span class="mono">uart_out</span> apunta al puerto donde conectaste el AVL, y que el receptor está recibiendo la trama.</div>
-      <div class="step"><span class="sh">Deja registrada la instalación</span>Anota patente o identificador del equipo, versión de firmware y configuración cargada.</div>
-    </div>
-  </div>
-
-  <div class="sec">
-    <div class="kick">— 13 / Checklist de cierre</div>
+    <div class="kick">— 11 / Cierre</div>
     <h2 class="display">Antes de dar por terminada la instalación</h2>
     <div class="chk">
-      <div class="i">Fusible instalado en el punto de toma</div>
-      <div class="i">Polaridad verificada antes de energizar</div>
+      <div class="i">Fusible en el punto de toma</div>
+      <div class="i">Polaridad verificada</div>
       <div class="i">Masa a chasis limpia y firme</div>
-      <div class="i">CAN conectado en derivación, sin cortar el bus</div>
-      <div class="i">Sin resistencia de terminación agregada</div>
-      <div class="i">TX y RX cruzados correctamente al gateway</div>
-      <div class="i">Relés cableados con el criterio de falla segura</div>
-      <div class="i">LED en parpadeo lento con el vehículo en marcha</div>
+      <div class="i">CAN en derivación, sin cortar el bus</div>
+      <div class="i">Sin terminación agregada</div>
+      <div class="i">TX y RX cruzados al gateway</div>
+      <div class="i">Relés con criterio de falla segura</div>
+      <div class="i">LED en parpadeo lento en marcha</div>
       <div class="i">Variables visibles en el Configurador</div>
-      <div class="i">Instalación registrada con FW y configuración</div>
+      <div class="i">Equipo, firmware y config registrados</div>
     </div>
-  </div>
-
-  <div class="sec">
-    <div class="kick">— 14 / Fallas frecuentes</div>
-    <h2 class="display">Síntoma, causa probable</h2>
-    <table class="tbl cols tight">
-      <thead><tr><th>Síntoma</th><th>Dónde mirar primero</th></tr></thead>
-      <tbody>
-        <tr><td>LED apagado</td><td>Alimentación o fusible. El LED no depende de la configuración</td></tr>
-        <tr><td>LED fijo en marcha</td><td>No llega tráfico CAN: par invertido, ramal mal conectado o bus equivocado</td></tr>
-        <tr><td>Sin datos en el gateway</td><td>TX/RX cruzados, <span class="mono">uart_out</span> apuntando a otro puerto, o masas no unidas</td></tr>
-        <tr><td>Lecturas intermitentes</td><td>Masa deficiente. Es la causa más frecuente y la que menos lo parece</td></tr>
-        <tr><td>Relé que actúa solo</td><td>Regla sin <b>debounce</b> suficiente para la señal que la dispara</td></tr>
-      </tbody>
-    </table>
   </div>
 
   <div class="cta">
     <div>
       <h3 class="display">¿Algo no calza con lo que ves en terreno?</h3>
-      <p>Escríbenos con el identificador del equipo, la versión de firmware y qué patrón muestra el LED. Con esos tres datos el diagnóstico arranca de inmediato.</p>
+      <p>Escríbenos con el identificador del equipo, la versión de firmware y qué patrón muestra el LED.</p>
     </div>
     <div class="info">
       <div><div class="k">Soporte</div><div class="v">soporte@metrican.cl</div></div>
-      <div><div class="k">Comercial</div><div class="v">contacto@metrican.cl</div></div>
     </div>
   </div>
 
-  <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Santiago · Chile</div><div>MI-MC-2026 · REV 01</div><div>Página 4 de 4</div></div>
+  <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Santiago · Chile</div><div>MI-MC-2026 · REV 02</div><div>Página 6 de 6</div></div>
 </section>
 
 </doc-page>

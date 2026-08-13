@@ -40,19 +40,37 @@ if [ "${1:-}" = "--dossier" ]; then
   exit 0
 fi
 
-# Sin argumentos: todos los HTML de documento del repo. Se excluyen los
-# `- print.html` del brand book y el brochure, que son variantes de impresión
-# de piezas antiguas con su propio flujo.
+# Sin argumentos: todos los documentos del repo, prefiriendo SIEMPRE la variante
+# `- print.html` cuando existe.
+#
+# La primera versión hacía lo contrario —excluía los `- print.html`— y el brand
+# book y el brochure salieron cortados. No era un problema de escala: sus páginas
+# miden 1280×800 px, formato de presentación, y la variante interactiva no trae
+# `@page`, así que chromium las imprimía sobre A4 vertical y recortaba. El
+# `- print.html` sí declara `@page { size: A4 landscape }` y el `scale(0.877)`
+# que mete esos 1280 px dentro de la hoja. Esa variante existe exactamente para
+# esto; saltársela y culpar al render era el camino largo.
 if [ $# -gt 0 ]; then
   archivos=("$@")
 else
-  mapfile -t archivos < <(find "$RAIZ" -name "*.html" -not -name "*- print.html" -not -path "*/dist/*" | sort)
+  mapfile -t todos < <(find "$RAIZ" -name "*.html" -not -path "*/dist/*" | sort)
+  archivos=()
+  for f in "${todos[@]}"; do
+    # Si este es el archivo base y existe su variante de impresión, se salta:
+    # ya entrará la otra.
+    case "$f" in
+      *" - print.html") archivos+=("$f") ;;
+      *) [ -f "${f%.html} - print.html" ] || archivos+=("$f") ;;
+    esac
+  done
 fi
 
 for f in "${archivos[@]}"; do
   [ -f "$f" ] || { echo "no existe: $f" >&2; continue; }
   abs="$(cd "$(dirname "$f")" && pwd)/$(basename "$f")"
-  nombre="$(basename "${f%.html}")"
+  # El sufijo " - print" es un detalle de cómo se produce el PDF, no del
+  # documento. Al cliente le llega "Brand_Book.pdf".
+  nombre="$(basename "${f%.html}")"; nombre="${nombre% - print}"
   destino="$SALIDA/${nombre// /_}.pdf"
 
   # --virtual-time-budget le da tiempo a doc-page.js a paginar y a las fuentes
