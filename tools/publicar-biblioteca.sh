@@ -22,13 +22,22 @@ DESTINO="$BIBLIOTECA/documentos"
 
 [ -d "$BIBLIOTECA" ] || { echo "No existe la biblioteca en $BIBLIOTECA" >&2; exit 1; }
 
-# Se renderiza siempre antes de copiar. Publicar un PDF viejo desde dist/ es el
+# Se vacía dist/ y se renderiza de cero. Publicar un PDF viejo desde dist/ es el
 # fallo silencioso clásico: el fichero está, tiene buena pinta, y le falta el
 # último cambio.
+#
+# La primera versión sólo renderizaba encima, y al cambiar el nombre de salida
+# —de `Brand_Book_-_print.pdf` a `Brand_Book.pdf`— el fichero viejo se quedó en
+# dist/ y viajó a la biblioteca. Dos PDF del mismo documento, uno de ellos
+# desactualizado, y ninguna señal de cuál era cuál.
+rm -rf "$RAIZ/dist"
 bash "$RAIZ/tools/render.sh" >/dev/null
 bash "$RAIZ/tools/render.sh" --dossier >/dev/null
 
+# El destino también se limpia: un documento que se retira del repo de marca
+# tiene que desaparecer de la biblioteca, no quedarse ahí para siempre.
 mkdir -p "$DESTINO"
+find "$DESTINO" -maxdepth 1 -name '*.pdf' -delete
 cp -f "$RAIZ"/dist/*.pdf "$DESTINO"/
 
 for f in "$DESTINO"/*.pdf; do

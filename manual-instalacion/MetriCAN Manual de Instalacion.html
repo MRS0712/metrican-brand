@@ -120,8 +120,8 @@
         <div class="pad light" style="background:var(--w-blanco)"><span><span class="gp">UART_1</span><span class="sg">TX</span></span></div>
         <div class="pad dark" style="background:var(--w-azul)"><span><span class="gp">UART_1</span><span class="sg">RX</span></span></div>
         <div class="pad dark" style="background:var(--w-gris)"><span><span class="gp">RS485</span><span class="sg">485 A</span></span></div>
-        <div class="pad light" style="background:var(--w-naranjo)"><span><span class="gp">CAN_2</span><span class="sg">CAN L</span></span></div>
-        <div class="pad light" style="background:var(--w-naranjo)"><span><span class="gp">CAN_1</span><span class="sg">CAN L</span></span></div>
+        <div class="pad light" style="background:var(--w-amarillo)"><span><span class="gp">CAN_2</span><span class="sg">CAN L</span></span></div>
+        <div class="pad light" style="background:var(--w-amarillo)"><span><span class="gp">CAN_1</span><span class="sg">CAN L</span></span></div>
         <div class="pad dark" style="background:var(--w-azul)"><span><span class="gp">UART_3(A)</span><span class="sg">RX</span></span></div>
         <div class="pad dark" style="background:var(--w-azul)"><span><span class="gp">UART_4(B)</span><span class="sg">RX</span></span></div>
         <div class="pad dark" style="background:var(--w-negro)"><span><span class="gp">MASA</span><span class="sg">GND</span></span></div>
@@ -134,12 +134,12 @@
         <div class="l"><span class="wire" style="background:var(--w-rojo)"></span>Rojo — alimentación</div>
         <div class="l"><span class="wire" style="background:var(--w-negro)"></span>Negro — masa</div>
         <div class="l"><span class="wire" style="background:var(--w-azul)"></span>Azul — CAN H y RX serie</div>
-        <div class="l"><span class="wire" style="background:var(--w-naranjo)"></span>Naranjo — CAN L, 485 B y NC</div>
+        <div class="l"><span class="wire" style="background:var(--w-naranjo)"></span>Naranjo — 485 B y NC de relé</div>
         <div class="l"><span class="wire" style="background:var(--w-blanco)"></span>Blanco — TX serie</div>
         <div class="l"><span class="wire" style="background:var(--w-gris)"></span>Gris — 485 A y común de relé</div>
         <div class="l"><span class="wire" style="background:var(--w-verde)"></span>Verde — NO de relé</div>
         <div class="l"><span class="wire" style="background:var(--w-morado)"></span>Morado — 1-Wire</div>
-        <div class="l"><span class="wire" style="background:var(--w-amarillo)"></span>Amarillo — entrada digital</div>
+        <div class="l"><span class="wire" style="background:var(--w-amarillo)"></span>Amarillo — CAN L y entrada digital</div>
       </div>
     </div>
 
@@ -211,8 +211,8 @@
       <tbody>
         <tr><td>A11</td><td><b>PWR</b> · rotulado BAT/IGN</td><td><span class="wire" style="background:var(--w-rojo)"></span>Rojo</td><td>Alimentación del equipo, 9–32 V DC permanente</td></tr>
         <tr><td>B10</td><td><b>GND</b></td><td><span class="wire" style="background:var(--w-negro)"></span>Negro</td><td>Masa común de alimentación, buses y E/S</td></tr>
-        <tr><td>A07 · B07</td><td><b>CAN_1</b> · CAN H / CAN L</td><td><span class="wire" style="background:var(--w-azul)"></span>Azul · <span class="wire" style="background:var(--w-naranjo)"></span>Naranjo</td><td>Bus CAN 1</td></tr>
-        <tr><td>A06 · B06</td><td><b>CAN_2</b> · CAN H / CAN L</td><td><span class="wire" style="background:var(--w-azul)"></span>Azul · <span class="wire" style="background:var(--w-naranjo)"></span>Naranjo</td><td>Bus CAN 2 — canal independiente</td></tr>
+        <tr><td>A07 · B07</td><td><b>CAN_1</b> · CAN H / CAN L</td><td><span class="wire" style="background:var(--w-azul)"></span>Azul · <span class="wire" style="background:var(--w-amarillo)"></span>Amarillo</td><td>Bus CAN 1</td></tr>
+        <tr><td>A06 · B06</td><td><b>CAN_2</b> · CAN H / CAN L</td><td><span class="wire" style="background:var(--w-azul)"></span>Azul · <span class="wire" style="background:var(--w-amarillo)"></span>Amarillo</td><td>Bus CAN 2 — canal independiente</td></tr>
         <tr><td>B03 · B04</td><td><b>UART_1</b> · TX / RX</td><td><span class="wire" style="background:var(--w-blanco)"></span>Blanco · <span class="wire" style="background:var(--w-azul)"></span>Azul</td><td><b>Salida de datos al gateway por defecto</b></td></tr>
         <tr><td>A02 · A03</td><td><b>UART_2</b> · TX / RX</td><td><span class="wire" style="background:var(--w-blanco)"></span>Blanco · <span class="wire" style="background:var(--w-azul)"></span>Azul</td><td>Segundo puerto serie</td></tr>
         <tr><td>A08 · B08</td><td><b>UART_3(A)</b> · TX / RX</td><td><span class="wire" style="background:var(--w-blanco)"></span>Blanco · <span class="wire" style="background:var(--w-azul)"></span>Azul</td><td>Tercer puerto serie</td></tr>

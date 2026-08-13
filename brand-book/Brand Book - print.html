@@ -895,7 +895,11 @@ p { color: var(--silver); }
 .topbar .right .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--ok); display: inline-block; margin-right: 6px; box-shadow: 0 0 6px var(--ok); }
 
 @media print {
-  @page { size: A4 landscape; margin: 0; }
+  /* La hoja ES el diseño. Las páginas del brand book son de 1280x800 px
+     —formato presentación, 16:10— y una A4 apaisada es 1,414: encajarlas
+     dejaba una franja blanca al pie que no se quita escalando, porque es
+     geometría. Se imprime a tamaño nativo y calza exacto. */
+  @page { size: 1280px 800px; margin: 0; }
   html, body {
     background: white !important;
     margin: 0 !important;
@@ -912,7 +916,6 @@ p { color: var(--silver); }
     border-bottom: none !important;
     margin: 0 !important;
     overflow: hidden !important;
-    zoom: 0.877;
     page-break-after: always;
     break-after: page;
     page-break-inside: avoid;
