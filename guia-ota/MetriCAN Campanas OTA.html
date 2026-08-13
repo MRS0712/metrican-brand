@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MetriCAN — Campañas OTA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../assets/doc.css" />
+</head>
+<body>
+<doc-page size="a4">
+
+<!-- ═══════════════ 1 · LAS DOS VÍAS ═══════════════ -->
+<section class="page manual" data-screen-label="1 · Las dos vías">
+  <div class="hd">
+    <img src="../assets/logo-metrican.png" alt="MetriCAN" />
+    <div class="mid">Campañas OTA</div>
+    <div class="rt">DOC <b>OT-MC-2026</b><br />REV <b>01 · AGO 2026</b></div>
+  </div>
+  <div class="rule"></div>
+
+  <div class="title">
+    <div>
+      <div class="kick">— Administración de flota</div>
+      <h1 class="display">Campañas OTA</h1>
+      <div class="sub">Actualizar sin ir a buscar el vehículo.</div>
+      <p class="lead">Una campaña OTA es una actualización que <b>llega sola</b> a las unidades: firmware o configuración nueva, desplegada por grupo y con vuelta atrás si algo no sale como debía. Esta guía es para quien administra la flota.</p>
+    </div>
+    <div class="pshot"><img src="../assets/pcb-metrican-transparent.png" alt="Placa MetriCAN" /></div>
+  </div>
+
+  <div class="aplica">
+    <div class="a"><div class="k">Firmware</div><div class="v">v2.6.0</div></div>
+    <div class="a"><div class="k">Configurador</div><div class="v">v2.1.0</div></div>
+    <div class="a"><div class="k">Vías</div><div class="v">Cable · BLE · WiFi</div></div>
+    <div class="a"><div class="k">Reversión</div><div class="v">Automática</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="kick">— 01 / Las dos vías</div>
+    <h2 class="display">En el vehículo, o a distancia</h2>
+    <div class="two">
+      <div class="box">
+        <div class="h">Local — cable o Bluetooth</div>
+        <ul>
+          <li>Desde el <b>Configurador</b>, unidad por unidad</li>
+          <li>No necesita red ni servidor</li>
+          <li>El técnico ve el avance y el resultado</li>
+          <li>Para pocas unidades, o cuando no hay cobertura</li>
+        </ul>
+      </div>
+      <div class="box">
+        <div class="h">Remota — WiFi</div>
+        <ul>
+          <li>El equipo <b>consulta un servidor</b> cada cierto tiempo</li>
+          <li>Descarga e instala solo si hay versión nueva</li>
+          <li>Escala a una flota completa</li>
+          <li>Requiere WiFi al alcance y servidor propio</li>
+        </ul>
+      </div>
+    </div>
+    <p class="note">Las dos usan el mismo mecanismo y las mismas garantías. Cambia quién inicia: en la local, una persona; en la remota, el propio equipo.</p>
+  </div>
+
+  <div class="sec">
+    <div class="kick">— 02 / La garantía</div>
+    <h2 class="display">Por qué es seguro actualizar</h2>
+    <div class="steps">
+      <div class="step"><span class="sh">Se escribe en un espacio aparte</span>El equipo guarda dos versiones. La nueva se descarga <b>sin tocar la que está corriendo</b>, que sigue operando durante todo el proceso.</div>
+      <div class="step"><span class="sh">Se verifica antes de activar</span>Terminada la descarga, se comprueba la integridad del archivo. Si no cuadra, no se activa nada y la unidad sigue con la versión anterior.</div>
+      <div class="step"><span class="sh">Se activa y reinicia</span>Recién ahí el equipo apunta a la versión nueva y se reinicia.</div>
+      <div class="step"><span class="sh">Si no arranca bien, vuelve sola</span>La versión nueva debe confirmar que arrancó correctamente. Si no lo hace, el equipo <b>revierte automáticamente</b> a la anterior, que sigue intacta en su espacio.</div>
+    </div>
+    <div class="adv">
+      <div class="t">Consecuencia práctica</div>
+      <p>Una campaña fallida no deja unidades muertas en terreno. El peor resultado esperable es que un grupo siga con la versión previa — que es exactamente donde estaba antes de empezar.</p>
+    </div>
+  </div>
+
+  <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Campañas OTA</div><div>Página 1 de 4</div></div>
+</section>
+
+<!-- ═══════════════ 2 · CAMPAÑA REMOTA ═══════════════ -->
+<section class="page manual" data-screen-label="2 · Campaña remota">
+  <div class="hd">
+    <img src="../assets/logo-metrican.png" alt="MetriCAN" />
+    <div class="mid">Campañas OTA · <b>Despliegue remoto</b></div>
+    <div class="rt">DOC <b>OT-MC-2026</b><br />REV <b>01 · AGO 2026</b></div>
+  </div>
+  <div class="rule"></div>
+
+  <div class="sec">
+    <div class="kick">— 03 / Cómo funciona</div>
+    <h2 class="display">El equipo pregunta, el servidor responde</h2>
+    <div class="flow">
+      <div class="fb">
+        <div class="t">Cada cierto tiempo</div>
+        <h4>La unidad consulta</h4>
+        <p>Se identifica y declara qué versión trae puesta.</p>
+      </div>
+      <div class="arw">→</div>
+      <div class="fb mid">
+        <div class="t">Decide</div>
+        <h4>El servidor responde</h4>
+        <p>Nada que hacer, o la versión que corresponde a esa unidad.</p>
+      </div>
+      <div class="arw">→</div>
+      <div class="fb">
+        <div class="t">Sola</div>
+        <h4>Descarga e instala</h4>
+        <p>Con verificación y reversión automática.</p>
+      </div>
+    </div>
+    <p class="note">La unidad <b>nunca recibe algo que no pidió</b>: es ella quien inicia la consulta. Eso simplifica la red — no hace falta que el servidor alcance al vehículo, sólo que el vehículo alcance al servidor.</p>
+  </div>
+
+  <div class="sec">
+    <div class="kick">— 04 / Qué se configura</div>
+    <h2 class="display">Del lado del equipo</h2>
+    <table class="tbl cols tight">
+      <thead><tr><th>Parámetro</th><th>Qué define</th></tr></thead>
+      <tbody>
+        <tr><td>Red WiFi</td><td>La red a la que se conecta para consultar. Basta con que esté disponible en el patio o el punto de recarga</td></tr>
+        <tr><td>Dirección del servidor</td><td>Dónde consultar. Debe ser <b>HTTPS</b></td></tr>
+        <tr><td>Intervalo de consulta</td><td>Cada cuánto pregunta. Un día es lo habitual; más seguido sólo tiene sentido durante un despliegue activo</td></tr>
+        <tr><td>Nombre del equipo</td><td>Cómo se identifica ante el servidor, además de su identificador de hardware</td></tr>
+        <tr><td>Grupo</td><td>Lo que permite desplegar <b>a una parte de la flota</b> y no a todas las unidades a la vez</td></tr>
+      </tbody>
+    </table>
+    <div class="adv warn">
+      <div class="t">El nombre y el grupo no son cosmética</div>
+      <p>Son el criterio con el que el servidor decide qué le toca a cada unidad. Una flota donde todos los equipos se llaman igual no se puede desplegar por partes — y desplegar por partes es la única forma prudente de hacerlo.</p>
+    </div>
+  </div>
+
+  <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Campañas OTA</div><div>OT-MC-2026 · REV 01</div><div>Página 2 de 4</div></div>
+</section>
+
+<!-- ═══════════════ 3 · CÓMO SE HACE ═══════════════ -->
+<section class="page manual" data-screen-label="3 · Cómo se hace">
+  <div class="hd">
+    <img src="../assets/logo-metrican.png" alt="MetriCAN" />
+    <div class="mid">Campañas OTA · <b>Cómo se despliega</b></div>
+    <div class="rt">DOC <b>OT-MC-2026</b><br />REV <b>01 · AGO 2026</b></div>
+  </div>
+  <div class="rule"></div>
+
+  <div class="sec">
+    <div class="kick">— 05 / El procedimiento</div>
+    <h2 class="display">Una campaña, paso a paso</h2>
+    <div class="steps">
+      <div class="step"><span class="sh">Prueba en una unidad de banco</span>Nunca la primera vez sobre una unidad en operación. Verifica que la versión nueva arranca, lee el bus y emite lo que debe.</div>
+      <div class="step"><span class="sh">Despliega a un grupo piloto</span>Unas pocas unidades reales, representativas de la flota. Déjalas correr un ciclo completo de operación antes de seguir.</div>
+      <div class="step"><span class="sh">Revisa que el dato siga llegando</span>Que la unidad se haya actualizado no significa que el gateway siga recibiendo lo mismo. Se comprueba en el destino, no en el equipo.</div>
+      <div class="step"><span class="sh">Amplía por grupos</span>Nunca a la flota entera de una vez. Si algo se rompe, se rompe en un grupo y no en todos.</div>
+      <div class="step"><span class="sh">Registra qué versión quedó dónde</span>Una flota donde no se sabe qué versión tiene cada unidad es una flota que no se puede diagnosticar.</div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="kick">— 06 / Firmware y configuración</div>
+    <h2 class="display">No son lo mismo, y conviene no mezclarlos</h2>
+    <table class="tbl cols tight">
+      <thead><tr><th></th><th>Firmware</th><th>Configuración</th></tr></thead>
+      <tbody>
+        <tr><td>Qué cambia</td><td>Lo que el equipo <b>sabe hacer</b></td><td>Lo que el equipo <b>hace</b> en esta unidad</td></tr>
+        <tr><td>Frecuencia</td><td>Pocas veces al año</td><td>Cada vez que cambia el vehículo o el requerimiento</td></tr>
+        <tr><td>Alcance</td><td>Igual para toda la flota</td><td>Distinta por modelo, cliente u operación</td></tr>
+        <tr><td>Riesgo</td><td>Mayor — reinicia el equipo</td><td>Menor — recarga en caliente</td></tr>
+      </tbody>
+    </table>
+    <div class="adv">
+      <div class="t">Una campaña, un cambio</div>
+      <p>Desplegar firmware y configuración nuevos al mismo tiempo hace imposible saber cuál de los dos causó el problema si aparece uno. Primero uno, se verifica, después el otro.</p>
+    </div>
+  </div>
+
+  <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Campañas OTA</div><div>OT-MC-2026 · REV 01</div><div>Página 3 de 4</div></div>
+</section>
+
+<!-- ═══════════════ 4 · DIAGNÓSTICO ═══════════════ -->
+<section class="page manual" data-screen-label="4 · Diagnóstico">
+  <div class="hd">
+    <img src="../assets/logo-metrican.png" alt="MetriCAN" />
+    <div class="mid">Campañas OTA · <b>Diagnóstico</b></div>
+    <div class="rt">DOC <b>OT-MC-2026</b><br />REV <b>01 · AGO 2026</b></div>
+  </div>
+  <div class="rule"></div>
+
+  <div class="sec">
+    <div class="kick">— 07 / Qué mirar</div>
+    <h2 class="display">Cuando una unidad no se actualiza</h2>
+    <table class="tbl cols tight">
+      <thead><tr><th>Síntoma</th><th>Dónde mirar primero</th></tr></thead>
+      <tbody>
+        <tr><td>La unidad nunca consulta</td><td>WiFi: red configurada, cobertura en el punto donde estaciona. El equipo no puede consultar lo que no alcanza</td></tr>
+        <tr><td>Consulta pero no descarga</td><td>El servidor no le está ofreciendo nada: revisa el grupo y el nombre con que se identifica esa unidad</td></tr>
+        <tr><td>Descarga y no cambia de versión</td><td>La verificación falló o el arranque no se confirmó, y revirtió sola. Es el mecanismo funcionando, no una falla</td></tr>
+        <tr><td>Se actualizó y dejó de emitir</td><td>La configuración cargada puede no ser compatible con la versión nueva. Revisa en el destino qué llegó a cambiar</td></tr>
+        <tr><td>Se quedó a mitad</td><td>Perdió alimentación durante la carga. La versión anterior sigue intacta: se reintenta en la siguiente consulta</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sec">
+    <div class="kick">— 08 / El LED durante la actualización</div>
+    <h2 class="display">Lo que se ve desde afuera</h2>
+    <table class="tbl cols tight">
+      <thead><tr><th>Patrón</th><th>Significado</th></tr></thead>
+      <tbody>
+        <tr><td>Parpadeo rápido · 100 ms</td><td><b>Actualización en curso.</b> No cortar la alimentación</td></tr>
+        <tr><td>Doble destello cada segundo</td><td>Conectando a WiFi — el paso previo a la consulta</td></tr>
+        <tr><td>Parpadeo lento · 500 ms</td><td>Operación normal, recibiendo datos del bus</td></tr>
+      </tbody>
+    </table>
+    <p class="note">Estos tres patrones permiten seguir una campaña <b>mirando el equipo</b>, sin conectar nada. Es especialmente útil en la unidad piloto.</p>
+  </div>
+
+  <div class="sec">
+    <div class="kick">— 09 / Requisitos del servidor</div>
+    <h2 class="display">Del lado de la infraestructura</h2>
+    <div class="two">
+      <div class="box">
+        <div class="h">Obligatorio</div>
+        <ul>
+          <li><b>HTTPS</b> — el equipo no consulta en claro</li>
+          <li>Un punto de consulta y uno de descarga</li>
+          <li>Registro de qué versión tiene cada unidad</li>
+        </ul>
+      </div>
+      <div class="box">
+        <div class="h">Recomendado</div>
+        <ul>
+          <li>Despliegue <b>por grupo</b>, no por flota completa</li>
+          <li>Historial de campañas y su resultado</li>
+          <li>Perfiles de configuración versionados</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta">
+    <div>
+      <h3 class="display">¿Vas a montar el servidor de campañas?</h3>
+      <p>Entregamos la especificación del protocolo y el esquema de datos que el equipo espera, para que lo integres a la infraestructura que ya tienes.</p>
+    </div>
+    <div class="info">
+      <div><div class="k">Soporte</div><div class="v">soporte@metrican.cl</div></div>
+    </div>
+  </div>
+
+  <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Santiago · Chile</div><div>OT-MC-2026 · REV 01</div><div>Página 4 de 4</div></div>
+</section>
+
+</doc-page>
+<script src="../assets/doc-page.js"></script>
+</body>
+</html>

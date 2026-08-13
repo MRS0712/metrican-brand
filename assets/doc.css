@@ -37,6 +37,12 @@ doc-page:not(:defined){visibility:hidden}
 }
 *{box-sizing:border-box;margin:0;padding:0}
 .page{font-family:'Manrope',system-ui,sans-serif;color:var(--ink);background:#fff;padding:13mm 13mm 11mm;display:flex;flex-direction:column;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+/* Los bloques de una página no se encogen. `.page` es flex en columna, así que
+   por defecto sus hijos ceden altura cuando la página va sobrada — y un bloque
+   con `overflow:hidden` que cede altura BORRA contenido sin avisar. Pasó con la
+   tira de aplicabilidad de la guía OTA: se veían los rótulos y no los valores.
+   Con esto, una página que no cabe se ve que no cabe. */
+.page > *{flex-shrink:0}
 .display{font-family:'Space Grotesk',sans-serif;letter-spacing:-0.02em}
 .mono{font-family:'JetBrains Mono',monospace}
 a{color:var(--blue);text-decoration:none}a:hover{color:var(--blue-br)}
@@ -130,7 +136,12 @@ a{color:var(--blue);text-decoration:none}a:hover{color:var(--blue-br)}
    ========================================================================== */
 
 /* ── Aplicabilidad — a qué versión aplica el documento ─────────────────── */
-.aplica{margin-top:10px;display:flex;gap:0;border:1px solid var(--line);border-radius:3px;overflow:hidden}
+/* `flex:0 0 auto` no es cosmético. `.page` es un contenedor flex en columna, así
+   que sus hijos se ENCOGEN cuando la página va sobrada de contenido. Con
+   `overflow:hidden`, esta tira se aplastaba a la mitad de su altura y perdía la
+   fila de valores: los rótulos seguían ahí y los datos desaparecían, sin ningún
+   aviso. Una página que no cabe tiene que verse que no cabe, no borrar un dato. */
+.aplica{margin-top:10px;display:flex;flex:0 0 auto;gap:0;border:1px solid var(--line);border-radius:3px;overflow:hidden}
 .aplica .a{padding:6px 11px;background:var(--paper2);border-right:1px solid var(--line-soft);flex:1}
 .aplica .a:last-child{border-right:0}
 .aplica .k{font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--mute)}
@@ -219,6 +230,14 @@ a{color:var(--blue);text-decoration:none}a:hover{color:var(--blue-br)}
 .page.manual .pad .sg{font-size:9px}
 .page.manual .pinout .idx div{font-size:7.6px}
 .page.manual .pinout .vista{font-size:9.5px;margin-top:9px}
+
+/* ── Capturas de pantalla ──────────────────────────────────────────────────
+   Con marco y pie. Una captura sin marco en un documento impreso se confunde
+   con el fondo de la página y deja de leerse como "esto es la pantalla". */
+.shot{margin-top:10px;border:1px solid var(--line);border-radius:3px;overflow:hidden;background:var(--paper2)}
+.shot img{display:block;width:100%;height:auto}
+.shot .pie{font-family:'JetBrains Mono',monospace;font-size:8.6px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);padding:6px 10px;border-top:1px solid var(--line-soft);background:#fff}
+.shot .pie b{color:var(--deep);font-weight:600}
 
 /* `.pinout.grande` — el diagrama con una página para él solo.
    Es la hoja que el instalador va a fotografiar con el teléfono y mirar a
