@@ -1,0 +1,187 @@
+/* ============================================================================
+   MetriCAN · Hoja de marca compartida para documentación
+   ----------------------------------------------------------------------------
+   Extraída de la Ficha Técnica DS-MC-2026 rev 05, que hasta ahora la llevaba
+   embebida. Un manual de veinte páginas que copie y pegue ese bloque bifurca la
+   marca en la primera corrección: se toca en un sitio y el resto queda viejo,
+   sin que nadie lo note hasta que dos PDF del mismo mes no se parecen.
+
+   Todo documento nuevo enlaza esta hoja y NO redefine colores ni tipografías.
+   Si a una pieza le falta un componente, se agrega ACÁ, no en el documento.
+
+   Requiere, en el <head> del documento:
+     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+     <link rel="stylesheet" href="../assets/doc.css" />
+   y al cierre del <body>:
+     <script src="../assets/doc-page.js"></script>
+   ========================================================================== */
+
+/* ── Evita el destello del contenido sin paginar ───────────────────────── */
+doc-page:not(:defined){visibility:hidden}
+
+/* ── Paleta y tipografía de marca ──────────────────────────────────────── */
+:root{
+  --blue:#1F7AE0;--blue-br:#2A9DF4;--deep:#003570;
+  --ink:#0B0D14;--ink2:#11141C;
+  --line:#D7DDE6;--line-soft:#E7EBF1;
+  --mute:#6B7388;--mute2:#959DAD;
+  --paper2:#F4F6FA;--ok:#1F9D6B;
+  /* Semánticos de aviso — sólo para documentación operativa */
+  --warn:#B8860B;--warn-bg:#FDF6E3;
+  --danger:#C0392B;--danger-bg:#FDF0EE;
+  /* Colores REALES del cable del arnés. No son decorativos: el instalador
+     identifica por color, así que un cambio acá desinforma en terreno. */
+  --w-verde:#6AA84F;--w-gris:#8A8F98;--w-naranjo:#E69138;--w-blanco:#FFFFFF;
+  --w-azul:#2A6FD6;--w-morado:#8E7CC3;--w-amarillo:#F1C232;--w-rojo:#CC0000;
+  --w-negro:#0B0D14;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+.page{font-family:'Manrope',system-ui,sans-serif;color:var(--ink);background:#fff;padding:13mm 13mm 11mm;display:flex;flex-direction:column;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+.display{font-family:'Space Grotesk',sans-serif;letter-spacing:-0.02em}
+.mono{font-family:'JetBrains Mono',monospace}
+a{color:var(--blue);text-decoration:none}a:hover{color:var(--blue-br)}
+
+/* ── Cabecera y pie ────────────────────────────────────────────────────── */
+.hd{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding-bottom:9px;border-bottom:1px solid var(--line)}
+.hd img{height:22px}
+.hd .mid{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--mute);padding-top:5px}
+.hd .mid b{color:var(--ink2);font-weight:600}
+.hd .rt{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--mute);text-align:right;line-height:1.65}
+.hd .rt b{color:var(--ink2);font-weight:600}
+.rule{height:2px;background:linear-gradient(90deg,var(--blue) 0,var(--blue-br) 18%,var(--line-soft) 18%,var(--line-soft) 100%)}
+.ft{margin-top:auto;padding-top:9px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--mute2)}
+.ft b{color:var(--mute)}
+.dot{width:5px;height:5px;border-radius:50%;background:var(--blue);display:inline-block;margin-right:6px;vertical-align:middle}
+
+/* ── Titulares y secciones ─────────────────────────────────────────────── */
+.kick{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);font-weight:600}
+.title{margin-top:12px;display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center}
+.title h1{font-family:'Space Grotesk',sans-serif;font-size:33px;font-weight:600;letter-spacing:-0.03em;line-height:1;margin-top:6px}
+.title h1 sup{font-size:12px;color:var(--blue);vertical-align:super}
+.title .sub{font-family:'Space Grotesk',sans-serif;font-size:13.5px;font-weight:400;color:var(--mute);margin-top:6px;letter-spacing:-0.01em}
+.lead{font-size:12px;line-height:1.55;color:var(--ink2);margin-top:9px;text-wrap:pretty}
+.lead b{font-weight:700}
+.sec{margin-top:9px}
+.sec h2{font-family:'Space Grotesk',sans-serif;font-size:14.5px;font-weight:600;letter-spacing:-0.01em;margin-top:4px}
+.sec h3{font-family:'Space Grotesk',sans-serif;font-size:12.5px;font-weight:600;letter-spacing:-0.01em;margin-top:9px;color:var(--deep)}
+.sec .note{font-size:12px;line-height:1.55;color:var(--mute);margin-top:6px;text-wrap:pretty}
+.sec .note b{font-weight:700;color:var(--ink2)}
+.pshot{width:52mm;display:flex;align-items:center;justify-content:center}
+.pshot img{max-height:258px;max-width:100%;object-fit:contain;filter:drop-shadow(0 7px 20px rgba(11,13,20,.2))}
+
+/* ── Tabla estándar ────────────────────────────────────────────────────── */
+.tbl{width:100%;border-collapse:collapse;margin-top:8px}
+.tbl thead th{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;color:#fff;background:var(--deep);padding:8px 11px;text-align:left}
+.tbl tbody th{width:42mm;font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;text-align:left;padding:4.5px 11px;border-bottom:1px solid var(--line-soft);color:var(--ink);vertical-align:top;background:var(--paper2)}
+.tbl tbody td{font-size:12px;line-height:1.4;padding:4.5px 11px;border-bottom:1px solid var(--line-soft);color:var(--ink2);vertical-align:top}
+.tbl tbody td b{font-weight:700;color:var(--ink)}
+.tbl tbody td .mono{font-size:11.5px;color:var(--deep)}
+/* Variante de columnas libres (sin th lateral ancho) */
+.tbl.cols tbody td:first-child{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--deep);font-weight:600;white-space:nowrap}
+.tbl.tight tbody td{padding:3.5px 9px;font-size:11px}
+
+/* ── Fichas rápidas, protocolos, variables ─────────────────────────────── */
+.qs{display:grid;grid-template-columns:repeat(6,minmax(max-content,1fr));margin-top:12px;border:1px solid var(--line);border-radius:3px;overflow:hidden}
+.qs .c{padding:8px 9px;border-right:1px solid var(--line-soft);background:var(--paper2)}
+.qs .c:last-child{border-right:0}
+.qs .k{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--mute)}
+.qs .v{font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:600;color:var(--deep);letter-spacing:-0.02em;margin-top:5px;line-height:1;white-space:nowrap}
+.qs .v small{font-size:11px;font-weight:500;color:var(--mute);letter-spacing:0}
+.protos{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.protos.apps{display:grid;grid-template-columns:repeat(3,1fr)}
+.proto{border:1px solid var(--line);border-radius:3px;padding:8px 13px;background:var(--paper2)}
+.proto .p{font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;color:var(--deep)}
+.proto .s{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-top:3px}
+.vars{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:9px}
+.var{border:1px solid var(--line);border-radius:3px;padding:8px 11px;background:var(--paper2)}
+.var .vn{font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:600;color:var(--blue)}
+.var .vw{font-size:11px;line-height:1.45;color:var(--mute);margin-top:5px}
+
+/* ── Diagrama de flujo y cajas ─────────────────────────────────────────── */
+.flow{display:grid;grid-template-columns:1fr 20px 1fr 20px 1fr;margin-top:8px}
+.fb{border:1px solid var(--line);border-radius:3px;padding:9px 12px;background:var(--paper2)}
+.fb.mid{border-color:var(--blue);background:rgba(31,122,224,.04)}
+.fb .t{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--mute)}
+.fb h4{font-family:'Space Grotesk',sans-serif;font-size:13.5px;font-weight:600;margin-top:4px;letter-spacing:-0.01em}
+.fb.mid h4{color:var(--blue)}
+.fb p{font-size:11px;line-height:1.45;color:var(--mute);margin-top:5px}
+.arw{display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--blue)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:8px}
+.box{border:1px solid var(--line);border-radius:3px;padding:10px 12px;background:var(--paper2)}
+.box .h{font-family:'JetBrains Mono',monospace;font-size:7.2px;letter-spacing:.16em;text-transform:uppercase;color:var(--blue);font-weight:600;margin-bottom:6px}
+.box ul{list-style:none;display:flex;flex-direction:column;gap:5px}
+.box li{display:block;position:relative;padding-left:11px;font-size:9px;line-height:1.45;color:var(--ink2)}
+.box li::before{content:'';position:absolute;left:0;top:5px;width:4px;height:4px;border-radius:50%;background:var(--blue)}
+.box li b{font-weight:700;color:var(--ink)}
+
+/* ── Llamado a la acción ───────────────────────────────────────────────── */
+.cta{margin-top:9px;border:1.5px solid var(--blue);border-radius:3px;background:rgba(31,122,224,.04);padding:9px 14px;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center}
+.cta h3{font-family:'Space Grotesk',sans-serif;font-size:13.5px;font-weight:600;letter-spacing:-0.01em}
+.cta p{font-size:11.5px;line-height:1.5;color:var(--mute);margin-top:5px;max-width:108mm}
+.cta .info{display:flex;flex-direction:column;gap:6px;text-align:right}
+.cta .info .k{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--mute)}
+.cta .info .v{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;color:var(--deep)}
+
+/* ============================================================================
+   COMPONENTES DE DOCUMENTACIÓN OPERATIVA
+   Lo que un manual necesita y una ficha de venta no: pasos, avisos, checklist,
+   pinouts y bloques de consola.
+   ========================================================================== */
+
+/* ── Aplicabilidad — a qué versión aplica el documento ─────────────────── */
+.aplica{margin-top:10px;display:flex;gap:0;border:1px solid var(--line);border-radius:3px;overflow:hidden}
+.aplica .a{padding:6px 11px;background:var(--paper2);border-right:1px solid var(--line-soft);flex:1}
+.aplica .a:last-child{border-right:0}
+.aplica .k{font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--mute)}
+.aplica .v{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;color:var(--deep);margin-top:3px}
+
+/* ── Pasos numerados ───────────────────────────────────────────────────── */
+.steps{counter-reset:step;margin-top:9px;display:flex;flex-direction:column;gap:7px}
+.step{position:relative;padding-left:26px;font-size:11.5px;line-height:1.5;color:var(--ink2)}
+.step::before{counter-increment:step;content:counter(step);position:absolute;left:0;top:0;width:18px;height:18px;border-radius:50%;background:var(--blue);color:#fff;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;display:flex;align-items:center;justify-content:center}
+.step b{font-weight:700;color:var(--ink)}
+.step .sh{font-family:'Space Grotesk',sans-serif;font-size:12.5px;font-weight:600;color:var(--ink);display:block;margin-bottom:2px}
+
+/* ── Avisos: nota, atención, peligro ───────────────────────────────────── */
+.adv{margin-top:9px;border-left:3px solid var(--blue);background:rgba(31,122,224,.05);padding:8px 12px;border-radius:0 3px 3px 0}
+.adv .t{font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.15em;text-transform:uppercase;font-weight:600;color:var(--blue)}
+.adv p{font-size:11.5px;line-height:1.5;color:var(--ink2);margin-top:4px}
+.adv p b{font-weight:700}
+.adv.warn{border-left-color:var(--warn);background:var(--warn-bg)}
+.adv.warn .t{color:var(--warn)}
+.adv.danger{border-left-color:var(--danger);background:var(--danger-bg)}
+.adv.danger .t{color:var(--danger)}
+
+/* ── Checklist ─────────────────────────────────────────────────────────── */
+.chk{margin-top:8px;display:grid;grid-template-columns:1fr 1fr;gap:5px 16px}
+.chk .i{position:relative;padding-left:17px;font-size:11px;line-height:1.45;color:var(--ink2)}
+.chk .i::before{content:'';position:absolute;left:0;top:1.5px;width:11px;height:11px;border:1.5px solid var(--blue);border-radius:2px}
+
+/* ── Bloque de consola / comando ───────────────────────────────────────── */
+.cmd{margin-top:8px;background:var(--ink);color:#E7EBF1;font-family:'JetBrains Mono',monospace;font-size:10.5px;line-height:1.6;padding:9px 12px;border-radius:3px;white-space:pre-wrap;word-break:break-word}
+.cmd .c{color:var(--mute2)}
+.cmd .o{color:#7FD1A8}
+
+/* ── Diagrama de pines del conector ────────────────────────────────────────
+   Doce columnas por dos filas, tal como se ve MIRANDO EL CONECTOR DEL EQUIPO.
+   La orientación no es un detalle de estilo: publicada en espejo, el manual
+   hace cablear al revés. Cualquier reuso debe conservar el rótulo de vista.  */
+.pinout{margin-top:10px}
+.pinout .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:2px}
+.pad{border:1px solid var(--line);border-radius:2px;padding:6px 2px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:7.6px;font-weight:600;line-height:1.15;letter-spacing:-0.01em;min-height:26px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.pad.dark{color:#fff}
+.pad.light{color:var(--ink)}
+.pad .gp{display:block;font-size:6.1px;font-weight:500;letter-spacing:.02em;opacity:.82;margin-bottom:1px}
+.pad .sg{display:block;font-size:7.8px;font-weight:700}
+.pinout .idx{display:grid;grid-template-columns:repeat(12,1fr);gap:2px;margin-bottom:2px}
+.pinout .idx div{text-align:center;font-family:'JetBrains Mono',monospace;font-size:6.6px;color:var(--mute2);letter-spacing:.06em}
+.pinout .caps{display:grid;grid-template-columns:repeat(12,1fr);gap:2px;margin-top:3px}
+.pinout .cap{text-align:center;font-family:'JetBrains Mono',monospace;font-size:7px;letter-spacing:.04em;text-transform:uppercase;color:var(--mute)}
+.pinout .grp{display:grid;grid-template-columns:repeat(12,1fr);gap:2px;margin-bottom:3px}
+.pinout .g{text-align:center;font-family:'JetBrains Mono',monospace;font-size:7.4px;font-weight:600;letter-spacing:.05em;color:var(--deep);border:1px solid var(--blue);border-bottom:0;border-radius:2px 2px 0 0;padding:2px 0;background:rgba(31,122,224,.06)}
+.pinout .g.sp{grid-column:span 2}
+.pinout .vista{margin-top:6px;font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--danger);font-weight:600;text-align:center}
+
+/* Muestra de color de cable, para la tabla de pines */
+.wire{display:inline-block;width:9px;height:9px;border-radius:2px;border:1px solid var(--line);vertical-align:-1px;margin-right:5px}
