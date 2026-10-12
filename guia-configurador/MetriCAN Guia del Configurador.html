@@ -12,12 +12,12 @@
 <body>
 <doc-page size="a4">
 
-<!-- ═══════════════ 1 · PORTADA Y CONEXIÓN ═══════════════ -->
-<section class="page manual" data-screen-label="1 · Conexión">
+<!-- ═══════════════ 1 · PORTADA Y QUÉ ES ═══════════════ -->
+<section class="page manual" data-screen-label="1 · Qué es">
   <div class="hd">
     <img src="../assets/logo-metrican.png" alt="MetriCAN" />
     <div class="mid">Guía del Configurador</div>
-    <div class="rt">DOC <b>GC-MC-2026</b><br />REV <b>01 · AGO 2026</b></div>
+    <div class="rt">DOC <b>GC-MC-2026</b><br />REV <b>02 · OCT 2026</b></div>
   </div>
   <div class="rule"></div>
 
@@ -25,256 +25,580 @@
     <div>
       <div class="kick">— Aplicación de escritorio</div>
       <h1 class="display">Guía del Configurador</h1>
-      <div class="sub">Ocho pestañas, y qué se resuelve en cada una.</div>
-      <p class="lead">MetriCAN Configurator es la aplicación de PC desde la que se lee, edita y carga toda la configuración del equipo: qué señales decodifica del bus, qué variables calcula a bordo, cuándo mueve un relé y por dónde entrega los datos. Se conecta <b>por cable USB o por Bluetooth</b>, sin desmontar nada.</p>
+      <div class="sub">Nueve pestañas, y qué se resuelve en cada una.</div>
+      <p class="lead">El Configurador es el programa de escritorio con el que se le habla a un MetriCAN: escribe la configuración del equipo, lee la que tiene cargada de verdad, actualiza el firmware <b>por cable o por Bluetooth</b> y muestra lo que está midiendo en este momento. Esta guía recorre sus nueve pestañas y no supone conocimiento previo de la herramienta.</p>
     </div>
     <div class="pshot"><img src="../assets/pcb-metrican-transparent.png" alt="Placa MetriCAN" /></div>
   </div>
 
   <div class="aplica">
-    <div class="a"><div class="k">Configurador</div><div class="v">v2.1.0</div></div>
-    <div class="a"><div class="k">Firmware</div><div class="v">v2.6.0</div></div>
+    <div class="a"><div class="k">Configurador</div><div class="v">v2.2.6</div></div>
+    <div class="a"><div class="k">Firmware</div><div class="v">v2.7.23</div></div>
     <div class="a"><div class="k">Conexión</div><div class="v">USB · BLE</div></div>
-    <div class="a"><div class="k">Pestañas</div><div class="v">8</div></div>
+    <div class="a"><div class="k">Pestañas</div><div class="v">9</div></div>
   </div>
 
   <div class="sec">
-    <div class="kick">— 01 / Conectar</div>
-    <h2 class="display">La barra superior</h2>
-    <p class="note">Todo empieza arriba: se elige el modo de conexión, el dispositivo y se pulsa <b>Conectar</b>. El indicador de la derecha pasa de <b>Desconectado</b> a conectado, y recién ahí los botones de lectura y escritura tienen efecto.</p>
-    <div class="steps">
-      <div class="step"><span class="sh">Elige el modo</span><b>Serial (USB)</b> con el cable conectado, o <b>BLE</b> para trabajar sin abrir el tablero.</div>
-      <div class="step"><span class="sh">Selecciona el dispositivo</span>Si la lista está vacía, pulsa <b>Buscar</b>. En USB aparece el puerto con su chip entre corchetes.</div>
-      <div class="step"><span class="sh">Conecta</span>Los indicadores <b>FW</b> y <b>HW</b> de la esquina se completan con las versiones del equipo. Es la confirmación de que hay diálogo real.</div>
-    </div>
+    <div class="kick">— 01 / Qué es y qué no es</div>
+    <h2 class="display">Cuatro cosas, y una que no hace</h2>
+    <table class="tbl cols tight">
+      <thead><tr><th>Hace</th><th>Qué significa</th></tr></thead>
+      <tbody>
+        <tr><td>Escribe</td><td>La configuración del equipo: qué señales lee del vehículo, cómo se llaman, qué periféricos tiene, qué reglas aplica</td></tr>
+        <tr><td>Lee</td><td>Lo que el equipo tiene cargado de verdad, que no siempre es lo que uno cree</td></tr>
+        <tr><td>Actualiza</td><td>El firmware, por cable o por Bluetooth, sin desmontar el equipo del vehículo</td></tr>
+        <tr><td>Diagnostica</td><td>Muestra lo que el equipo está midiendo en este momento, variable por variable</td></tr>
+      </tbody>
+    </table>
     <div class="adv">
-      <div class="t">Antes de tocar nada</div>
-      <p>En un equipo ya instalado, la primera acción siempre es <b>Leer del dispositivo</b>. Editar sobre un formulario en blanco y subirlo reemplaza la configuración que estaba funcionando.</p>
+      <div class="t">Lo que no hace</div>
+      <p>No fabrica el mapa de señales de un vehículo nuevo. Ese mapa —el <span class="mono">.dbc</span>— sale de un levantamiento sobre el vehículo. El Configurador lo <b>importa, lo edita y lo sube</b>, pero no lo inventa.</p>
     </div>
   </div>
 
-  <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Guía del Configurador</div><div>Página 1 de 7</div></div>
+  <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Guía del Configurador</div><div>Página 1 de 15</div></div>
 </section>
 
-<!-- ═══════════════ 2 · CONFIG EDITOR ═══════════════ -->
-<section class="page manual" data-screen-label="2 · Config Editor">
+<!-- ═══════════════ 2 · LA BARRA DE CONEXIÓN ═══════════════ -->
+<section class="page manual" data-screen-label="2 · Conexión">
   <div class="hd">
     <img src="../assets/logo-metrican.png" alt="MetriCAN" />
-    <div class="mid">Guía del Configurador · <b>Config Editor</b></div>
-    <div class="rt">DOC <b>GC-MC-2026</b><br />REV <b>01 · AGO 2026</b></div>
+    <div class="mid">Guía del Configurador · <b>Conexión</b></div>
+    <div class="rt">DOC <b>GC-MC-2026</b><br />REV <b>02 · OCT 2026</b></div>
   </div>
   <div class="rule"></div>
 
   <div class="sec">
-    <div class="kick">— 02 / Config Editor</div>
-    <h2 class="display">El corazón de la configuración</h2>
-    <p class="note">Es <span class="mono">config.json</span> con formularios en vez de llaves y comas. La columna izquierda son las secciones; la derecha, los campos de la sección elegida. El panel de la derecha muestra <b>ayuda contextual</b> al hacer clic en un campo, y lleva la cuenta de los <b>cambios sin guardar</b>.</p>
-    <div class="shot">
-      <img src="../assets/capturas/00-config-editor.png" alt="Pestaña Config Editor" />
-      <div class="pie"><b>Config Editor</b> · sección Sistema — identificación, nivel de log, UART de salida y watchdog</div>
+    <div class="kick">— 02 / La barra de conexión</div>
+    <h2 class="display">La franja que no cambia nunca</h2>
+    <p class="note">Esta franja está en todas las pestañas y siempre hace lo mismo. Mientras el indicador diga <b>Desconectado</b>, las pestañas que leen del equipo no tienen nada que leer: varias se ven vacías por eso, y no porque el equipo esté mal.</p>
+    <div class="steps">
+      <div class="step"><span class="sh">Elige el modo</span><b>Serial (USB)</b> es el camino normal, con el cable puesto. <b>BLE</b> sirve cuando el equipo ya está instalado y llegar al conector es incómodo.</div>
+      <div class="step"><span class="sh">Elige el dispositivo</span>No lo adivines: aprieta <b>↺ Buscar</b> y elige el que aparece. En Linux se ve como <span class="mono">/dev/ttyUSB0 [CP210x]</span>; en Windows, como un <span class="mono">COMx</span>.</div>
+      <div class="step"><span class="sh">Conecta</span>El punto de al lado es el semáforo: gris en <b>Desconectado</b>, verde con la sesión abierta. <b>FW</b> y <b>HW</b> se completan con las versiones del equipo, y ésa es la confirmación de que hay diálogo real.</div>
     </div>
     <table class="tbl cols tight">
-      <thead><tr><th>Sección</th><th>Qué se define ahí</th></tr></thead>
+      <thead><tr><th>Lo demás de la barra</th><th>Para qué está</th></tr></thead>
       <tbody>
-        <tr><td>Sistema</td><td>Nombre y grupo del equipo, <span class="mono">uart_out</span>, nivel de log, odómetro y horómetro iniciales</td></tr>
-        <tr><td>CAN1 · CAN2</td><td>Habilitación y velocidad de cada bus</td></tr>
-        <tr><td>UART1 … UART4</td><td>Qué periférico atiende cada puerto serie. UART1 viene marcado como <b>salida</b></td></tr>
-        <tr><td>Modbus RTU · J1708</td><td>Buses industriales y protocolo pesado legacy</td></tr>
-        <tr><td>AVL / Geozonas</td><td>Lectura del AVL y límites por zona geográfica</td></tr>
-        <tr><td>Entradas · Salidas</td><td>La entrada digital y las <b>reglas de relé</b></td></tr>
-        <tr><td>Auxiliares · Carga EV</td><td>Variables calculadas a bordo y monitoreo de carga eléctrica</td></tr>
-        <tr><td>Conectividad</td><td>WiFi y Bluetooth</td></tr>
+        <tr><td>Exportar carpeta…</td><td>Guarda en disco todo lo que el equipo tiene cargado. Es el respaldo, y es lo que hay que hacer <b>antes</b> de tocar nada en un equipo instalado</td></tr>
+        <tr><td>RAM</td><td>Avisa si la memoria libre del equipo conectado está cayendo</td></tr>
+        <tr><td>EMITE</td><td>Dice si la telemetría está saliendo</td></tr>
+        <tr><td>FW · HW</td><td>Versión de firmware y de hardware del equipo conectado</td></tr>
+        <tr><td>LIGHT</td><td>Cambia entre tema claro y oscuro. Sólo estético</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Guía del Configurador</div><div>GC-MC-2026 · REV 02</div><div>Página 2 de 15</div></div>
+</section>
+
+<!-- ═══════════════ 3 · LOS CUATRO BOTONES ═══════════════ -->
+<section class="page manual" data-screen-label="3 · Los cuatro botones">
+  <div class="hd">
+    <img src="../assets/logo-metrican.png" alt="MetriCAN" />
+    <div class="mid">Guía del Configurador · <b>Disco y equipo</b></div>
+    <div class="rt">DOC <b>GC-MC-2026</b><br />REV <b>02 · OCT 2026</b></div>
+  </div>
+  <div class="rule"></div>
+
+  <div class="sec">
+    <div class="kick">— 03 / Los cuatro botones que se repiten</div>
+    <h2 class="display">Dos mundos que no hay que confundir</h2>
+    <p class="note">Casi todas las pestañas de edición llevan la misma fila de cuatro botones. Dos trabajan contra el <b>disco de tu PC</b> y dos contra el <b>equipo</b>; confundirlos es el error más caro de esta herramienta.</p>
+    <div class="flow">
+      <div class="fb">
+        <div class="t">Tu PC</div>
+        <h4>El disco</h4>
+        <p>Los <span class="mono">.json</span> guardados: respaldos y configuraciones de partida.</p>
+      </div>
+      <div class="arw">⇄</div>
+      <div class="fb mid">
+        <div class="t">En el medio</div>
+        <h4>La pantalla</h4>
+        <p>Lo que estás editando. No es ni el disco ni el equipo.</p>
+      </div>
+      <div class="arw">⇄</div>
+      <div class="fb">
+        <div class="t">En el vehículo</div>
+        <h4>El equipo</h4>
+        <p>Lo que de verdad está funcionando ahí afuera.</p>
+      </div>
+    </div>
+    <table class="tbl cols tight">
+      <thead><tr><th>Botón</th><th>De dónde a dónde</th></tr></thead>
+      <tbody>
+        <tr><td>Abrir archivo</td><td>del disco <b>→</b> a la pantalla</td></tr>
+        <tr><td>Guardar archivo</td><td>de la pantalla <b>→</b> al disco</td></tr>
+        <tr><td>Leer del dispositivo</td><td>del equipo <b>→</b> a la pantalla</td></tr>
+        <tr><td>Subir al dispositivo</td><td>de la pantalla <b>→</b> al equipo</td></tr>
       </tbody>
     </table>
     <div class="adv warn">
-      <div class="t">Guardar no es subir</div>
-      <p><b>Guardar archivo</b> deja un <span class="mono">.json</span> en tu PC. <b>Subir al dispositivo</b> es lo que cambia el equipo. Son dos acciones distintas y conviene hacer las dos: el archivo es tu respaldo.</p>
+      <div class="t">Lo que ves no es lo que el equipo tiene</div>
+      <p>Lo que está en pantalla no llega al equipo hasta que aprietas <b>Subir</b>. Y lo que el equipo tiene no aparece en pantalla hasta que aprietas <b>Leer</b>. Un equipo puede quedar con una configuración <b>a medias</b> si se sube una pestaña y se olvida otra.</p>
+    </div>
+    <div class="adv">
+      <div class="t">Costumbre que ahorra disgustos</div>
+      <p>En un equipo instalado: primero <b>Exportar carpeta…</b>, después <b>Leer del dispositivo</b>, y recién entonces editar. Son cinco segundos, y es lo único que permite volver atrás.</p>
     </div>
   </div>
 
-  <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Guía del Configurador</div><div>GC-MC-2026 · REV 01</div><div>Página 2 de 7</div></div>
+  <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Guía del Configurador</div><div>GC-MC-2026 · REV 02</div><div>Página 3 de 15</div></div>
 </section>
 
-<!-- ═══════════════ 3 · VARIABLES CAN ═══════════════ -->
-<section class="page manual" data-screen-label="3 · Variables CAN">
+<!-- ═══════════════ 4 · CONFIG EDITOR ═══════════════ -->
+<section class="page manual" data-screen-label="4 · Config Editor">
+  <div class="hd">
+    <img src="../assets/logo-metrican.png" alt="MetriCAN" />
+    <div class="mid">Guía del Configurador · <b>Config Editor</b></div>
+    <div class="rt">DOC <b>GC-MC-2026</b><br />REV <b>02 · OCT 2026</b></div>
+  </div>
+  <div class="rule"></div>
+
+  <div class="sec">
+    <div class="kick">— 04 / Config Editor</div>
+    <h2 class="display">La identidad del equipo</h2>
+    <p class="note">Aquí se define <b>qué es</b> este equipo. La columna de la izquierda son las secciones y cada una gobierna una parte del aparato; al centro, los campos de la sección elegida.</p>
+    <div class="shot">
+      <img src="../assets/capturas/00-config-editor.png" alt="Pestaña Config Editor" />
+      <div class="pie"><b>Config Editor</b> · sección Sistema — identificación, UART de salida, nivel de log, latido de salud y valores de arranque del odómetro</div>
+    </div>
+    <div class="adv">
+      <div class="t">La columna de la derecha es la ayuda</div>
+      <p>Al hacer clic en un campo aparece su descripción, y debajo la lista de <b>cambios sin guardar</b>. Si esa lista tiene cosas, todavía no están en el equipo.</p>
+    </div>
+  </div>
+
+  <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Guía del Configurador</div><div>GC-MC-2026 · REV 02</div><div>Página 4 de 15</div></div>
+</section>
+
+<!-- ═══════════════ 5 · SECCIONES DEL CONFIG EDITOR ═══════════════ -->
+<section class="page manual" data-screen-label="5 · Secciones">
+  <div class="hd">
+    <img src="../assets/logo-metrican.png" alt="MetriCAN" />
+    <div class="mid">Guía del Configurador · <b>Config Editor</b></div>
+    <div class="rt">DOC <b>GC-MC-2026</b><br />REV <b>02 · OCT 2026</b></div>
+  </div>
+  <div class="rule"></div>
+
+  <div class="sec">
+    <div class="kick">— 04 / Config Editor · secciones</div>
+    <h2 class="display">Qué gobierna cada una</h2>
+    <table class="tbl cols tight">
+      <thead><tr><th>Sección</th><th>Qué se define ahí</th></tr></thead>
+      <tbody>
+        <tr><td>Sistema</td><td>Nombre y grupo del equipo, por qué puerto sale la telemetría, nivel de log y cada cuánto manda el latido de salud. También el odómetro y el horómetro de arranque: poner aquí el kilometraje del tablero hace que el equipo cuente desde ahí</td></tr>
+        <tr><td>CAN1 · CAN2</td><td>Los dos buses: velocidad, cada cuánto emite, cuánto espera antes de dar una señal por rancia, y qué señales disparan emisión inmediata</td></tr>
+        <tr><td>UART1 … UART4</td><td>Los cuatro puertos serie: a qué velocidad va cada uno y qué rol tiene — cámara, módem, Modbus, periférico genérico</td></tr>
+        <tr><td>Modbus RTU</td><td>El periférico industrial por RS485, con su protocolo propio</td></tr>
+        <tr><td>J1708 / J1587</td><td>El bus pesado legacy de los vehículos de flota antiguos</td></tr>
+        <tr><td>Entradas</td><td>La entrada física, típicamente la ignición</td></tr>
+        <tr><td>Salidas · Relés</td><td>Las reglas de los dos relés</td></tr>
+        <tr><td>Auxiliares</td><td>Las variables calculadas: horómetros, consumos, odómetro propio</td></tr>
+        <tr><td>Carga EV</td><td>El ciclo de carga en vehículos eléctricos</td></tr>
+        <tr><td>Conectividad</td><td>WiFi y Bluetooth</td></tr>
+        <tr><td>IGNITION</td><td>A qué se le aplica el corte por ignición</td></tr>
+      </tbody>
+    </table>
+    <div class="adv warn">
+      <div class="t">IGNITION merece atención</div>
+      <p>El corte por ignición se elige <b>por separado</b> para la telemetría del bus, para las variables calculadas y para los avisos de la cámara, porque equivocarse cuesta distinto en cada uno: callar un bus deja el equipo <b>mudo</b>; callar un aviso de cámara sólo pierde ese aviso.</p>
+    </div>
+  </div>
+
+  <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Guía del Configurador</div><div>GC-MC-2026 · REV 02</div><div>Página 5 de 15</div></div>
+</section>
+
+<!-- ═══════════════ 6 · VARIABLES CAN ═══════════════ -->
+<section class="page manual" data-screen-label="6 · Variables CAN">
   <div class="hd">
     <img src="../assets/logo-metrican.png" alt="MetriCAN" />
     <div class="mid">Guía del Configurador · <b>Variables CAN</b></div>
-    <div class="rt">DOC <b>GC-MC-2026</b><br />REV <b>01 · AGO 2026</b></div>
+    <div class="rt">DOC <b>GC-MC-2026</b><br />REV <b>02 · OCT 2026</b></div>
   </div>
   <div class="rule"></div>
 
   <div class="sec">
-    <div class="kick">— 03 / Variables CAN</div>
-    <h2 class="display">Qué señales lee del bus</h2>
-    <p class="note">Aquí se define qué mensajes del bus interesan y cómo se traduce cada uno a un valor con unidad. Se puede <b>importar un archivo DBC</b> del fabricante y quedarse con las señales necesarias, o construir la lista a mano mensaje por mensaje.</p>
+    <div class="kick">— 05 / Variables CAN</div>
+    <h2 class="display">El mapa del vehículo</h2>
+    <p class="note">Esto es lo que convierte un equipo genérico en el equipo de <b>ese</b> camión: qué identificador del bus lleva cada dato, en qué bits está, con qué escala y qué nombre tiene. Se elige el <b>Bus</b> —CAN1 o CAN2, cada uno con su propio mapa—, se importa el <span class="mono">.dbc</span> del levantamiento y la tabla queda armada con los mensajes y, dentro de cada uno, sus señales. Las señales no se escriben a mano.</p>
     <div class="shot">
       <img src="../assets/capturas/01-variables-can.png" alt="Pestaña Variables CAN" />
-      <div class="pie"><b>Variables CAN</b> · 17 mensajes y 32 señales cargados desde un archivo de variables</div>
+      <div class="pie"><b>Variables CAN</b> · mensajes y señales con CAN ID, longitud, escala, offset y unidad — la captura está sin mapa cargado</div>
     </div>
-    <table class="tbl cols tight">
-      <thead><tr><th>Columna</th><th>Qué significa</th></tr></thead>
-      <tbody>
-        <tr><td>Mensaje / Señal</td><td>Los mensajes agrupan señales. Cada fila hija es un dato que el equipo va a publicar</td></tr>
-        <tr><td>CAN ID / bits</td><td>Identificador del mensaje y, en la señal, su posición y orden de bytes</td></tr>
-        <tr><td>Longitud</td><td>Cuántos bits ocupa la señal</td></tr>
-        <tr><td>Escala · Offset</td><td>La conversión a unidad real: <span class="mono">valor = crudo × escala + offset</span></td></tr>
-        <tr><td>Unidad</td><td>Cómo se reporta — km/h, °C, kPa</td></tr>
-      </tbody>
-    </table>
-    <div class="adv">
-      <div class="t">Versión DBC</div>
-      <p>El campo <b>Versión DBC</b> de la esquina identifica el juego de variables cargado. Ponerle un nombre con sentido —el modelo y la revisión— es lo que después permite saber qué tiene cada unidad de la flota sin conectarse a ella.</p>
+    <div class="adv danger">
+      <div class="t">Peligro · El orden de esta tabla es el orden de la trama</div>
+      <p>Las señales salen al aire en el orden en que están aquí. Quien recibe lee <b>por posición</b>: mover una señal de sitio o agregar una en medio corre todas las que vienen detrás y rompe la plataforma del cliente <b>sin ningún error visible</b>. Agregar al final es barato; insertar en medio no lo es.</p>
     </div>
   </div>
 
-  <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Guía del Configurador</div><div>GC-MC-2026 · REV 01</div><div>Página 3 de 7</div></div>
+  <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Guía del Configurador</div><div>GC-MC-2026 · REV 02</div><div>Página 6 de 15</div></div>
 </section>
 
-<!-- ═══════════════ 4 · AUX, QUERY Y SERIAL ═══════════════ -->
-<section class="page manual" data-screen-label="4 · AUX, QUERY, Serial">
+<!-- ═══════════════ 7 · VARIABLES AUX ═══════════════ -->
+<section class="page manual" data-screen-label="7 · Variables AUX">
   <div class="hd">
     <img src="../assets/logo-metrican.png" alt="MetriCAN" />
-    <div class="mid">Guía del Configurador · <b>AUX, QUERY y Serial</b></div>
-    <div class="rt">DOC <b>GC-MC-2026</b><br />REV <b>01 · AGO 2026</b></div>
+    <div class="mid">Guía del Configurador · <b>Variables AUX</b></div>
+    <div class="rt">DOC <b>GC-MC-2026</b><br />REV <b>02 · OCT 2026</b></div>
   </div>
   <div class="rule"></div>
 
   <div class="sec">
-    <div class="kick">— 04 / Variables AUX</div>
-    <h2 class="display">Los KPI que el bus no entrega</h2>
-    <p class="note">Una variable auxiliar es un dato que <b>no existe en el bus</b> y se construye a bordo combinando señales, acumulando en el tiempo o contando eventos. El equipo la calcula solo y la emite junto al resto.</p>
+    <div class="kick">— 06 / Variables AUX</div>
+    <h2 class="display">Lo que el equipo calcula</h2>
+    <p class="note">Aquí viven las variables que el equipo <b>calcula</b> en vez de leer: horómetros, consumo de combustible, consumo en ralentí, odómetro propio, contadores. Se parte de un <b>preset</b> según el tipo de vehículo —combustión, eléctrico o híbrido—, que ya trae el juego completo, y desde ahí se ajusta.</p>
     <div class="shot">
       <img src="../assets/capturas/02-variables-aux.png" alt="Pestaña Variables AUX" />
-      <div class="pie"><b>Variables AUX</b> · definición de variables derivadas y su ciclo de reseteo</div>
+      <div class="pie"><b>Variables AUX</b> · cada variable con su tipo, sus entradas, su condición y su ciclo — la captura está sin preset elegido</div>
     </div>
-    <table class="tbl cols tight">
-      <thead><tr><th>Tipo</th><th>Para qué sirve</th></tr></thead>
-      <tbody>
-        <tr><td>accumulator</td><td>Integra un valor en el tiempo — energía consumida, distancia recorrida</td></tr>
-        <tr><td>counter</td><td>Cuenta eventos al cruzar un umbral — frenadas bruscas, aperturas de puerta</td></tr>
-        <tr><td>horometer</td><td>Mide tiempo activo bajo una condición — horas de motor, tiempo en ralentí</td></tr>
-        <tr><td>instantaneous</td><td>Calcula en cada ciclo — potencia como tensión × corriente</td></tr>
-        <tr><td>min · max · average</td><td>Extremos y promedio del ciclo de operación</td></tr>
-      </tbody>
-    </table>
-    <p class="note">El <b>ciclo</b> es lo que da sentido a los acumuladores: cuando la señal de reseteo cambia —típicamente al apagarse el motor— el equipo emite el resumen del ciclo terminado y vuelve los acumuladores a cero. Un ciclo de operación, un resumen.</p>
-  </div>
-
-  <div class="sec">
-    <div class="kick">— 05 / Variables QUERY y Serial</div>
-    <h2 class="display">Cuando hay que preguntar, y cuando llega solo</h2>
     <div class="two">
       <div class="box">
-        <div class="h">Variables QUERY</div>
+        <div class="h">Sale vacía, no en cero</div>
         <ul>
-          <li>Para datos que <b>no se emiten solos</b> al bus</li>
-          <li>El equipo <b>pregunta</b> y espera la respuesta</li>
-          <li>Típico de diagnóstico y parámetros bajo demanda</li>
+          <li>Una variable que <b>no cumple su condición</b> no publica número</li>
+          <li>El consumo en ralentí sólo sale mientras el vehículo está en ralentí</li>
+          <li>El acumulado <b>no se pierde</b>: simplemente no se publica</li>
         </ul>
       </div>
       <div class="box">
-        <div class="h">Variables Serial</div>
+        <div class="h">Algunas se apagan solas</div>
         <ul>
-          <li>Datos que llegan por un <b>puerto serie</b>, no por CAN</li>
-          <li>Se declara qué mensajes esperar y cómo interpretarlos</li>
-          <li>Entran al sistema <b>igual que las del bus</b></li>
+          <li>El horómetro y el odómetro propios se <b>inhiben</b> si el bus publica los del fabricante</li>
+          <li>No compiten con el dato original: lo <b>suplen</b> cuando no existe</li>
+        </ul>
+      </div>
+    </div>
+    <div class="adv warn">
+      <div class="t">Las flechas ↑ ↓ no son cosmética</div>
+      <p>Igual que en Variables CAN, el orden de esta lista es el orden de los campos en la <b>trama auxiliar</b>.</p>
+    </div>
+  </div>
+
+  <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Guía del Configurador</div><div>GC-MC-2026 · REV 02</div><div>Página 7 de 15</div></div>
+</section>
+
+<!-- ═══════════════ 8 · VARIABLES AVL ═══════════════ -->
+<section class="page manual" data-screen-label="8 · Variables AVL">
+  <div class="hd">
+    <img src="../assets/logo-metrican.png" alt="MetriCAN" />
+    <div class="mid">Guía del Configurador · <b>Variables AVL</b></div>
+    <div class="rt">DOC <b>GC-MC-2026</b><br />REV <b>02 · OCT 2026</b></div>
+  </div>
+  <div class="rule"></div>
+
+  <div class="sec">
+    <div class="kick">— 07 / Variables AVL</div>
+    <h2 class="display">El módem y las zonas</h2>
+    <p class="note">Dos trabajos en una sola pestaña: de qué le hace caso el equipo al mensaje del módem, y qué recintos geográficos conoce.</p>
+    <div class="shot">
+      <img src="../assets/capturas/03-variables-avl.png" alt="Pestaña Variables AVL" />
+      <div class="pie"><b>Variables AVL</b> · modelo de módem, máscara de campos y catálogo de variables <span class="mono">AVL.*</span></div>
+    </div>
+    <div class="two">
+      <div class="box">
+        <div class="h">Arriba · el módem</div>
+        <ul>
+          <li>Qué campos trae el mensaje del <b>Queclink</b> y cómo se llaman: posición, velocidad GNSS, rumbo, altitud, fecha y hora, zonas</li>
+          <li><b>Recalcular índices</b> reordena cuando se agrega o se quita un campo</li>
+          <li><b>Provisionar AVL…</b> deja el módem configurado</li>
+        </ul>
+      </div>
+      <div class="box">
+        <div class="h">Abajo · las geozonas</div>
+        <ul>
+          <li>La lista de recintos, cada uno con su <b>límite de velocidad</b></li>
+          <li><b>Importar KML…</b> toma las zonas dibujadas en Google Earth; <b>Importar puntos…</b>, una lista de coordenadas</li>
+          <li><b>Leer del equipo</b> trae las que ya tiene; <b>Guardar geofences.txt…</b> las deja en un archivo</li>
         </ul>
       </div>
     </div>
   </div>
 
-  <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Guía del Configurador</div><div>GC-MC-2026 · REV 01</div><div>Página 4 de 7</div></div>
+  <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Guía del Configurador</div><div>GC-MC-2026 · REV 02</div><div>Página 8 de 15</div></div>
 </section>
 
-<!-- ═══════════════ 5 · ACTUALIZAR ═══════════════ -->
-<section class="page manual" data-screen-label="5 · Actualizar">
+<!-- ═══════════════ 9 · VARIABLES SERIAL ═══════════════ -->
+<section class="page manual" data-screen-label="9 · Variables Serial">
+  <div class="hd">
+    <img src="../assets/logo-metrican.png" alt="MetriCAN" />
+    <div class="mid">Guía del Configurador · <b>Variables Serial</b></div>
+    <div class="rt">DOC <b>GC-MC-2026</b><br />REV <b>02 · OCT 2026</b></div>
+  </div>
+  <div class="rule"></div>
+
+  <div class="sec">
+    <div class="kick">— 08 / Variables Serial</div>
+    <h2 class="display">Periféricos sin firmware nuevo</h2>
+    <p class="note">Esta pestaña es la que permite conectar una báscula, un caudalímetro o un lector de tarjetas <b>sin pedir una versión nueva de firmware</b>: aquí se describe el formato de lo que manda el aparato, y sus datos pasan a ser variables como cualquier otra.</p>
+    <div class="shot">
+      <img src="../assets/capturas/04-variables-serial.png" alt="Pestaña Variables Serial" />
+      <div class="pie"><b>Variables Serial</b> · el puerto, su prefijo de variables y la descripción de cada mensaje que llega por él</div>
+    </div>
+    <div class="two">
+      <div class="box">
+        <div class="h">Capturar del dispositivo</div>
+        <ul>
+          <li>Muestra lo que está entrando <b>de verdad</b> por ese puerto, en crudo</li>
+          <li>Distingue <b>el aparato no está conectado</b> de <b>está conectado y no nos entendemos</b></li>
+          <li>Desde fuera las dos se ven igual: silencio</li>
+        </ul>
+      </div>
+      <div class="box">
+        <div class="h">Probar en el dispositivo</div>
+        <ul>
+          <li>Aplica la descripción que escribiste a lo que está llegando</li>
+          <li>Enseña el resultado campo por campo</li>
+          <li>Si da <b>⚠ no es número</b>, la descripción no casa con el aparato</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Guía del Configurador</div><div>GC-MC-2026 · REV 02</div><div>Página 9 de 15</div></div>
+</section>
+
+<!-- ═══════════════ 10 · REPORTES ═══════════════ -->
+<section class="page manual" data-screen-label="10 · Reportes">
+  <div class="hd">
+    <img src="../assets/logo-metrican.png" alt="MetriCAN" />
+    <div class="mid">Guía del Configurador · <b>Reportes</b></div>
+    <div class="rt">DOC <b>GC-MC-2026</b><br />REV <b>02 · OCT 2026</b></div>
+  </div>
+  <div class="rule"></div>
+
+  <div class="sec">
+    <div class="kick">— 09 / Reportes</div>
+    <h2 class="display">Qué se manda, y cuándo</h2>
+    <p class="note">Define los eventos: qué manda el equipo <b>cuando pasa algo</b>, además de la telemetría periódica. Se añaden eventos y, dentro de cada uno, las condiciones que lo disparan.</p>
+    <div class="shot">
+      <img src="../assets/capturas/05-reportes.png" alt="Pestaña Reportes" />
+      <div class="pie"><b>Reportes</b> · un reporte, sus eventos, las condiciones de cada evento y las variables que lleva</div>
+    </div>
+    <table class="tbl cols tight">
+      <thead><tr><th>Bloque</th><th>Qué se declara</th></tr></thead>
+      <tbody>
+        <tr><td>Reporte</td><td>Su nombre, el código del latido, el origen del dato y cada cuánto se repite</td></tr>
+        <tr><td>Eventos</td><td>Cada uno con su código, su disparo, su antirrebote y el periodo mínimo entre dos</td></tr>
+        <tr><td>Condiciones</td><td>Variable, operador, umbral e histéresis. Se cumplen <b>todas</b></td></tr>
+        <tr><td>Variables</td><td>Las que viajan en el reporte, con el mismo nombre que en Variables en Vivo</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Guía del Configurador</div><div>GC-MC-2026 · REV 02</div><div>Página 10 de 15</div></div>
+</section>
+
+<!-- ═══════════════ 11 · ACTUALIZAR ═══════════════ -->
+<section class="page manual" data-screen-label="11 · Actualizar">
   <div class="hd">
     <img src="../assets/logo-metrican.png" alt="MetriCAN" />
     <div class="mid">Guía del Configurador · <b>Actualizar</b></div>
-    <div class="rt">DOC <b>GC-MC-2026</b><br />REV <b>01 · AGO 2026</b></div>
+    <div class="rt">DOC <b>GC-MC-2026</b><br />REV <b>02 · OCT 2026</b></div>
   </div>
   <div class="rule"></div>
 
   <div class="sec">
-    <div class="kick">— 06 / Actualizar</div>
-    <h2 class="display">Firmware nuevo sin desmontar el equipo</h2>
-    <p class="note">Carga una versión de firmware en el equipo <b>por el mismo cable o por Bluetooth</b> con que lo configuras. No hace falta programador ni abrir la carcasa.</p>
+    <div class="kick">— 10 / Actualizar</div>
+    <h2 class="display">Firmware y configuración en caliente</h2>
+    <p class="note">La pestaña tiene <b>dos bloques independientes</b>, y conviene no confundirlos. Los dos trabajan por <b>SERIAL o por BLE</b>: el selector está arriba a la derecha.</p>
     <div class="shot">
-      <img src="../assets/capturas/05-actualizar.png" alt="Pestaña Actualizar" />
-      <div class="pie"><b>Actualizar</b> · carga de firmware por cable o BLE, con verificación y activación</div>
+      <img src="../assets/capturas/06-actualizar.png" alt="Pestaña Actualizar" />
+      <div class="pie"><b>Actualizar</b> · 02.A OTA de firmware y 02.B paquete de configuración, con Rollback y Estado del equipo</div>
     </div>
-    <div class="adv danger">
-      <div class="t">Peligro · No cortes la alimentación</div>
-      <p>Durante la carga el <b>LED del equipo parpadea rápido, cada 100 ms</b>. Mientras dure ese patrón, no desconectes la alimentación ni el cable. El equipo guarda la versión nueva en un espacio aparte y <b>sólo la activa cuando la recibió completa</b>, pero un corte a mitad obliga a repetir el proceso desde el principio.</p>
-    </div>
-    <div class="adv">
-      <div class="t">Si algo sale mal</div>
-      <p>El equipo conserva la versión anterior. Si la nueva no arranca correctamente, <b>vuelve solo a la que estaba funcionando</b>. Por eso la actualización por cable es una operación segura incluso en terreno.</p>
+    <div class="two">
+      <div class="box">
+        <div class="h">02.A · OTA de firmware</div>
+        <ul>
+          <li>Tres pasos, en este orden: <b>Archivo…</b> → <b>Push →</b> → <b>OTA Activar</b></li>
+          <li>El equipo <b>sigue operando</b> durante la transferencia y no entra en modo bootloader</li>
+          <li>Se reinicia <b>sólo al activar</b>, y vuelve en unos 15 segundos</li>
+          <li>El archivo es un <span class="mono">.mtfw</span>, cifrado y con su suma de verificación</li>
+          <li><b>Rollback</b> vuelve a la versión anterior; <b>Estado del equipo</b> dice en qué partición está corriendo</li>
+        </ul>
+      </div>
+      <div class="box">
+        <div class="h">02.B · Paquete de configuración</div>
+        <ul>
+          <li>Dos pasos: <b>Carpeta…</b> → <b>Cargar →</b></li>
+          <li>Sube de una vez <b>todos</b> los <span class="mono">.json</span> de una carpeta y los recarga en caliente</li>
+          <li>El equipo <b>no se reinicia</b></li>
+          <li>Sólo se envía lo que exista en la carpeta</li>
+        </ul>
+      </div>
     </div>
   </div>
 
-  <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Guía del Configurador</div><div>GC-MC-2026 · REV 01</div><div>Página 5 de 7</div></div>
+  <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Guía del Configurador</div><div>GC-MC-2026 · REV 02</div><div>Página 11 de 15</div></div>
 </section>
 
-<!-- ═══════════════ 6 · VIVO, MONITOR Y CIERRE ═══════════════ -->
-<section class="page manual" data-screen-label="6 · Vivo y Monitor">
+<!-- ═══════════════ 12 · LOS TRES CAMINOS ═══════════════ -->
+<section class="page manual" data-screen-label="12 · Puesta en marcha">
   <div class="hd">
     <img src="../assets/logo-metrican.png" alt="MetriCAN" />
-    <div class="mid">Guía del Configurador · <b>Diagnóstico</b></div>
-    <div class="rt">DOC <b>GC-MC-2026</b><br />REV <b>01 · AGO 2026</b></div>
+    <div class="mid">Guía del Configurador · <b>Puesta en marcha</b></div>
+    <div class="rt">DOC <b>GC-MC-2026</b><br />REV <b>02 · OCT 2026</b></div>
   </div>
   <div class="rule"></div>
 
   <div class="sec">
-    <div class="kick">— 07 / Variables en Vivo</div>
-    <h2 class="display">La verificación que cierra la instalación</h2>
-    <p class="note">Muestra los valores que el equipo está leyendo <b>en este momento</b>, ya decodificados. Es la prueba de que la configuración es correcta y de que el cableado también: si la lista se actualiza, el equipo lee el bus.</p>
-    <div class="shot">
-      <img src="../assets/capturas/06-variables-en-vivo.png" alt="Pestaña Variables en Vivo" />
-      <div class="pie"><b>Variables en Vivo</b> · valores decodificados en tiempo real</div>
+    <div class="kick">— 11 / Puesta en marcha</div>
+    <h2 class="display">Los tres caminos para dejar un equipo listo</h2>
+    <p class="note">Según de qué se parte, el camino es distinto. Los tres salen del <b>mismo paquete de entrega</b>.</p>
+    <div class="three">
+      <div class="box">
+        <div class="h">A · Placa en blanco</div>
+        <ul>
+          <li>Cuando el equipo <b>nunca tuvo firmware</b></li>
+          <li>Se carga la carpeta <span class="mono">PACKAGE/</span> completa</li>
+          <li>Lleva los cinco binarios <b>y la configuración dentro</b></li>
+          <li>El equipo queda funcionando y configurado de una vez</li>
+        </ul>
+      </div>
+      <div class="box">
+        <div class="h">B · Equipo instalado</div>
+        <ul>
+          <li>Cuando ya está en el vehículo y hay <b>firmware nuevo</b></li>
+          <li>Pestaña <b>Actualizar</b>, bloque <b>02.A</b>, con el <span class="mono">.mtfw</span> de <span class="mono">OTA/</span></li>
+          <li>Al terminar, cargar la configuración con el bloque <b>02.B</b> y reiniciar</li>
+          <li><b>El OTA no toca la configuración</b></li>
+        </ul>
+      </div>
+      <div class="box">
+        <div class="h">C · Otra configuración</div>
+        <ul>
+          <li>Cuando el firmware se queda y sólo cambia el vehículo o un parámetro</li>
+          <li>Pestaña <b>Actualizar</b>, bloque <b>02.B</b>, con la carpeta <span class="mono">CONFIG/</span></li>
+          <li>Y después <b>reiniciar</b></li>
+        </ul>
+      </div>
+    </div>
+    <table class="tbl cols tight">
+      <thead><tr><th>Del paquete de entrega</th><th>Qué lleva, y en qué camino se usa</th></tr></thead>
+      <tbody>
+        <tr><td>PACKAGE/</td><td>Los cinco binarios y la configuración dentro. Es el camino <b>A</b>, el de la placa en blanco</td></tr>
+        <tr><td>OTA/</td><td>El <span class="mono">.mtfw</span> de la versión nueva. Es el camino <b>B</b>, por el bloque 02.A</td></tr>
+        <tr><td>CONFIG/</td><td>Los <span class="mono">.json</span> del vehículo. Es el camino <b>C</b>, por el bloque 02.B</td></tr>
+      </tbody>
+    </table>
+    <div class="adv warn">
+      <div class="t">El reinicio no siempre es opcional</div>
+      <p>Recargar en caliente actualiza la configuración <b>en memoria</b>, y hay cosas que el equipo sólo lee <b>al arrancar</b> — la velocidad de los buses CAN, entre otras. Si cambiaste el bitrate, el viejo sigue vigente hasta que reinicies. La comprobación es mirar la línea de arranque: tiene que decir la velocidad que pusiste.</p>
+    </div>
+    <div class="adv danger">
+      <div class="t">Peligro · Un .mtfw pertenece a una línea de equipo</div>
+      <p>Hay equipos <b>abiertos</b> y equipos <b>sellados</b>, y sus paquetes <b>no son intercambiables</b> — no es cosa del modelo. Cargar el de la línea equivocada deja el equipo en bucle de arranque. El nombre del archivo lo dice.</p>
     </div>
   </div>
 
-  <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Guía del Configurador</div><div>GC-MC-2026 · REV 01</div><div>Página 6 de 7</div></div>
+  <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Guía del Configurador</div><div>GC-MC-2026 · REV 02</div><div>Página 12 de 15</div></div>
 </section>
 
-<!-- ═══════════════ 7 · MONITOR Y CIERRE ═══════════════ -->
-<section class="page manual" data-screen-label="7 · Monitor">
+<!-- ═══════════════ 13 · VARIABLES EN VIVO ═══════════════ -->
+<section class="page manual" data-screen-label="13 · Variables en Vivo">
+  <div class="hd">
+    <img src="../assets/logo-metrican.png" alt="MetriCAN" />
+    <div class="mid">Guía del Configurador · <b>Variables en Vivo</b></div>
+    <div class="rt">DOC <b>GC-MC-2026</b><br />REV <b>02 · OCT 2026</b></div>
+  </div>
+  <div class="rule"></div>
+
+  <div class="sec">
+    <div class="kick">— 12 / Variables en Vivo</div>
+    <h2 class="display">Qué está midiendo ahora</h2>
+    <p class="note">La foto completa de lo que el equipo tiene medido <b>en este momento</b>, con el valor de cada variable y su antigüedad. <b>Iniciar auto-poll</b> la refresca sola cada pocos segundos; <b>Actualizar ahora</b> pide una foto suelta; <b>Exportar CSV</b> se lleva la tabla.</p>
+    <div class="shot">
+      <img src="../assets/capturas/07-variables-en-vivo.png" alt="Pestaña Variables en Vivo" />
+      <div class="pie"><b>Variables en Vivo</b> · auto-poll, intervalo y filtros por origen — la captura está sin equipo conectado</div>
+    </div>
+    <p class="note">Los filtros de arriba —<span class="mono">TODAS</span>, <span class="mono">CAN1</span>, <span class="mono">CAN2</span>, <span class="mono">AUX</span>, <span class="mono">CHARGE</span>, <span class="mono">INPUT</span>, <span class="mono">OTRAS</span>— separan por origen, que es justo lo que hace falta para contestar <b>¿esto viene del bus o lo está calculando el equipo?</b></p>
+    <div class="adv">
+      <div class="t">Es la primera pantalla de todo diagnóstico</div>
+      <p>Una variable que <b>nunca llegó</b>, una que llegó <b>hace media hora</b> y una que está <b>fresca</b> se ven distintas aquí, y se ven iguales en cualquier otro sitio.</p>
+    </div>
+  </div>
+
+  <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Guía del Configurador</div><div>GC-MC-2026 · REV 02</div><div>Página 13 de 15</div></div>
+</section>
+
+<!-- ═══════════════ 14 · MONITOR ═══════════════ -->
+<section class="page manual" data-screen-label="14 · Monitor">
   <div class="hd">
     <img src="../assets/logo-metrican.png" alt="MetriCAN" />
     <div class="mid">Guía del Configurador · <b>Monitor</b></div>
-    <div class="rt">DOC <b>GC-MC-2026</b><br />REV <b>01 · AGO 2026</b></div>
+    <div class="rt">DOC <b>GC-MC-2026</b><br />REV <b>02 · OCT 2026</b></div>
   </div>
   <div class="rule"></div>
 
   <div class="sec">
-    <div class="kick">— 08 / Monitor</div>
-    <h2 class="display">El diálogo en crudo</h2>
-    <p class="note">Muestra el intercambio tal cual viaja por el puerto: lo que el equipo emite y lo que recibe. Cuando algo no calza y las Variables en Vivo no alcanzan para explicarlo, el Monitor es donde se ve qué está pasando de verdad. Es también lo primero que pide soporte.</p>
+    <div class="kick">— 13 / Monitor</div>
+    <h2 class="display">Hablarle al equipo</h2>
+    <p class="note">La consola. Muestra todo lo que el equipo escribe por el cable y permite mandarle órdenes. <b>Iniciar monitor</b> abre el flujo; <b>Autoscroll</b> y <b>Timestamps</b> son comodidad; <b>FILTRO</b> acota lo que se ve; <b>Limpiar</b> vacía la pantalla y <b>Exportar log…</b> se lleva lo capturado a un archivo.</p>
     <div class="shot">
-      <img src="../assets/capturas/07-monitor.png" alt="Pestaña Monitor" />
-      <div class="pie"><b>Monitor</b> · tramas de entrada y salida sin interpretar</div>
+      <img src="../assets/capturas/08-monitor.png" alt="Pestaña Monitor" />
+      <div class="pie"><b>Monitor</b> · el flujo en crudo, los atajos a las preguntas frecuentes y la línea de comando</div>
+    </div>
+    <p class="note">Abajo están los <b>atajos a las preguntas más frecuentes</b>: estado del sistema, versión, reinicio, estado de cada bus CAN, volcado de variables, estado de los auxiliares, de los relés y del WiFi, y recarga de configuración. Y una línea para escribir cualquier orden a mano.</p>
+    <div class="adv">
+      <div class="t">Un equipo sano tiene ritmo</div>
+      <p>Arriba a la derecha, <b>RX</b> cuenta las líneas recibidas y <b>ln/s</b> el ritmo. Un equipo que no escribe nada no es necesariamente un equipo muerto, pero es la primera sospecha.</p>
+    </div>
+  </div>
+
+  <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Guía del Configurador</div><div>GC-MC-2026 · REV 02</div><div>Página 14 de 15</div></div>
+</section>
+
+<!-- ═══════════════ 15 · NOTAS Y CIERRE ═══════════════ -->
+<section class="page manual" data-screen-label="15 · Notas importantes">
+  <div class="hd">
+    <img src="../assets/logo-metrican.png" alt="MetriCAN" />
+    <div class="mid">Guía del Configurador · <b>Notas importantes</b></div>
+    <div class="rt">DOC <b>GC-MC-2026</b><br />REV <b>02 · OCT 2026</b></div>
+  </div>
+  <div class="rule"></div>
+
+  <div class="sec">
+    <div class="kick">— 14 / Notas importantes</div>
+    <h2 class="display">Lo que cuesta caro aprender solo</h2>
+    <div class="two">
+      <div class="box">
+        <div class="h">Antes de dar algo por hecho</div>
+        <ul>
+          <li><b>La versión se pregunta, no se supone.</b> <span class="mono">FW</span> arriba a la derecha, o el atajo de versión en el Monitor. Diagnosticar sobre la versión equivocada es perder la tarde</li>
+          <li><b>Una configuración que no entró se ve igual que una que entró.</b> La única diferencia visible está en el equipo: después de subir, leer de vuelta</li>
+          <li><b>El reinicio no es opcional cuando cambia el bus.</b> El controlador de CAN sólo se inicializa al arrancar; la línea de arranque tiene que decir la velocidad que pusiste</li>
+          <li><b>Antes de tocar un equipo instalado, respaldar.</b> <b>Exportar carpeta…</b> cuesta cinco segundos</li>
+        </ul>
+      </div>
+      <div class="box">
+        <div class="h">Lo que confunde en terreno</div>
+        <ul>
+          <li><b>El orden de las variables es un contrato.</b> La plataforma lee por posición: insertar una señal en medio no produce ningún error, produce datos equivocados. Comprobar el orden <b>real en el equipo</b>, no el del archivo</li>
+          <li><b>Un campo vacío y un cero no son lo mismo.</b> El equipo deja el campo vacío a propósito cuando el dato no llegó, llegó hace demasiado o el vehículo lo declara no disponible. Un cero es una medición; un vacío es la ausencia de medición</li>
+          <li><b>El silencio de un puerto serie tiene dos causas.</b> El aparato no está conectado, o está conectado y las velocidades no coinciden: <b>Capturar del dispositivo</b> es lo que las separa</li>
+          <li><b>Al reportar un problema, adjuntar el log.</b> <b>Exportar log…</b> del Monitor y la exportación de Variables en Vivo</li>
+        </ul>
+      </div>
     </div>
   </div>
 
   <div class="sec">
-    <div class="kick">— Asistente integrado</div>
-    <h2 class="display">Earl Cooper</h2>
-    <p class="note">El botón circular de la esquina inferior derecha abre el <b>asistente técnico</b> integrado en la aplicación: responde consultas sobre configuración, protocolos y diagnóstico sin salir del Configurador. Requiere una clave de servicio propia, que se introduce la primera vez.</p>
+    <div class="kick">— Qué no cubre esta guía</div>
+    <h2 class="display">Dónde sigue lo demás</h2>
+    <p class="note">Las <b>pestañas de fábrica</b> —provisión de llaves y sellado de placas— viven en el lanzador de fábrica, no en esta versión del programa, y tienen su propio procedimiento. La pestaña de <b>consultas activas (QUERY)</b> sólo aparece cuando un bus está puesto en modo consulta. Y <b>qué hace cada funcionalidad del equipo</b> está en <b>GF-MC-2026 · Guía de Funcionalidades</b>: ésta es el <i>cómo se pide</i>; aquélla, el <i>qué hace</i>.</p>
   </div>
 
   <div class="cta">
     <div>
       <h3 class="display">¿Una configuración que no logras armar?</h3>
-      <p>Envíanos el <span class="mono">.json</span> guardado y una captura del Monitor. Con eso se reproduce el caso sin tener el equipo delante.</p>
+      <p>Envíanos la carpeta de <span class="mono">Exportar carpeta…</span> y el log del Monitor. Con eso se reproduce el caso sin tener el equipo delante.</p>
     </div>
     <div class="info">
       <div><div class="k">Soporte</div><div class="v">soporte@metrican.cl</div></div>
     </div>
   </div>
 
-  <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Santiago · Chile</div><div>GC-MC-2026 · REV 01</div><div>Página 7 de 7</div></div>
+  <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Santiago · Chile</div><div>GC-MC-2026 · REV 02</div><div>Página 15 de 15</div></div>
 </section>
 
 </doc-page>

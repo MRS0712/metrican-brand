@@ -13,11 +13,11 @@
 <doc-page size="a4">
 
 <!-- ═══════════════ 1 · QUÉ HACE ═══════════════ -->
-<section class="page manual" data-screen-label="1 · Qué hace">
+<section class="page manual" data-screen-label="1 · El principio">
   <div class="hd">
     <img src="../assets/logo-metrican.png" alt="MetriCAN" />
     <div class="mid">Guía de Funcionalidades</div>
-    <div class="rt">DOC <b>GF-MC-2026</b><br />REV <b>01 · AGO 2026</b></div>
+    <div class="rt">DOC <b>GF-MC-2026</b><br />REV <b>02 · OCT 2026</b></div>
   </div>
   <div class="rule"></div>
 
@@ -26,14 +26,14 @@
       <div class="kick">— Qué se puede hacer con el equipo</div>
       <h1 class="display">Guía de funcionalidades</h1>
       <div class="sub">De la señal cruda al indicador que tu operación mira.</div>
-      <p class="lead">La ficha técnica dice qué <b>tiene</b> el equipo. Esta guía dice qué se puede <b>hacer</b> con él, con casos concretos: qué se configura, qué entrega y qué decisión permite tomar. Todo lo que sigue se calcula <b>a bordo</b> — el gateway recibe el resultado, no la materia prima.</p>
+      <p class="lead">La ficha técnica dice qué <b>tiene</b> el equipo. Esta guía dice qué <b>hace</b>, funcionalidad por funcionalidad, y cada entrada responde tres preguntas y nada más: qué hace, a partir de qué entradas, y qué entrega. No explica <b>cómo se pide</b> ninguna de estas cosas — para eso está <b>GC-MC-2026 · Guía del Configurador</b>. Todo lo que sigue se calcula <b>a bordo</b>: el gateway recibe el resultado, no la materia prima.</p>
     </div>
     <div class="pshot"><img src="../assets/pcb-metrican-transparent.png" alt="Placa MetriCAN" /></div>
   </div>
 
   <div class="aplica">
-    <div class="a"><div class="k">Firmware</div><div class="v">v2.6.0</div></div>
-    <div class="a"><div class="k">Configurador</div><div class="v">v2.1.0</div></div>
+    <div class="a"><div class="k">Firmware</div><div class="v">v2.7.23</div></div>
+    <div class="a"><div class="k">Configurador</div><div class="v">v2.2.6</div></div>
     <div class="a"><div class="k">Buses CAN</div><div class="v">2</div></div>
     <div class="a"><div class="k">Relés</div><div class="v">2 · 10 A</div></div>
   </div>
@@ -45,7 +45,7 @@
       <div class="fb">
         <div class="t">Entra</div>
         <h4>Señales crudas</h4>
-        <p>Dos buses CAN, RS485, 1-Wire, puertos serie y el AVL.</p>
+        <p>Dos buses CAN, cuatro puertos serie, 1-Wire, la entrada física y el AVL.</p>
       </div>
       <div class="arw">→</div>
       <div class="fb mid">
@@ -63,182 +63,329 @@
     <p class="note">La consecuencia práctica: <b>no cambias de plataforma</b>. MetriCAN no reemplaza tu AVL ni tu sistema de flota — les entrega datos que antes no tenían, ya procesados, por el mismo puerto serie que ya usan.</p>
   </div>
 
-  <div class="sec">
-    <div class="kick">— 02 / Lectura del bus</div>
-    <h2 class="display">Dos buses, en simultáneo</h2>
-    <table class="tbl cols tight">
-      <thead><tr><th>Capacidad</th><th>Qué significa en la práctica</th></tr></thead>
-      <tbody>
-        <tr><td>Dos canales CAN</td><td>Un vehículo con bus de tren motriz y bus de carrocería se lee entero, sin elegir cuál sacrificar</td></tr>
-        <tr><td>Decodificación por DBC</td><td>Se carga el archivo del fabricante y cada señal sale en su unidad real, no en cuentas crudas</td></tr>
-        <tr><td>Protocolos estándar</td><td>J1939, OBD-II, J1708/J1587 y CAN propietario definido por DBC</td></tr>
-        <tr><td>Consulta bajo demanda</td><td>Datos que el bus no emite solo: el equipo los pregunta y espera la respuesta</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Guía de Funcionalidades</div><div>Página 1 de 4</div></div>
+  <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Guía de Funcionalidades</div><div>Página 1 de 10</div></div>
 </section>
 
-<!-- ═══════════════ 2 · VARIABLES AUXILIARES ═══════════════ -->
-<section class="page manual" data-screen-label="2 · Variables auxiliares">
+<!-- ═══════════════ 2 · ENTRADAS Y SALIDAS ═══════════════ -->
+<section class="page manual" data-screen-label="2 · Entradas y salidas">
   <div class="hd">
     <img src="../assets/logo-metrican.png" alt="MetriCAN" />
-    <div class="mid">Guía de Funcionalidades · <b>Variables auxiliares</b></div>
-    <div class="rt">DOC <b>GF-MC-2026</b><br />REV <b>01 · AGO 2026</b></div>
+    <div class="mid">Guía de Funcionalidades · <b>Entradas y salidas</b></div>
+    <div class="rt">DOC <b>GF-MC-2026</b><br />REV <b>02 · OCT 2026</b></div>
   </div>
   <div class="rule"></div>
 
   <div class="sec">
-    <div class="kick">— 03 / Variables auxiliares</div>
-    <h2 class="display">Los indicadores los define el cliente</h2>
-    <p class="note">Una variable auxiliar es un dato que <b>el bus no entrega</b>. Se construye combinando señales, integrando en el tiempo o contando eventos, y el equipo la calcula solo. Es la funcionalidad que convierte telemetría en información de gestión.</p>
-
+    <div class="kick">— 02 / De qué se alimenta</div>
+    <h2 class="display">Las entradas del equipo, de una vez</h2>
+    <p class="note">Todo lo que viene después en esta guía se alimenta de alguna de éstas.</p>
     <table class="tbl cols tight">
-      <thead><tr><th>Tipo</th><th>Qué hace</th><th>Ejemplo de uso</th></tr></thead>
+      <thead><tr><th>Entrada</th><th>Qué es físicamente</th></tr></thead>
       <tbody>
-        <tr><td>accumulator</td><td>Integra un valor en el tiempo</td><td>Energía consumida y regenerada por ciclo, en kWh</td></tr>
-        <tr><td>counter</td><td>Cuenta cruces de un umbral</td><td>Frenadas bruscas, aperturas de puerta, sobrerrevoluciones</td></tr>
-        <tr><td>horometer</td><td>Mide tiempo bajo una condición</td><td>Horas de motor, tiempo en ralentí, horas de PTO</td></tr>
-        <tr><td>instantaneous</td><td>Calcula en cada ciclo</td><td>Potencia instantánea como tensión × corriente</td></tr>
-        <tr><td>min · max</td><td>Extremos del ciclo</td><td>Temperatura máxima alcanzada, tensión mínima del pack</td></tr>
-        <tr><td>average</td><td>Promedio del ciclo</td><td>Velocidad media, consumo medio</td></tr>
+        <tr><td>CAN 1 · CAN 2</td><td>Dos buses CAN independientes, cada uno con su velocidad</td></tr>
+        <tr><td>UART 1 a 4</td><td>Cuatro puertos serie, cada uno con su velocidad y su rol</td></tr>
+        <tr><td>Entrada física</td><td>Una línea digital, típicamente la ignición del vehículo</td></tr>
+        <tr><td>1-Wire</td><td>Un bus de un hilo: llaves iButton, sondas de temperatura, interruptores</td></tr>
+        <tr><td>WiFi</td><td>Para hablar con la plataforma</td></tr>
+        <tr><td>Bluetooth (BLE)</td><td>Para hablar con un teléfono o un notebook al lado del equipo</td></tr>
+        <tr><td>USB</td><td>El cable de servicio</td></tr>
       </tbody>
     </table>
-
-    <h3 class="display">El ciclo de operación</h3>
-    <p class="note">Los acumuladores necesitan un principio y un fin. El <b>ciclo</b> lo define una señal —típicamente el encendido del motor: cuando cambia, el equipo <b>emite el resumen del ciclo terminado</b> y vuelve los acumuladores a cero. Un turno, un viaje, una jornada: un resumen por cada uno, sin que nadie tenga que calcularlo después.</p>
-
-    <div class="vars">
-      <div class="var"><div class="vn">energia_total</div><div class="vw">Integra la potencia del pack en el tiempo: los <b>kWh consumidos y regenerados</b> del ciclo.</div></div>
-      <div class="var"><div class="vn">tiempo_ralenti</div><div class="vw">Cuánto estuvo encendido <b>sin moverse</b>. El costo que no aparece en ninguna factura.</div></div>
-      <div class="var"><div class="vn">autonomia_estimada</div><div class="vw">Cruza estado de carga con consumo reciente para estimar los <b>km restantes</b>.</div></div>
-    </div>
   </div>
 
   <div class="sec">
-    <div class="kick">— 04 / Cruce con el AVL</div>
-    <h2 class="display">Una sola trama, no dos fuentes</h2>
-    <p class="note">MetriCAN <b>lee las variables del AVL o gateway</b> —posición, odómetro, estados— y las integra con las señales del bus en una <b>única trama</b>. La consecuencia es que el consumo y la posición llegan juntos y con el mismo reloj: ya no hay que cruzar dos series de datos con marcas de tiempo distintas para saber dónde ocurrió algo.</p>
+    <div class="kick">— 03 / Por dónde entrega</div>
+    <h2 class="display">Y por dónde sale todo</h2>
+    <table class="tbl cols tight">
+      <thead><tr><th>Salida</th><th>Qué es</th></tr></thead>
+      <tbody>
+        <tr><td>Trama de telemetría</td><td>Una línea de texto por el puerto serie elegido, hacia el módem</td></tr>
+        <tr><td>Eventos</td><td>Líneas sueltas cuando pasa algo, no cada cierto tiempo</td></tr>
+        <tr><td>Dos relés</td><td><span class="mono">RELAY_1</span> y <span class="mono">RELAY_2</span>, contactos secos</td></tr>
+        <tr><td>Plataforma</td><td>Lo que el módem reenvía, y lo que el equipo manda por WiFi</td></tr>
+      </tbody>
+    </table>
   </div>
 
-  <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Guía de Funcionalidades</div><div>GF-MC-2026 · REV 01</div><div>Página 2 de 4</div></div>
+  <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Guía de Funcionalidades</div><div>GF-MC-2026 · REV 02</div><div>Página 2 de 10</div></div>
 </section>
 
-<!-- ═══════════════ 3 · ACCIONES Y SENSORES ═══════════════ -->
-<section class="page manual" data-screen-label="3 · Acciones y sensores">
+<!-- ═══════════════ 3 · LECTURA DEL VEHÍCULO ═══════════════ -->
+<section class="page manual" data-screen-label="3 · Lectura del vehículo">
   <div class="hd">
     <img src="../assets/logo-metrican.png" alt="MetriCAN" />
-    <div class="mid">Guía de Funcionalidades · <b>Acciones y sensores</b></div>
-    <div class="rt">DOC <b>GF-MC-2026</b><br />REV <b>01 · AGO 2026</b></div>
+    <div class="mid">Guía de Funcionalidades · <b>Lectura del vehículo</b></div>
+    <div class="rt">DOC <b>GF-MC-2026</b><br />REV <b>02 · OCT 2026</b></div>
   </div>
   <div class="rule"></div>
 
   <div class="sec">
-    <div class="kick">— 05 / Reglas y accionamiento</div>
-    <h2 class="display">Que el equipo actúe, no sólo informe</h2>
-    <p class="note">Una regla observa <b>cualquier variable del sistema</b> —del CAN, auxiliar, de un sensor externo o del AVL— y cuando se cumple la condición, <b>mueve un relé</b> o levanta una alerta. Se combinan varias condiciones con Y / O, así que la regla puede ser tan específica como la operación lo exija.</p>
-    <table class="tbl cols tight">
-      <thead><tr><th>Caso</th><th>Regla</th></tr></thead>
+    <div class="kick">— 04 / Lectura del vehículo</div>
+    <h2 class="display">Lo que el equipo saca del bus</h2>
+    <table class="tbl tight">
+      <thead><tr><th>Funcionalidad</th><th>Qué hace, y a partir de qué</th><th>Qué entrega</th></tr></thead>
       <tbody>
-        <tr><td>Inmovilizar tras un evento</td><td>Corta por relé cuando se cumple la condición definida, con el vehículo detenido</td></tr>
-        <tr><td>Limitar por zona</td><td>Excedida la velocidad permitida en una geozona, acciona la salida</td></tr>
-        <tr><td>Proteger un equipo</td><td>Temperatura sobre umbral <b>y</b> motor en marcha → alerta y accionamiento</td></tr>
-        <tr><td>Bloquear sin conductor</td><td>Sin iButton reconocido, la salida no habilita la operación</td></tr>
+        <tr>
+          <th>Telemetría del bus CAN</th>
+          <td>Escucha el bus del vehículo y extrae las variables que interesan —revoluciones, velocidad, temperaturas, combustible, marcha, frenos, puertas, presiones— a partir del mapa de señales de <i>ese</i> vehículo.</td>
+          <td>Una trama a intervalo fijo, en unidades de ingeniería y en <b>orden fijo</b>.</td>
+        </tr>
+        <tr>
+          <th>Segundo bus CAN</th>
+          <td>Lee una segunda red con su propia velocidad y su propio mapa: muchos vehículos llevan motor y transmisión en una, y chasis o carrocería en otra.</td>
+          <td>Una trama propia, o las dos redes <b>en una sola trama</b>. Es decisión de la configuración, y cambia el ancho de lo que recibe la plataforma.</td>
+        </tr>
+        <tr>
+          <th>Consulta activa (OBD-II / J1939)</th>
+          <td>Para vehículos que <b>no publican</b> solos lo que interesa: el equipo pregunta y espera la respuesta, con un bus en modo consulta y la lista de qué pedir y cada cuánto.</td>
+          <td>Las respuestas decodificadas, como variables más, en la misma trama.</td>
+        </tr>
+        <tr>
+          <th>Traducción de estados a texto</th>
+          <td>Muchas señales no son números sino estados —marcha puesta, freno de mano, puertas, estado de carga—, y el mapa del vehículo trae su tabla.</td>
+          <td>La palabra: <span class="mono">N</span>, <span class="mono">D4</span>, <span class="mono">R2</span>, <span class="mono">ON</span>, <span class="mono">OFF</span>. Si J1939 marca el valor como no disponible o error, el campo va <b>vacío</b>.</td>
+        </tr>
+        <tr>
+          <th>Diagnóstico del bus</th>
+          <td>Mira el tráfico de los dos buses: tramas por segundo, identificadores que no casan con ninguna señal configurada, pérdidas por desborde y errores de la capa física.</td>
+          <td>El estado de cada bus y la cuenta de lo que se pierde, separando dos cosas que se confunden: <b>el equipo no da abasto</b> y <b>el cable está mal</b>.</td>
+        </tr>
       </tbody>
     </table>
     <div class="adv">
-      <div class="t">Debounce y hold mínimo</div>
-      <p>Dos temporizadores evitan que una señal con ruido accione el relé. El <b>debounce</b> exige que la condición se sostenga antes de actuar; el <b>hold mínimo</b> garantiza que, una vez accionado, el relé permanezca cerrado un tiempo mínimo. Sin ellos, un parpadeo de la señal se convierte en un golpe de relé.</p>
+      <div class="t">Un campo vacío no es un cero</div>
+      <p>Una variable que no llegó, o que llegó hace demasiado, sale como campo <b>vacío</b>, no como cero: el sitio nunca desaparece, y por eso quien recibe puede leer <b>por posición</b>. Un cero es una medición; un vacío es la ausencia de medición.</p>
     </div>
   </div>
 
-  <div class="sec">
-    <div class="kick">— 06 / Identificación y sensores</div>
-    <h2 class="display">Quién opera, y en qué condiciones</h2>
-    <div class="three">
-      <div class="box">
-        <div class="h">iButton · conductor</div>
-        <ul>
-          <li>Identifica <b>quién</b> está operando</li>
-          <li>Asocia turno y conducta a una persona</li>
-          <li>Habilita o bloquea por regla</li>
-        </ul>
-      </div>
-      <div class="box">
-        <div class="h">1-Wire · temperatura</div>
-        <ul>
-          <li>Sensores externos en el mismo bus</li>
-          <li>Cadena de frío, sala de máquinas</li>
-          <li>Entran como una variable más</li>
-        </ul>
-      </div>
-      <div class="box">
-        <div class="h">Modbus RTU · RS485</div>
-        <ul>
-          <li>Equipos industriales del vehículo</li>
-          <li>Medidores, displays, sensores</li>
-          <li>Maestro o esclavo</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <div class="sec">
-    <div class="kick">— 07 / Vehículo eléctrico</div>
-    <h2 class="display">Sesiones de carga</h2>
-    <p class="note">El equipo <b>detecta y registra las sesiones de carga</b>: cuándo empieza, tensión y corriente durante el proceso, y cuándo termina. Soporta vehículos de <b>dos conectores</b>: la sesión comienza si cualquiera está cargando y termina sólo cuando ambos finalizan. Durante la carga suprime el resto de tramas, de modo que los datos del ciclo de carga no quedan mezclados con los de operación.</p>
-  </div>
-
-  <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Guía de Funcionalidades</div><div>GF-MC-2026 · REV 01</div><div>Página 3 de 4</div></div>
+  <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Guía de Funcionalidades</div><div>GF-MC-2026 · REV 02</div><div>Página 3 de 10</div></div>
 </section>
 
-<!-- ═══════════════ 4 · ENTREGA Y GESTIÓN ═══════════════ -->
-<section class="page manual" data-screen-label="4 · Entrega y gestión">
+<!-- ═══════════════ 4 · PERIFÉRICOS I ═══════════════ -->
+<section class="page manual" data-screen-label="4 · Periféricos I">
   <div class="hd">
     <img src="../assets/logo-metrican.png" alt="MetriCAN" />
-    <div class="mid">Guía de Funcionalidades · <b>Entrega y gestión</b></div>
-    <div class="rt">DOC <b>GF-MC-2026</b><br />REV <b>01 · AGO 2026</b></div>
+    <div class="mid">Guía de Funcionalidades · <b>Periféricos</b></div>
+    <div class="rt">DOC <b>GF-MC-2026</b><br />REV <b>02 · OCT 2026</b></div>
   </div>
   <div class="rule"></div>
 
   <div class="sec">
-    <div class="kick">— 08 / Entrega de datos</div>
-    <h2 class="display">Cómo salen los datos</h2>
-    <table class="tbl cols tight">
-      <thead><tr><th>Aspecto</th><th>Comportamiento</th></tr></thead>
+    <div class="kick">— 05 / Periféricos · cámaras y buses</div>
+    <h2 class="display">Lo que se cuelga de los puertos serie</h2>
+    <p class="note">Los cuatro puertos serie son <b>intercambiables</b>: cada uno puede llevar cualquiera de estos roles.</p>
+    <table class="tbl tight">
+      <thead><tr><th>Funcionalidad</th><th>Qué hace, y a partir de qué</th><th>Qué entrega</th></tr></thead>
       <tbody>
-        <tr><td>Puerto</td><td>Uno de los cuatro serie, seleccionable. <b>UART_1 por defecto</b></td></tr>
-        <tr><td>Frecuencia</td><td>Configurable por trama. Las auxiliares además emiten al cerrar el ciclo</td></tr>
-        <tr><td>Formato</td><td>Trama estructurada y parseable, con etiqueta de variable y valor</td></tr>
-        <tr><td>Destinatario</td><td>AVL, datalogger, modem o PLC — el que ya esté instalado</td></tr>
-        <tr><td>Trama única</td><td>Las señales del bus y las del AVL pueden viajar combinadas en un solo mensaje</td></tr>
+        <tr>
+          <th>Cámara ADAS Mobileye</th>
+          <td>Convierte las alertas de la cámara que mira a la carretera —frenada inminente, salida de carril, peatón, distancia al de delante, exceso sobre la señal de tránsito— en eventos de la plataforma. Va en un puerto serie o en el segundo bus CAN.</td>
+          <td>Un evento por suceso: si varias alertas de la misma familia llegan juntas, entrega <b>sólo la más específica</b>. Y avisa aparte cuando la cámara deja de responder, que es una falla de instalación y no un evento de conducción.</td>
+        </tr>
+        <tr>
+          <th>Cámara de fatiga MR830 (DSM)</th>
+          <td>Convierte las alarmas de la cámara que mira al conductor —fatiga, distracción, bostezo, teléfono, fumar, cinturón, cambio y ausencia de conductor— en eventos.</td>
+          <td>Un evento por alarma, con <b>dos velocidades</b> desde v2.7.23: la que declara la cámara y la que el equipo lee del bus, para contrastarlas. Tiene enfriamiento, así que una alarma sostenida no produce una avalancha.</td>
+        </tr>
+        <tr>
+          <th>Pasarela Inventure / GWC</th>
+          <td>Cuando el vehículo ya lleva una pasarela de telemetría instalada, lee de ella los datos del motor en vez de decodificar el bus directamente. Por puerto serie o por CAN.</td>
+          <td>Más de un centenar de variables del motor —combustible, kilómetros, temperatura, revoluciones— publicadas como variables propias del equipo.</td>
+        </tr>
+        <tr>
+          <th>Modbus RTU por RS485</th>
+          <td>Lee registros de un aparato externo que habla Modbus —un display, un sensor, un medidor— a partir de la lista de registros a leer.</td>
+          <td>Cada registro convertido a variable. Y además puede <b>escribir</b> en el aparato: es lo que permite mostrar un número en un display externo.</td>
+        </tr>
+        <tr>
+          <th>Bus J1708 / J1587</th>
+          <td>Lee el bus de vehículos de flota antiguos que no publican sus datos en el CAN, a partir de la lista de MID y PID a escuchar.</td>
+          <td>Revoluciones, velocidad, temperatura y odómetro decodificados como variables.</td>
+        </tr>
       </tbody>
     </table>
   </div>
 
+  <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Guía de Funcionalidades</div><div>GF-MC-2026 · REV 02</div><div>Página 4 de 10</div></div>
+</section>
+
+<!-- ═══════════════ 5 · PERIFÉRICOS II ═══════════════ -->
+<section class="page manual" data-screen-label="5 · Periféricos II">
+  <div class="hd">
+    <img src="../assets/logo-metrican.png" alt="MetriCAN" />
+    <div class="mid">Guía de Funcionalidades · <b>Periféricos</b></div>
+    <div class="rt">DOC <b>GF-MC-2026</b><br />REV <b>02 · OCT 2026</b></div>
+  </div>
+  <div class="rule"></div>
+
   <div class="sec">
-    <div class="kick">— 09 / Gestión de la flota</div>
-    <h2 class="display">Configurar sin ir al vehículo</h2>
-    <div class="two">
-      <div class="box">
-        <div class="h">En terreno</div>
-        <ul>
-          <li>Configurador por <b>cable o Bluetooth</b></li>
-          <li>Firmware nuevo sin abrir la carcasa</li>
-          <li>Variables en vivo para verificar</li>
-        </ul>
-      </div>
-      <div class="box">
-        <div class="h">A distancia</div>
-        <ul>
-          <li><b>Campañas OTA</b> por WiFi</li>
-          <li>Versionado y reversión</li>
-          <li>Perfiles de configuración por flota</li>
-        </ul>
-      </div>
+    <div class="kick">— 06 / Periféricos · módem y serie</div>
+    <h2 class="display">El AVL, lo genérico y el estado de los puertos</h2>
+    <table class="tbl tight">
+      <thead><tr><th>Funcionalidad</th><th>Qué hace, y a partir de qué</th><th>Qué entrega</th></tr></thead>
+      <tbody>
+        <tr>
+          <th>Módem AVL Queclink</th>
+          <td>Toma del módem los datos de posición y estado —latitud, longitud, velocidad GNSS, rumbo, altitud, precisión, fecha y hora, zonas geográficas— y los incorpora a la telemetría del equipo.</td>
+          <td>Esas variables disponibles para la trama, para las reglas de relé y para el limitador por zona. El mapa de campos viene de la configuración, así que <b>un modelo nuevo de módem no exige firmware nuevo</b>.</td>
+        </tr>
+        <tr>
+          <th>Periférico serie genérico</th>
+          <td>Lee un aparato que habla por cable serie —una báscula, un caudalímetro, un lector de tarjetas— describiendo en la configuración el formato de sus mensajes.</td>
+          <td>Sus datos como variables del equipo, usables en la trama, en los eventos y en las reglas de relé igual que cualquier señal del bus. <b>Sin pedir una versión nueva de firmware.</b></td>
+        </tr>
+        <tr>
+          <th>Puente transparente</th>
+          <td>Conecta dos puertos serie y deja pasar lo que entra por uno hacia el otro, sin interpretarlo.</td>
+          <td>El mismo flujo, intacto. Sirve para hablarle a un aparato que está detrás del equipo.</td>
+        </tr>
+        <tr>
+          <th>Estado de los puertos</th>
+          <td>Dice, para cada uno de los cuatro puertos, a qué velocidad está, qué rol tiene, cuántos bytes han entrado y cuánto tiempo lleva callado.</td>
+          <td>El dato que separa <b>el aparato no está conectado</b> de <b>está conectado y hablamos a velocidades distintas</b>, que desde fuera se ven igual: silencio.</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="adv">
+      <div class="t">Una pasarela, un AVL y una báscula caben a la vez</div>
+      <p>Los roles no compiten entre sí: con cuatro puertos serie, el límite práctico es cuántos aparatos hay que atender, no cuáles son compatibles.</p>
     </div>
-    <p class="note">El detalle de las campañas remotas está en la guía <b>OT-MC-2026 · Campañas OTA</b>.</p>
+  </div>
+
+  <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Guía de Funcionalidades</div><div>GF-MC-2026 · REV 02</div><div>Página 5 de 10</div></div>
+</section>
+
+<!-- ═══════════════ 6 · ENTRADAS PROPIAS ═══════════════ -->
+<section class="page manual" data-screen-label="6 · Entradas propias">
+  <div class="hd">
+    <img src="../assets/logo-metrican.png" alt="MetriCAN" />
+    <div class="mid">Guía de Funcionalidades · <b>Entradas propias</b></div>
+    <div class="rt">DOC <b>GF-MC-2026</b><br />REV <b>02 · OCT 2026</b></div>
+  </div>
+  <div class="rule"></div>
+
+  <div class="sec">
+    <div class="kick">— 07 / Entradas propias del equipo</div>
+    <h2 class="display">Lo que el equipo mide por su cuenta</h2>
+    <table class="tbl tight">
+      <thead><tr><th>Funcionalidad</th><th>Qué hace, y a partir de qué</th><th>Qué entrega</th></tr></thead>
+      <tbody>
+        <tr>
+          <th>Ignición por entrada física</th>
+          <td>Sabe si el vehículo está encendido mirando una línea eléctrica cableada a la llave de contacto. Si no está cableada, el equipo también puede deducir la ignición de una señal del bus.</td>
+          <td>El estado de ignición como variable, y el <b>corte de emisión</b> cuando está apagada. Sin esto, un camión detenido sigue mandando tramas toda la noche, y eso se paga en datos y en batería.</td>
+        </tr>
+        <tr>
+          <th>Identificación del conductor por iButton</th>
+          <td>Lee la llave del conductor en el bus 1-Wire, de modo que cada viaje queda asociado a una persona.</td>
+          <td>Un evento con el código de la llave al presentarla, y la identidad como variable mientras dure. Puede exigir <b>confirmación</b> y accionar el <b>zumbador</b> para avisar al conductor de que debe identificarse.</td>
+        </tr>
+        <tr>
+          <th>Sondas de temperatura y contactos 1-Wire</th>
+          <td>Lee sondas de temperatura y contactos conectados al mismo bus de un hilo.</td>
+          <td>Cada sonda como variable con su nombre. Sirve para cámaras de frío, compartimentos y puertas.</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="adv warn">
+      <div class="t">A qué se le aplica el corte por ignición se elige por separado</div>
+      <p>Telemetría del bus, variables calculadas y avisos de la cámara se cortan <b>por separado</b>, porque el costo de equivocarse es distinto en cada uno: callar un bus deja el equipo <b>mudo</b>; callar un aviso de cámara sólo pierde ese aviso.</p>
+    </div>
+  </div>
+
+  <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Guía de Funcionalidades</div><div>GF-MC-2026 · REV 02</div><div>Página 6 de 10</div></div>
+</section>
+
+<!-- ═══════════════ 7 · VARIABLES CALCULADAS ═══════════════ -->
+<section class="page manual" data-screen-label="7 · Variables calculadas">
+  <div class="hd">
+    <img src="../assets/logo-metrican.png" alt="MetriCAN" />
+    <div class="mid">Guía de Funcionalidades · <b>Variables calculadas</b></div>
+    <div class="rt">DOC <b>GF-MC-2026</b><br />REV <b>02 · OCT 2026</b></div>
+  </div>
+  <div class="rule"></div>
+
+  <div class="sec">
+    <div class="kick">— 08 / Variables calculadas</div>
+    <h2 class="display">El equipo no se limita a repetir: calcula</h2>
+    <p class="note">Estas variables viajan en su propia trama y <b>sobreviven a los cortes de energía</b>. Son las que convierten telemetría en información de gestión.</p>
+    <table class="tbl tight">
+      <thead><tr><th>Funcionalidad</th><th>Qué hace, y a partir de qué</th><th>Qué entrega</th></tr></thead>
+      <tbody>
+        <tr>
+          <th>Horómetros</th>
+          <td>Cuenta tiempo bajo condición sobre señales del vehículo y, si hace falta, una segunda condición encadenada: <i>motor girando</i> <b>y</b> <i>vehículo detenido</i> es el ralentí.</td>
+          <td>Horas de motor, de viaje y de ralentí, con reinicio por ciclo si se quiere. Se <b>inhibe solo</b> cuando el vehículo ya publica su horómetro.</td>
+        </tr>
+        <tr>
+          <th>Consumo de combustible</th>
+          <td>Integra en el tiempo el caudal instantáneo del motor, en litros por hora.</td>
+          <td>Litros acumulados en total y en ralentí — que es el consumo que se puede atacar.</td>
+        </tr>
+        <tr>
+          <th>Odómetro propio</th>
+          <td>Integra la velocidad del vehículo por tiempo.</td>
+          <td>Kilómetros acumulados aunque el vehículo no publique su cuentakilómetros. Admite que se le ponga el valor del tablero para arrancar desde ahí.</td>
+        </tr>
+        <tr>
+          <th>Contadores de sucesos</th>
+          <td>Cuenta cruces de umbral con flanco sobre cualquier variable del equipo.</td>
+          <td>Cuántas veces se abrió una puerta, conmutó un relé o se cruzó un límite.</td>
+        </tr>
+        <tr>
+          <th>Variables derivadas</th>
+          <td>Combina dos o más variables existentes con una operación aritmética.</td>
+          <td>El resultado como una variable más, con su nombre y su unidad.</td>
+        </tr>
+        <tr>
+          <th>Energía y carga en vehículos eléctricos</th>
+          <td>Mide el ciclo de carga a partir del estado de carga, la tensión y la corriente del bus.</td>
+          <td>El evento de carga con su energía, y el <b>aislamiento del resto de las cuentas</b>: lo que entra por el enchufe no se confunde con lo que devuelve el freno regenerativo.</td>
+        </tr>
+        <tr>
+          <th>Juegos por tipo de vehículo</th>
+          <td>Trae listos los juegos de variables calculadas de cada tipo: combustión, eléctrico e híbrido.</td>
+          <td>El conjunto completo de ese tipo, cada variable con su cálculo y sus condiciones, sin definirlas una por una.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Guía de Funcionalidades</div><div>GF-MC-2026 · REV 02</div><div>Página 7 de 10</div></div>
+</section>
+
+<!-- ═══════════════ 8 · ACCIONES ═══════════════ -->
+<section class="page manual" data-screen-label="8 · Acciones">
+  <div class="hd">
+    <img src="../assets/logo-metrican.png" alt="MetriCAN" />
+    <div class="mid">Guía de Funcionalidades · <b>Acciones</b></div>
+    <div class="rt">DOC <b>GF-MC-2026</b><br />REV <b>02 · OCT 2026</b></div>
+  </div>
+  <div class="rule"></div>
+
+  <div class="sec">
+    <div class="kick">— 09 / Acciones sobre el vehículo</div>
+    <h2 class="display">Que el equipo actúe, no sólo informe</h2>
+    <table class="tbl tight">
+      <thead><tr><th>Funcionalidad</th><th>Qué hace, y a partir de qué</th><th>Qué entrega</th></tr></thead>
+      <tbody>
+        <tr>
+          <th>Relés por regla</th>
+          <td>Acciona dos contactos secos cuando se cumple una condición medida sobre <b>cualquier</b> variable del equipo: del bus, de un periférico, de la entrada física o calculada.</td>
+          <td>El contacto conmutado, con <b>histéresis</b> para que no vibre en el umbral, y el <b>estado real del relé</b> como variable — que es distinto de la orden dada: un relé puede recibir la orden y no conmutar.</td>
+        </tr>
+        <tr>
+          <th>Limitador de velocidad por zona</th>
+          <td>Impide que el vehículo supere cierta velocidad dentro de un recinto —una faena, un patio, una planta— cruzando las zonas que reporta el módem con la velocidad del vehículo.</td>
+          <td>El relé accionado mientras se excede el límite de esa zona, con margen de liberación para que no oscile en el borde. Cada zona lleva su límite y hay uno por defecto fuera de todas. Opcionalmente <b>muestra el límite vigente en un display</b>.</td>
+        </tr>
+        <tr>
+          <th>Zumbador de identificación</th>
+          <td>Avisa al conductor de que debe presentar su llave, a partir del estado de la ignición o del motor y del lector de llaves.</td>
+          <td>Un pitido intermitente por uno de los relés, y el silencio al identificarse.</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 
   <div class="sec">
@@ -247,18 +394,128 @@
     <table class="tbl cols tight">
       <thead><tr><th>Situación</th><th>Respuesta del equipo</th></tr></thead>
       <tbody>
-        <tr><td>El firmware se bloquea</td><td>Vigilancia de ejecución <b>independiente del procesador</b> reinicia el equipo</td></tr>
-        <tr><td>Una actualización sale mal</td><td>Vuelve solo a la versión anterior, que se conserva íntegra</td></tr>
-        <tr><td>Se corta la alimentación</td><td>Los relés quedan en su posición de reposo: común unido a NC</td></tr>
-        <tr><td>El bus deja de responder</td><td>El LED lo delata sin conectar nada, y las variables quedan marcadas como no válidas</td></tr>
+        <tr><td>Una actualización se corta</td><td>Arranca con la versión anterior en vez de quedar inutilizado</td></tr>
+        <tr><td>Llega un firmware ajeno</td><td>El paquete está firmado: un archivo alterado o de otra línea de equipo se <b>rechaza antes de escribir nada</b></td></tr>
+        <tr><td>Se corta la alimentación</td><td>La configuración y las variables calculadas sobreviven al corte</td></tr>
+        <tr><td>El bus deja de responder</td><td>Las variables quedan como campo vacío, y el diagnóstico del bus dice si es desborde o capa física</td></tr>
+        <tr><td>No pasa nada hace horas</td><td>El latido de salud distingue <b>un equipo callado porque no pasa nada</b> de <b>uno callado porque está muerto</b></td></tr>
       </tbody>
     </table>
+  </div>
+
+  <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Guía de Funcionalidades</div><div>GF-MC-2026 · REV 02</div><div>Página 8 de 10</div></div>
+</section>
+
+<!-- ═══════════════ 9 · ENTREGA DE LA INFORMACIÓN ═══════════════ -->
+<section class="page manual" data-screen-label="9 · Entrega">
+  <div class="hd">
+    <img src="../assets/logo-metrican.png" alt="MetriCAN" />
+    <div class="mid">Guía de Funcionalidades · <b>Entrega</b></div>
+    <div class="rt">DOC <b>GF-MC-2026</b><br />REV <b>02 · OCT 2026</b></div>
+  </div>
+  <div class="rule"></div>
+
+  <div class="sec">
+    <div class="kick">— 11 / Entrega de la información</div>
+    <h2 class="display">Cómo salen los datos</h2>
+    <table class="tbl tight">
+      <thead><tr><th>Funcionalidad</th><th>Qué hace, y a partir de qué</th><th>Qué entrega</th></tr></thead>
+      <tbody>
+        <tr>
+          <th>Trama de telemetría</th>
+          <td>Publica todas las variables del vehículo juntas, a intervalo fijo, por el puerto serie que va al módem.</td>
+          <td>Una línea con un encabezado que identifica la configuración y los campos en orden fijo.</td>
+        </tr>
+        <tr>
+          <th>Emisión por suceso</th>
+          <td>Además del intervalo fijo, emite <b>en el momento</b> en que cambia una señal marcada como relevante — una marcha, un freno de mano, una puerta.</td>
+          <td>Una trama inmediata, con antirrebote para que un contacto sucio no produzca una ráfaga.</td>
+        </tr>
+        <tr>
+          <th>Trama de variables calculadas</th>
+          <td>Publica aparte el bloque de horómetros, consumos y odómetro.</td>
+          <td>Su propia trama, con su propio intervalo y su propio encabezado.</td>
+        </tr>
+        <tr>
+          <th>Reporte a la plataforma por WiFi</th>
+          <td>El equipo se conecta a una red WiFi y habla directamente con la plataforma, sin depender del módem.</td>
+          <td>El aviso periódico de que está vivo, con su versión y su estado.</td>
+        </tr>
+        <tr>
+          <th>Latido de salud</th>
+          <td>Dice cada cierto tiempo que sigue vivo y en qué estado está, aunque no haya pasado nada.</td>
+          <td>Una línea de estado a intervalo configurable, una hora por defecto.</td>
+        </tr>
+        <tr>
+          <th>Diagnóstico en vivo</th>
+          <td>Muestra el valor actual de cada variable del equipo, con su antigüedad.</td>
+          <td>La foto completa: qué se está leyendo, qué está rancio y qué nunca llegó. Es la primera pregunta de toda instalación y de todo reclamo.</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="adv danger">
+      <div class="t">Peligro · El orden y el ancho son contrato</div>
+      <p>Quien recibe lee <b>por posición</b>. Cambiar el orden de las variables o el ancho de la trama rompe a la plataforma del otro lado, y lo hace sin producir ningún error: produce datos equivocados, que es peor.</p>
+    </div>
+  </div>
+
+  <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Guía de Funcionalidades</div><div>GF-MC-2026 · REV 02</div><div>Página 9 de 10</div></div>
+</section>
+
+<!-- ═══════════════ 10 · MANTENIMIENTO Y CIERRE ═══════════════ -->
+<section class="page manual" data-screen-label="10 · Mantenimiento">
+  <div class="hd">
+    <img src="../assets/logo-metrican.png" alt="MetriCAN" />
+    <div class="mid">Guía de Funcionalidades · <b>Mantenimiento</b></div>
+    <div class="rt">DOC <b>GF-MC-2026</b><br />REV <b>02 · OCT 2026</b></div>
+  </div>
+  <div class="rule"></div>
+
+  <div class="sec">
+    <div class="kick">— 12 / Mantenimiento del equipo instalado</div>
+    <h2 class="display">Configurar y actualizar sin ir al vehículo</h2>
+    <table class="tbl tight">
+      <thead><tr><th>Funcionalidad</th><th>Qué hace, y a partir de qué</th><th>Qué entrega</th></tr></thead>
+      <tbody>
+        <tr>
+          <th>Configuración del vehículo</th>
+          <td>Define qué equipo es: qué señales lee, cómo se llaman, qué periféricos tiene, qué reglas de relé aplica y cada cuánto emite.</td>
+          <td>Un equipo genérico convertido en el equipo de <i>ese</i> vehículo. La configuración sobrevive a los cortes de energía y a las actualizaciones: <b>actualizar el programa no borra la configuración</b>.</td>
+        </tr>
+        <tr>
+          <th>Actualización de firmware por cable</th>
+          <td>Pone una versión nueva del programa sin abrir el equipo ni desmontarlo del vehículo, con el cable de servicio y el paquete firmado.</td>
+          <td>El equipo con la versión nueva, y la <b>vuelta atrás automática</b> si la carga se corta a mitad.</td>
+        </tr>
+        <tr>
+          <th>Actualización remota</th>
+          <td>El equipo instalado pregunta por su cuenta a la plataforma, por WiFi, si hay firmware o configuración nueva.</td>
+          <td>El equipo al día sin que nadie vaya con un cable. No hay que buscarlo: es él quien pregunta.</td>
+        </tr>
+        <tr>
+          <th>Conexión sin cable</th>
+          <td>Permite hablarle al equipo desde un teléfono o un notebook por Bluetooth, cuando llegar al conector es incómodo.</td>
+          <td>Consulta de estado y diagnóstico sin desmontar nada.</td>
+        </tr>
+        <tr>
+          <th>Control de acceso</th>
+          <td>Decide quién puede cambiar la configuración de un equipo instalado, a partir de las credenciales del operador.</td>
+          <td>Un equipo que acepta cambios <b>sólo de quien está autorizado</b>. Las versiones selladas van además con arranque verificado y memoria cifrada.</td>
+        </tr>
+        <tr>
+          <th>Identificación del equipo</th>
+          <td>Responde qué versión de firmware lleva, qué configuración tiene cargada y cuánto tiempo lleva encendido.</td>
+          <td>Lo que separa <b>lo que debería tener cargado</b> de <b>lo que tiene cargado</b>, y hay que tenerlo antes de diagnosticar cualquier otra cosa.</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="note">El detalle de las campañas remotas está en <b>OT-MC-2026 · Campañas OTA</b>; el paso a paso de la herramienta, en <b>GC-MC-2026 · Guía del Configurador</b>.</p>
   </div>
 
   <div class="cta">
     <div>
       <h3 class="display">¿Un indicador que tu operación necesita y no está en esta lista?</h3>
-      <p>Las variables auxiliares se definen por configuración, no por firmware. Cuéntanos qué dato necesitas y evaluamos si sale de las señales que tu flota ya tiene en el bus.</p>
+      <p>Las variables calculadas se definen por configuración, no por firmware. Cuéntanos qué dato necesitas y evaluamos si sale de las señales que tu flota ya tiene en el bus.</p>
     </div>
     <div class="info">
       <div><div class="k">Comercial</div><div class="v">contacto@metrican.cl</div></div>
@@ -266,7 +523,7 @@
     </div>
   </div>
 
-  <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Santiago · Chile</div><div>GF-MC-2026 · REV 01</div><div>Página 4 de 4</div></div>
+  <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Santiago · Chile</div><div>GF-MC-2026 · REV 02</div><div>Página 10 de 10</div></div>
 </section>
 
 </doc-page>
