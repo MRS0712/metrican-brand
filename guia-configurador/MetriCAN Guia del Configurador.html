@@ -188,8 +188,8 @@
       <thead><tr><th>Sección</th><th>Qué se define ahí</th></tr></thead>
       <tbody>
         <tr><td>Sistema</td><td>Nombre y grupo del equipo, por qué puerto sale la telemetría, nivel de log y cada cuánto manda el latido de salud. También el odómetro y el horómetro de arranque: poner aquí el kilometraje del tablero hace que el equipo cuente desde ahí</td></tr>
-        <tr><td>CAN1 · CAN2</td><td>Los dos buses: velocidad, cada cuánto emite, cuánto espera antes de dar una señal por rancia, y qué señales disparan emisión inmediata</td></tr>
-        <tr><td>UART1 … UART4</td><td>Los cuatro puertos serie: a qué velocidad va cada uno y qué rol tiene — cámara, módem, Modbus, periférico genérico</td></tr>
+        <tr><td>CAN1 · CAN2</td><td>Los dos buses: velocidad, cada cuánto emite, cuánto espera antes de dar una señal por rancia, y qué señales disparan emisión inmediata. Aquí también se pone un bus en <b>modo Mobileye</b> cuando el vehículo lleva cámara ADAS</td></tr>
+        <tr><td>UART1 … UART4</td><td>Los cuatro puertos serie: a qué velocidad va cada uno y qué rol tiene — cámara de fatiga (DSM), módem, Modbus, periférico genérico</td></tr>
         <tr><td>Modbus RTU</td><td>El periférico industrial por RS485, con su protocolo propio</td></tr>
         <tr><td>J1708 / J1587</td><td>El bus pesado legacy de los vehículos de flota antiguos</td></tr>
         <tr><td>Entradas</td><td>La entrada física, típicamente la ignición</td></tr>
@@ -200,6 +200,10 @@
         <tr><td>IGNITION</td><td>A qué se le aplica el corte por ignición</td></tr>
       </tbody>
     </table>
+    <div class="adv">
+      <div class="t">Una idea que conviene tener presente al recorrer estas secciones</div>
+      <p>Todo lo que el equipo lee —el bus, una cámara, un periférico serie, la entrada física, una sonda— <b>se convierte en una variable del sistema</b>, con su nombre y su unidad. Desde ahí todas valen lo mismo: viajan en la trama, pueden disparar un reporte, pueden accionar un relé y pueden alimentar un cálculo. Por eso <b>Salidas · Relés</b> y <b>Auxiliares</b> pueden referirse a <b>cualquier</b> variable, venga de donde venga.</p>
+    </div>
     <div class="adv warn">
       <div class="t">IGNITION merece atención</div>
       <p>El corte por ignición se elige <b>por separado</b> para la telemetría del bus, para las variables calculadas y para los avisos de la cámara, porque equivocarse cuesta distinto en cada uno: callar un bus deja el equipo <b>mudo</b>; callar un aviso de cámara sólo pierde ese aviso.</p>
@@ -225,6 +229,11 @@
     <div class="shot">
       <img src="../assets/capturas/01-variables-can.png" alt="Pestaña Variables CAN" />
       <div class="pie"><b>Variables CAN</b> · mensajes y señales con CAN ID, longitud, escala, offset y unidad — la captura está sin mapa cargado</div>
+    </div>
+    <div class="adv">
+      <div class="t">Aquí está el verdadero valor del equipo</div>
+      <p>De fábrica el equipo ya sabe leer <b>J1939</b>, el estándar de los vehículos pesados: revoluciones, velocidad, temperaturas, combustible. Eso funciona sin que nadie traduzca nada, y es <b>el piso</b>.</p>
+      <p><b>El techo es esta pestaña.</b> Lo que cada fabricante publica fuera del estándar —el estado de carga de un eléctrico, la temperatura de cada celda, el nivel de un estanque, una señal de un carrozado— no está en J1939 y no hay catálogo que lo cubra. Se levanta del vehículo y se carga aquí como <b>traducción propia</b>, y desde ese momento el equipo lo entrega igual que lo estándar. Dos equipos con el mismo firmware y traducciones distintas son dos productos distintos.</p>
     </div>
     <div class="adv danger">
       <div class="t">Peligro · El orden de esta tabla es el orden de la trama</div>
@@ -444,43 +453,47 @@
   <div class="sec">
     <div class="kick">— 11 / Puesta en marcha</div>
     <h2 class="display">Los tres caminos para dejar un equipo listo</h2>
-    <p class="note">Según de qué se parte, el camino es distinto. Los tres salen del <b>mismo paquete de entrega</b>.</p>
+    <p class="note">Según de qué se parte, el camino es distinto. En terreno sólo se cargan <b>dos cosas</b>: firmware nuevo (<span class="mono">.mtfw</span>) y configuración — ésta por carpeta completa o campo por campo.</p>
     <div class="three">
       <div class="box">
-        <div class="h">A · Placa en blanco</div>
+        <div class="h">A · Firmware nuevo en un equipo instalado</div>
         <ul>
-          <li>Cuando el equipo <b>nunca tuvo firmware</b></li>
-          <li>Se carga la carpeta <span class="mono">PACKAGE/</span> completa</li>
-          <li>Lleva los cinco binarios <b>y la configuración dentro</b></li>
-          <li>El equipo queda funcionando y configurado de una vez</li>
+          <li>Cuando ya está en el vehículo y hay <b>versión nueva</b></li>
+          <li>Pestaña <b>Actualizar</b>, bloque <b>02.A</b>, con el <span class="mono">.mtfw</span> del paquete</li>
+          <li>Al terminar, cargar la configuración y <b>reiniciar</b></li>
+          <li><b>El OTA no toca la configuración</b>: lo que había sigue ahí</li>
         </ul>
       </div>
       <div class="box">
-        <div class="h">B · Equipo instalado</div>
+        <div class="h">B · Misma versión, otra configuración</div>
         <ul>
-          <li>Cuando ya está en el vehículo y hay <b>firmware nuevo</b></li>
-          <li>Pestaña <b>Actualizar</b>, bloque <b>02.A</b>, con el <span class="mono">.mtfw</span> de <span class="mono">OTA/</span></li>
-          <li>Al terminar, cargar la configuración con el bloque <b>02.B</b> y reiniciar</li>
-          <li><b>El OTA no toca la configuración</b></li>
+          <li>Cuando el firmware se queda y cambia el vehículo</li>
+          <li>Pestaña <b>Actualizar</b>, bloque <b>02.B</b>, con la <b>carpeta de configuración completa</b></li>
+          <li>Sube todos los <span class="mono">.json</span> de una vez y los recarga en caliente</li>
+          <li>Y después <b>reiniciar</b> si cambió algo de los buses</li>
         </ul>
       </div>
       <div class="box">
-        <div class="h">C · Otra configuración</div>
+        <div class="h">C · Un solo ajuste</div>
         <ul>
-          <li>Cuando el firmware se queda y sólo cambia el vehículo o un parámetro</li>
-          <li>Pestaña <b>Actualizar</b>, bloque <b>02.B</b>, con la carpeta <span class="mono">CONFIG/</span></li>
-          <li>Y después <b>reiniciar</b></li>
+          <li>Cuando sólo cambia <b>un parámetro</b></li>
+          <li>Pestaña <b>Config Editor</b>: cambiar el campo y <b>Subir al dispositivo</b></li>
+          <li>Para un parámetro suelto no hace falta mover la carpeta entera</li>
+          <li>Después, <b>Leer del dispositivo</b> para comprobar que entró</li>
         </ul>
       </div>
     </div>
     <table class="tbl cols tight">
       <thead><tr><th>Del paquete de entrega</th><th>Qué lleva, y en qué camino se usa</th></tr></thead>
       <tbody>
-        <tr><td>PACKAGE/</td><td>Los cinco binarios y la configuración dentro. Es el camino <b>A</b>, el de la placa en blanco</td></tr>
-        <tr><td>OTA/</td><td>El <span class="mono">.mtfw</span> de la versión nueva. Es el camino <b>B</b>, por el bloque 02.A</td></tr>
-        <tr><td>CONFIG/</td><td>Los <span class="mono">.json</span> del vehículo. Es el camino <b>C</b>, por el bloque 02.B</td></tr>
+        <tr><td>OTA/</td><td>El <span class="mono">.mtfw</span> de la versión nueva. Es el camino <b>A</b>, por el bloque 02.A</td></tr>
+        <tr><td>CONFIG/</td><td>Los <span class="mono">.json</span> del vehículo. Es el camino <b>B</b>, por el bloque 02.B</td></tr>
       </tbody>
     </table>
+    <div class="adv">
+      <div class="t">El equipo nunca llega en blanco</div>
+      <p>Sale de fábrica con su firmware y su identidad ya grabados: eso es parte del proceso de fabricación y <b>no se hace desde esta herramienta</b>. Lo que se carga en terreno es firmware nuevo y configuración — nada más.</p>
+    </div>
     <div class="adv warn">
       <div class="t">El reinicio no siempre es opcional</div>
       <p>Recargar en caliente actualiza la configuración <b>en memoria</b>, y hay cosas que el equipo sólo lee <b>al arrancar</b> — la velocidad de los buses CAN, entre otras. Si cambiaste el bitrate, el viejo sigue vigente hasta que reinicies. La comprobación es mirar la línea de arranque: tiene que decir la velocidad que pusiste.</p>
@@ -585,7 +598,7 @@
   <div class="sec">
     <div class="kick">— Qué no cubre esta guía</div>
     <h2 class="display">Dónde sigue lo demás</h2>
-    <p class="note">Las <b>pestañas de fábrica</b> —provisión de llaves y sellado de placas— viven en el lanzador de fábrica, no en esta versión del programa, y tienen su propio procedimiento. La pestaña de <b>consultas activas (QUERY)</b> sólo aparece cuando un bus está puesto en modo consulta. Y <b>qué hace cada funcionalidad del equipo</b> está en <b>GF-MC-2026 · Guía de Funcionalidades</b>: ésta es el <i>cómo se pide</i>; aquélla, el <i>qué hace</i>.</p>
+    <p class="note">El <b>flujo de fábrica</b> —la carga inicial de firmware en una placa virgen, la provisión de llaves y el sellado— vive en el lanzador de fábrica, no en esta versión del programa, y tiene su propio procedimiento. La pestaña de <b>consultas activas (QUERY)</b> sólo aparece cuando un bus está puesto en modo consulta. Y <b>qué hace cada funcionalidad del equipo</b> está en <b>GF-MC-2026 · Guía de Funcionalidades</b>: ésta es el <i>cómo se pide</i>; aquélla, el <i>qué hace</i>.</p>
   </div>
 
   <div class="cta">

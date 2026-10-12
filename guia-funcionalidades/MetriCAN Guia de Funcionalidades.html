@@ -50,8 +50,8 @@
       <div class="arw">→</div>
       <div class="fb mid">
         <div class="t">Ocurre acá</div>
-        <h4>Decodificar y calcular</h4>
-        <p>Cada señal a su unidad real. Las variables derivadas, a bordo.</p>
+        <h4>Todo se vuelve variable</h4>
+        <p>Cada señal a su unidad real y con su nombre. Desde ahí, todas valen lo mismo.</p>
       </div>
       <div class="arw">→</div>
       <div class="fb">
@@ -61,6 +61,10 @@
       </div>
     </div>
     <p class="note">La consecuencia práctica: <b>no cambias de plataforma</b>. MetriCAN no reemplaza tu AVL ni tu sistema de flota — les entrega datos que antes no tenían, ya procesados, por el mismo puerto serie que ya usan.</p>
+    <div class="adv">
+      <div class="t">La idea que ordena esta guía</div>
+      <p>Todo lo que entra al equipo —el bus del vehículo, una cámara, una báscula por cable serie, una sonda de temperatura, la entrada de ignición— <b>se convierte en una variable del sistema</b>, con su nombre y su unidad. Y a partir de ahí todas sirven para lo mismo, sin que importe por dónde entraron: <b>viajar en la trama, disparar un reporte, accionar un relé, alimentar un cálculo</b>. Ése es el flujo general, y es lo que hace que agregar un periférico no sea agregar un caso especial.</p>
+    </div>
   </div>
 
   <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Guía de Funcionalidades</div><div>Página 1 de 10</div></div>
@@ -91,6 +95,10 @@
         <tr><td>USB</td><td>El cable de servicio</td></tr>
       </tbody>
     </table>
+    <div class="adv">
+      <div class="t">Esta tabla es una lista de orígenes, no de casos especiales</div>
+      <p>Lo que entra por cualquiera de estas vías <b>deja de ser «el dato de un periférico» y pasa a ser una variable del sistema</b>, igual que cualquier señal del bus del vehículo. El peso de una báscula y las revoluciones del motor se usan igual: las dos pueden ir en la trama, disparar un reporte, accionar un relé o entrar en un cálculo.</p>
+    </div>
   </div>
 
   <div class="sec">
@@ -122,6 +130,7 @@
   <div class="sec">
     <div class="kick">— 04 / Lectura del vehículo</div>
     <h2 class="display">Lo que el equipo saca del bus</h2>
+    <p class="note">Lo que el equipo trae de fábrica es el <b>piso</b>; las traducciones que le cargas tú son el <b>techo</b>. Las dos cosas se leen por el mismo camino y se entregan igual.</p>
     <table class="tbl tight">
       <thead><tr><th>Funcionalidad</th><th>Qué hace, y a partir de qué</th><th>Qué entrega</th></tr></thead>
       <tbody>
@@ -153,6 +162,11 @@
       </tbody>
     </table>
     <div class="adv">
+      <div class="t">De fábrica lee J1939 · con traducciones propias lee lo que tú necesitas</div>
+      <p>El equipo sale sabiendo leer <b>J1939</b>, el estándar de los vehículos pesados: con la configuración de fábrica ya entrega revoluciones, velocidad, temperaturas, combustible y el resto de lo que ese estándar define, sin que nadie traduzca nada.</p>
+      <p><b>Pero el mayor potencial aparece cuando se le cargan traducciones propias.</b> Lo que cada fabricante publica fuera del estándar —el estado de carga de un eléctrico, la temperatura de cada celda, el nivel de un estanque, una señal de un carrozado— no está en J1939 y no hay catálogo que lo cubra: se levanta del vehículo, se escribe como traducción propia y el equipo pasa a entregarlo igual que lo estándar. <b>Dos equipos con el mismo firmware y traducciones distintas son dos productos distintos.</b></p>
+    </div>
+    <div class="adv">
       <div class="t">Un campo vacío no es un cero</div>
       <p>Una variable que no llegó, o que llegó hace demasiado, sale como campo <b>vacío</b>, no como cero: el sitio nunca desaparece, y por eso quien recibe puede leer <b>por posición</b>. Un cero es una medición; un vacío es la ausencia de medición.</p>
     </div>
@@ -172,14 +186,14 @@
 
   <div class="sec">
     <div class="kick">— 05 / Periféricos · cámaras y buses</div>
-    <h2 class="display">Lo que se cuelga de los puertos serie</h2>
-    <p class="note">Los cuatro puertos serie son <b>intercambiables</b>: cada uno puede llevar cualquiera de estos roles.</p>
+    <h2 class="display">Lo que se le cuelga al equipo</h2>
+    <p class="note">La cámara ADAS va por <b>bus CAN</b>. Los demás van por puerto serie, y los cuatro puertos son <b>intercambiables</b>: cada uno puede llevar cualquiera de esos roles.</p>
     <table class="tbl tight">
       <thead><tr><th>Funcionalidad</th><th>Qué hace, y a partir de qué</th><th>Qué entrega</th></tr></thead>
       <tbody>
         <tr>
           <th>Cámara ADAS Mobileye</th>
-          <td>Convierte las alertas de la cámara que mira a la carretera —frenada inminente, salida de carril, peatón, distancia al de delante, exceso sobre la señal de tránsito— en eventos de la plataforma. Va en un puerto serie o en el segundo bus CAN.</td>
+          <td>Convierte las alertas de la cámara que mira a la carretera —frenada inminente, salida de carril, peatón, distancia al de delante, exceso sobre la señal de tránsito— en eventos de la plataforma. Va por <b>bus CAN</b>: la cámara publica con el protocolo <i>Mobileye Standard CAN Output</i> y el equipo pone uno de sus dos buses en modo Mobileye para escucharla. <b>No va por puerto serie.</b></td>
           <td>Un evento por suceso: si varias alertas de la misma familia llegan juntas, entrega <b>sólo la más específica</b>. Y avisa aparte cuando la cámara deja de responder, que es una falla de instalación y no un evento de conducción.</td>
         </tr>
         <tr>
@@ -204,6 +218,10 @@
         </tr>
       </tbody>
     </table>
+    <div class="adv">
+      <div class="t">Lo que de verdad importa de todos ellos</div>
+      <p>Ninguno de estos periféricos entrega «su dato» por un camino aparte: lo que leen <b>entra al flujo general como una variable más del sistema</b>. Desde ahí sirve para lo mismo que una señal del motor — viajar en la trama, disparar un reporte, accionar un relé, alimentar un cálculo.</p>
+    </div>
   </div>
 
   <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Guía de Funcionalidades</div><div>GF-MC-2026 · REV 02</div><div>Página 4 de 10</div></div>
