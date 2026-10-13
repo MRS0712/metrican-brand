@@ -344,24 +344,9 @@
       <img src="../assets/capturas/04-variables-serial.png" alt="Pestaña Variables Serial" />
       <div class="pie"><b>Variables Serial</b> · el puerto, su prefijo de variables y la descripción de cada mensaje que llega por él</div>
     </div>
-    <div class="two">
-      <div class="box">
-        <div class="h">Capturar del dispositivo</div>
-        <ul>
-          <li>Muestra lo que está entrando <b>de verdad</b> por ese puerto, en crudo</li>
-          <li>Distingue <b>el aparato no está conectado</b> de <b>está conectado y no nos entendemos</b></li>
-          <li>Desde fuera las dos se ven igual: silencio</li>
-        </ul>
-      </div>
-      <div class="box">
-        <div class="h">Probar en el dispositivo</div>
-        <ul>
-          <li>Aplica la descripción que escribiste a lo que está llegando</li>
-          <li>Enseña el resultado campo por campo</li>
-          <li>Si da <b>⚠ no es número</b>, la descripción no casa con el aparato</li>
-        </ul>
-      </div>
-    </div>
+    <p class="note"><b>Describir un aparato es acertar a la primera o no enterarte de que fallaste</b>, porque un aparato mal descrito no da error: da una columna vacía para siempre. Por eso la pestaña trae dos botones para comprobarlo <b>antes</b> de guardar nada.</p>
+    <p class="note"><b>Capturar del dispositivo</b> enseña, tal cual, lo que está entrando por ese puerto en este momento. Sirve para dos preguntas que desde fuera se ven igual —las dos son silencio—: <b>¿está el aparato conectado?</b> y <b>¿está conectado pero hablamos a velocidades distintas?</b> Si no aparece nada, el problema es el cable o la velocidad, y no vale la pena seguir escribiendo la descripción.</p>
+    <p class="note"><b>Probar en el dispositivo</b> toma la descripción que acabas de escribir, se la aplica a lo que está llegando y te enseña el valor que saldría. Si ves el número que esperabas, la descripción es correcta. Si ves un aviso de que <b>no es número</b>, no lo es — y lo sabes ahora y no dentro de un mes.</p>
   </div>
 
   <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Guía del Configurador</div><div>GC-MC-2026 · REV 02</div><div>Página 9 de 15</div></div>
@@ -422,7 +407,7 @@
           <li>Tres pasos, en este orden: <b>Archivo…</b> → <b>Push →</b> → <b>OTA Activar</b></li>
           <li>El equipo <b>sigue operando</b> durante la transferencia y no entra en modo bootloader</li>
           <li>Se reinicia <b>sólo al activar</b>, y vuelve en unos 15 segundos</li>
-          <li>El archivo es un <span class="mono">.mtfw</span>, cifrado y con su suma de verificación</li>
+          <li>El archivo es un <span class="mono">.mtfw</span>: el firmware va cifrado dentro, y el equipo comprueba que llegó íntegro antes de instalarlo</li>
           <li><b>Rollback</b> vuelve a la versión anterior; <b>Estado del equipo</b> dice en qué partición está corriendo</li>
         </ul>
       </div>
@@ -430,11 +415,15 @@
         <div class="h">02.B · Paquete de configuración</div>
         <ul>
           <li>Dos pasos: <b>Carpeta…</b> → <b>Cargar →</b></li>
-          <li>Sube de una vez <b>todos</b> los <span class="mono">.json</span> de una carpeta y los recarga en caliente</li>
-          <li>El equipo <b>no se reinicia</b></li>
+          <li>Sube de una vez <b>todos</b> los <span class="mono">.json</span> de una carpeta</li>
           <li>Sólo se envía lo que exista en la carpeta</li>
+          <li><b>No reinicia el equipo</b> — y justamente por eso hay que reiniciarlo</li>
         </ul>
       </div>
+    </div>
+    <div class="adv warn">
+      <div class="t">Subir la configuración no reinicia el equipo</div>
+      <p>Y <b>justamente por eso hay que reiniciarlo</b>: mientras no arranque de nuevo, lo que acabas de subir está en el equipo pero <b>no está en uso</b>. El Configurador avisa con <span class="mono">REQUIERE_REINICIO</span> cuando el campo que tocaste es de los que esperan al arranque, que son casi todos.</p>
     </div>
   </div>
 
@@ -465,12 +454,12 @@
         </ul>
       </div>
       <div class="box">
-        <div class="h">B · Misma versión, otra configuración</div>
+        <div class="h">B · El mismo firmware, otra configuración</div>
         <ul>
           <li>Cuando el firmware se queda y cambia el vehículo</li>
           <li>Pestaña <b>Actualizar</b>, bloque <b>02.B</b>, con la <b>carpeta de configuración completa</b></li>
-          <li>Sube todos los <span class="mono">.json</span> de una vez y los recarga en caliente</li>
-          <li>Y después <b>reiniciar</b> si cambió algo de los buses</li>
+          <li>Sube todos los <span class="mono">.json</span> de una vez</li>
+          <li>Y después <b>reiniciar</b>: el equipo guarda los ficheros al instante, pero no los usa hasta arrancar de nuevo</li>
         </ul>
       </div>
       <div class="box">
@@ -490,17 +479,10 @@
         <tr><td>CONFIG/</td><td>Los <span class="mono">.json</span> del vehículo. Es el camino <b>B</b>, por el bloque 02.B</td></tr>
       </tbody>
     </table>
-    <div class="adv">
-      <div class="t">El equipo nunca llega en blanco</div>
-      <p>Sale de fábrica con su firmware y su identidad ya grabados: eso es parte del proceso de fabricación y <b>no se hace desde esta herramienta</b>. Lo que se carga en terreno es firmware nuevo y configuración — nada más.</p>
-    </div>
     <div class="adv warn">
-      <div class="t">El reinicio no siempre es opcional</div>
-      <p>Recargar en caliente actualiza la configuración <b>en memoria</b>, y hay cosas que el equipo sólo lee <b>al arrancar</b> — la velocidad de los buses CAN, entre otras. Si cambiaste el bitrate, el viejo sigue vigente hasta que reinicies. La comprobación es mirar la línea de arranque: tiene que decir la velocidad que pusiste.</p>
-    </div>
-    <div class="adv danger">
-      <div class="t">Peligro · Un .mtfw pertenece a una línea de equipo</div>
-      <p>Hay equipos <b>abiertos</b> y equipos <b>sellados</b>, y sus paquetes <b>no son intercambiables</b> — no es cosa del modelo. Cargar el de la línea equivocada deja el equipo en bucle de arranque. El nombre del archivo lo dice.</p>
+      <div class="t">Cargar y reiniciar son un solo paso en dos tiempos</div>
+      <p>El equipo guarda los ficheros nuevos al instante, pero sus módulos internos —los buses, los puertos serie, la ignición, los relés, los auxiliares— <b>leen la configuración una sola vez, al arrancar</b>, y siguen trabajando con la que leyeron. Por eso en <b>A</b> y en <b>B</b> hay que reiniciar al terminar, y no sólo cuando cambió algo grande.</p>
+      <p>Si lo que cambió fue la velocidad de un bus, la comprobación es mirar la <b>línea de arranque</b>: tiene que decir la velocidad que pusiste. Si dice otra, la configuración no entró en uso.</p>
     </div>
   </div>
 
@@ -598,7 +580,8 @@
   <div class="sec">
     <div class="kick">— Qué no cubre esta guía</div>
     <h2 class="display">Dónde sigue lo demás</h2>
-    <p class="note">El <b>flujo de fábrica</b> —la carga inicial de firmware en una placa virgen, la provisión de llaves y el sellado— vive en el lanzador de fábrica, no en esta versión del programa, y tiene su propio procedimiento. La pestaña de <b>consultas activas (QUERY)</b> sólo aparece cuando un bus está puesto en modo consulta. Y <b>qué hace cada funcionalidad del equipo</b> está en <b>GF-MC-2026 · Guía de Funcionalidades</b>: ésta es el <i>cómo se pide</i>; aquélla, el <i>qué hace</i>.</p>
+    <p class="note"><b>Qué hace cada funcionalidad del equipo</b> está en <b>GF-MC-2026 · Guía de Funcionalidades</b>. Ésta es el <i>cómo se pide</i>; aquélla, el <i>qué hace</i>.</p>
+    <p class="note"><b>El detalle de cada comando del sistema</b> —las respuestas de estado, los avisos <span class="mono">WARN|</span>, los comandos <span class="mono">SYS|</span>, <span class="mono">CAN|</span>, <span class="mono">AUX|</span>, <span class="mono">FILE|</span> y <span class="mono">OTA|</span>, con su formato y qué significa cada campo— está en <b>RC-MC-2026 · Referencia de Comandos y Avisos</b>. Es el documento al que se acude cuando el Monitor dice algo que no se reconoce.</p>
   </div>
 
   <div class="cta">

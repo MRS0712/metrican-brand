@@ -90,7 +90,7 @@
         <tr><td>UART 1 a 4</td><td>Cuatro puertos serie, cada uno con su velocidad y su rol</td></tr>
         <tr><td>Entrada física</td><td>Una línea digital, típicamente la ignición del vehículo</td></tr>
         <tr><td>1-Wire</td><td>Un bus de un hilo: llaves iButton, sondas de temperatura, interruptores</td></tr>
-        <tr><td>WiFi</td><td>Para hablar con la plataforma</td></tr>
+        <tr><td>WiFi</td><td>Canal de <b>gestión</b>: consultar estado, configurar y actualizar firmware a distancia. <b>No lleva telemetría</b></td></tr>
         <tr><td>Bluetooth (BLE)</td><td>Para hablar con un teléfono o un notebook al lado del equipo</td></tr>
         <tr><td>USB</td><td>El cable de servicio</td></tr>
       </tbody>
@@ -110,7 +110,7 @@
         <tr><td>Trama de telemetría</td><td>Una línea de texto por el puerto serie elegido, hacia el módem</td></tr>
         <tr><td>Eventos</td><td>Líneas sueltas cuando pasa algo, no cada cierto tiempo</td></tr>
         <tr><td>Dos relés</td><td><span class="mono">RELAY_1</span> y <span class="mono">RELAY_2</span>, contactos secos</td></tr>
-        <tr><td>Plataforma</td><td>Lo que el módem reenvía, y lo que el equipo manda por WiFi</td></tr>
+        <tr><td>Plataforma</td><td>La telemetría que reenvía el módem</td></tr>
       </tbody>
     </table>
   </div>
@@ -455,9 +455,9 @@
           <td>Su propia trama, con su propio intervalo y su propio encabezado.</td>
         </tr>
         <tr>
-          <th>Reporte a la plataforma por WiFi</th>
-          <td>El equipo se conecta a una red WiFi y habla directamente con la plataforma, sin depender del módem.</td>
-          <td>El aviso periódico de que está vivo, con su versión y su estado.</td>
+          <th>Canal de gestión por WiFi</th>
+          <td>El equipo se conecta a una red WiFi para que se le pueda <b>consultar el estado, cambiar la configuración y actualizar el firmware</b> a distancia, a partir de las credenciales de la red y la dirección del servicio.</td>
+          <td>El estado del equipo y la vía para configurarlo y actualizarlo en remoto, sin que nadie vaya hasta él con un cable.</td>
         </tr>
         <tr>
           <th>Latido de salud</th>
@@ -471,9 +471,9 @@
         </tr>
       </tbody>
     </table>
-    <div class="adv danger">
-      <div class="t">Peligro · El orden y el ancho son contrato</div>
-      <p>Quien recibe lee <b>por posición</b>. Cambiar el orden de las variables o el ancho de la trama rompe a la plataforma del otro lado, y lo hace sin producir ningún error: produce datos equivocados, que es peor.</p>
+    <div class="adv warn">
+      <div class="t">El canal de gestión no transporta telemetría</div>
+      <p>Los datos del vehículo salen por su camino de siempre —la trama al módem— y <b>no pasan por el WiFi</b>. Ese canal es para <b>administrar</b> el equipo: consultarlo, configurarlo y actualizarlo a distancia. No es una segunda vía de telemetría.</p>
     </div>
   </div>
 
@@ -501,8 +501,8 @@
           <td>Un equipo genérico convertido en el equipo de <i>ese</i> vehículo. La configuración sobrevive a los cortes de energía y a las actualizaciones: <b>actualizar el programa no borra la configuración</b>.</td>
         </tr>
         <tr>
-          <th>Actualización de firmware por cable</th>
-          <td>Pone una versión nueva del programa sin abrir el equipo ni desmontarlo del vehículo, con el cable de servicio y el paquete firmado.</td>
+          <th>Actualización de firmware en el equipo instalado</th>
+          <td>Pone una versión nueva del programa sin abrir el equipo, sin desmontarlo del vehículo y sin interrumpir su funcionamiento mientras se transfiere. El paquete firmado entra <b>por cable de servicio o por Bluetooth</b>, lo que sea más cómodo según dónde haya quedado instalado el equipo.</td>
           <td>El equipo con la versión nueva, y la <b>vuelta atrás automática</b> si la carga se corta a mitad.</td>
         </tr>
         <tr>
