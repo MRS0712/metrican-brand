@@ -16,17 +16,17 @@
 <section class="page manual" data-screen-label="1 · Entrega y configuración">
   <div class="hd">
     <img src="../assets/logo-metrican.png" alt="MetriCAN" />
-    <div class="mid">Nota de versión y uso · <b>Firmware 2.8.6</b></div>
-    <div class="rt">DOC <b>NV-MC-2026</b><br />REV <b>01 · OCT 2026</b></div>
+    <div class="mid">Nota de versión y uso · <b>Firmware 2.8.6 · Configurador 2.2.8</b></div>
+    <div class="rt">DOC <b>NV-MC-2026</b><br />REV <b>02 · OCT 2026</b></div>
   </div>
   <div class="rule"></div>
 
   <div class="title">
     <div>
-      <div class="kick">— Firmware 2.8.6</div>
+      <div class="kick">— Firmware 2.8.6 · Configurador 2.2.8</div>
       <h1 class="display">Nota de versión y uso</h1>
       <div class="sub">Qué incluye esta entrega, cómo configurar un equipo y qué evitar en esta versión.</div>
-      <p class="lead">Esta entrega permite <b>configurar equipos MetriCAN de línea protegida</b> —los que salen de fábrica con la memoria cifrada— y mantenerlos al día por actualización remota. El procedimiento de configuración recomendado está <b>verificado sobre un equipo de esa misma línea</b>. Las dos limitaciones conocidas están en la página siguiente, con el camino alternativo para cada una.</p>
+      <p class="lead">Esta entrega permite <b>configurar equipos MetriCAN de línea protegida</b> —los que salen de fábrica con la memoria cifrada— y mantenerlos al día por actualización remota. Todo el procedimiento está <b>verificado sobre un equipo de esa misma línea</b>: la carga del paquete completo de configuración, el ida y vuelta de las geozonas y la comprobación automática de que lo escrito quedó en el equipo.</p>
     </div>
   </div>
 
@@ -37,7 +37,7 @@
       <thead><tr><th>Componente</th><th>Detalle</th></tr></thead>
       <tbody>
         <tr><th>Firmware</th><td><b>2.8.6</b> · archivo <span class="mono">fw_metrican_v2.8.6.mtfw</span> — paquete firmado para equipos de <b>línea protegida</b>. Se carga por actualización remota o desde el Configurador</td></tr>
-        <tr><th>Configurador</th><td><b>2.2.7</b> para Windows · se descarga desde el enlace del correo de entrega. No requiere instalación</td></tr>
+        <tr><th>Configurador</th><td><b>2.2.8</b> para Windows · se descarga desde el enlace del correo de entrega. No requiere instalación</td></tr>
         <tr><th>Documentación</th><td><b>Guía del Configurador</b> y <b>Guía de Funcionalidades</b>, adjuntas en el mismo correo</td></tr>
       </tbody>
     </table>
@@ -52,13 +52,13 @@
     <h2 class="display">Cómo configurar un equipo</h2>
     <div class="steps">
       <div class="step"><span class="sh">Conectar y leer</span>Abrir el Configurador y conectarse al equipo. <b>Leer primero</b> la configuración que tiene cargada: es la base sobre la que se trabaja y el respaldo si algo hay que deshacer.</div>
-      <div class="step"><span class="sh">Editar por campos</span>Modificar los valores que correspondan <b>en el editor, campo por campo</b>. El equipo valida cada valor al recibirlo y, si lo rechaza, indica el motivo.</div>
-      <div class="step"><span class="sh">Guardar</span>Guardar la configuración en el equipo. Si algún campo fue rechazado, <b>la operación no se guarda a medias</b>.</div>
-      <div class="step"><span class="sh">Reiniciar y comprobar</span>Algunos parámetros se aplican al reiniciar — el Configurador lo indica cuando corresponde. Tras el reinicio, <b>volver a leer</b> la configuración y verificar que los valores son los esperados.</div>
+      <div class="step"><span class="sh">Editar</span>Modificar los valores que correspondan, campo por campo o cargando una carpeta de configuración completa. El equipo valida cada valor al recibirlo y, si lo rechaza, indica el motivo.</div>
+      <div class="step"><span class="sh">Guardar</span>Guardar en el equipo. El Configurador <b>comprueba por su cuenta</b> que lo escrito quedó realmente en el dispositivo, volviendo a leerlo y cotejándolo. Si algún campo fue rechazado, la operación <b>no se guarda a medias</b>.</div>
+      <div class="step"><span class="sh">El reinicio está contemplado</span>Al guardar la configuración principal el equipo <b>se reinicia solo</b> y vuelve con los cambios aplicados. El Configurador lo espera, reconecta y verifica: no hay que hacer nada ni repetir la carga. Lo avisa cuando ocurre.</div>
     </div>
     <div class="adv">
-      <div class="t">Por qué campo por campo</div>
-      <p>Es el camino verificado en esta versión, y además el que da el mejor diagnóstico: un valor fuera de rango se informa <b>con su motivo</b> en el momento de escribirlo, en lugar de aparecer como un fallo genérico al final.</p>
+      <div class="t">Cuánto tarda, medido</div>
+      <p>Sobre un equipo de línea protegida: la configuración principal <b>7 s</b>, el <b>paquete completo de seis archivos 29 s</b>, y leer la configuración entera del equipo <b>5 s</b>. Cada archivo se verifica releyéndolo del dispositivo.</p>
     </div>
   </div>
 
@@ -69,37 +69,45 @@
 <section class="page manual" data-screen-label="2 · Limitaciones conocidas">
   <div class="hd">
     <img src="../assets/logo-metrican.png" alt="MetriCAN" />
-    <div class="mid">Nota de versión y uso · <b>Limitaciones conocidas</b></div>
-    <div class="rt">DOC <b>NV-MC-2026</b><br />REV <b>01 · OCT 2026</b></div>
+    <div class="mid">Nota de versión y uso · <b>Qué cambia en esta versión</b></div>
+    <div class="rt">DOC <b>NV-MC-2026</b><br />REV <b>02 · OCT 2026</b></div>
   </div>
   <div class="rule"></div>
 
   <div class="sec">
-    <div class="kick">— 03 / Limitaciones conocidas</div>
-    <h2 class="display">Dos cosas a tener en cuenta</h2>
-    <p class="lead">Las dos están identificadas, tienen un camino alternativo y su corrección ya está en desarrollo para la próxima versión. Ninguna de las dos produce daño permanente en el equipo.</p>
+    <div class="kick">— 03 / Qué cambia en esta versión</div>
+    <h2 class="display">Lo que se resolvió</h2>
+    <p class="lead">Las dos limitaciones de la entrega anterior <b>están resueltas</b> y verificadas sobre un equipo de línea protegida. No hay que cambiar la forma de trabajar ni evitar ninguna operación.</p>
 
     <div class="box">
-      <div class="h">01 · Carga del archivo de configuración completo</div>
+      <div class="h">01 · La carga de la configuración completa</div>
       <ul>
-        <li><b>Qué ocurre.</b> Enviar el archivo de configuración completo en una sola operación puede provocar que el equipo se reinicie antes de terminar.</li>
-        <li><b>Qué hacer.</b> Usar la <b>edición por campos</b> descrita en la página anterior. Ese camino está verificado y no reinicia el equipo.</li>
-        <li><b>Si ocurre.</b> El equipo arranca de nuevo con su configuración anterior intacta. No queda a medio configurar: se vuelve a conectar y se continúa por campos.</li>
+        <li><b>Antes.</b> Enviar el archivo de configuración completo podía reiniciar el equipo antes de terminar, y el Configurador lo informaba como un fallo.</li>
+        <li><b>Ahora.</b> El archivo <b>sí queda guardado</b>: el equipo se reinicia al terminar de guardarlo y vuelve con la configuración aplicada. El Configurador lo espera, reconecta y <b>verifica releyendo</b> antes de darlo por bueno.</li>
+        <li><b>Qué verás.</b> Un aviso de que el equipo se reinició y la configuración quedó aplicada. No hay que repetir la carga.</li>
       </ul>
     </div>
 
     <div class="box" style="margin-top:10px">
-      <div class="h">02 · Mensaje de verificación al terminar de guardar</div>
+      <div class="h">02 · El mensaje de verificación al guardar</div>
       <ul>
-        <li><b>Qué ocurre.</b> Al cerrar una escritura, el Configurador puede informar que la operación <b>no se completó</b> aunque en el equipo sí haya quedado correcta.</li>
-        <li><b>Qué hacer.</b> Antes de repetir la operación, <b>volver a leer</b> la configuración del equipo. Si los valores son los esperados, la escritura fue correcta y el aviso es incorrecto.</li>
-        <li><b>Qué no hacer.</b> No repetir la carga varias veces seguidas por ese aviso: el equipo ya tiene los valores.</li>
+        <li><b>Antes.</b> Podía informar que la operación no se completó aunque en el equipo hubiera quedado correcta.</li>
+        <li><b>Ahora.</b> El recuento de lo escrito es correcto y se coteja con lo que declara el propio equipo. Un aviso de fallo ya significa un fallo real.</li>
+      </ul>
+    </div>
+
+    <div class="box" style="margin-top:10px">
+      <div class="h">03 · Geozonas en el paquete de configuración</div>
+      <ul>
+        <li><b>Antes.</b> Al leer un equipo, sus geozonas no se recuperaban, y exportar la carpeta producía un paquete <b>sin</b> los polígonos. El equipo de destino quedaba con el limitador configurado y sin las zonas sobre las que decide.</li>
+        <li><b>Ahora.</b> Leer el equipo trae también sus geozonas, y la carpeta exportada las lleva. Verificado de ida y vuelta: tres zonas cargadas, leídas y exportadas <b>idénticas</b>.</li>
+        <li><b>A tener en cuenta.</b> El bit de cada geozona va de <b>20 a 44</b>. Si un archivo trae bits fuera de ese rango, el Configurador <b>avisa y nombra las zonas afectadas</b> en lugar de corregirlas en silencio.</li>
       </ul>
     </div>
 
     <div class="adv">
-      <div class="t">La regla corta</div>
-      <p>Configurar <b>por campos</b>, y <b>comprobar releyendo</b> en vez de confiar en el mensaje final. Con esos dos hábitos las dos limitaciones de esta versión quedan cubiertas.</p>
+      <div class="t">Una entrega corresponde a una línea de equipo</div>
+      <p>El paquete de firmware está emitido para equipos de <b>línea protegida</b>. En un equipo de otra línea, el propio equipo <b>rechaza el archivo</b> y sigue funcionando con su versión anterior. No hay riesgo de dejar una unidad inservible por equivocar el paquete.</p>
     </div>
   </div>
 
