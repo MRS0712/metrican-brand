@@ -16,17 +16,17 @@
 <section class="page manual" data-screen-label="1 · Entrega y configuración">
   <div class="hd">
     <img src="../assets/logo-metrican.png" alt="MetriCAN" />
-    <div class="mid">Nota de versión y uso · <b>Firmware 2.8.6 · Configurador 2.2.8</b></div>
-    <div class="rt">DOC <b>NV-MC-2026</b><br />REV <b>02 · OCT 2026</b></div>
+    <div class="mid">Nota de versión y uso · <b>Firmware 2.8.6 · Configurador 2.2.9</b></div>
+    <div class="rt">DOC <b>NV-MC-2026</b><br />REV <b>03 · OCT 2026</b></div>
   </div>
   <div class="rule"></div>
 
   <div class="title">
     <div>
-      <div class="kick">— Firmware 2.8.6 · Configurador 2.2.8</div>
+      <div class="kick">— Firmware 2.8.6 · Configurador 2.2.9</div>
       <h1 class="display">Nota de versión y uso</h1>
       <div class="sub">Qué incluye esta entrega, cómo configurar un equipo y qué evitar en esta versión.</div>
-      <p class="lead">Esta entrega permite <b>configurar equipos MetriCAN de línea protegida</b> —los que salen de fábrica con la memoria cifrada— y mantenerlos al día por actualización remota. Todo el procedimiento está <b>verificado sobre un equipo de esa misma línea</b>: la carga del paquete completo de configuración, el ida y vuelta de las geozonas y la comprobación automática de que lo escrito quedó en el equipo.</p>
+      <p class="lead">Esta entrega permite <b>configurar equipos MetriCAN</b> y mantenerlos al día por actualización remota. Todo el procedimiento está <b>verificado sobre un equipo real</b>: la carga del paquete completo de configuración, el ida y vuelta de las geozonas y la comprobación automática de que lo escrito quedó en el equipo.</p>
     </div>
   </div>
 
@@ -36,14 +36,15 @@
     <table class="tbl">
       <thead><tr><th>Componente</th><th>Detalle</th></tr></thead>
       <tbody>
-        <tr><th>Firmware</th><td><b>2.8.6</b> · archivo <span class="mono">fw_metrican_v2.8.6.mtfw</span> — paquete firmado para equipos de <b>línea protegida</b>. Se carga por actualización remota o desde el Configurador</td></tr>
-        <tr><th>Configurador</th><td><b>2.2.8</b> para Windows · se descarga desde el enlace del correo de entrega. No requiere instalación</td></tr>
+        <tr><th>Firmware</th><td><b>2.8.6</b> · archivo <span class="mono">fw_metrican_v2.8.6.mtfw</span> — paquete firmado. Se carga por actualización remota o desde el Configurador</td></tr>
+        <tr><th>Configurador</th><td><b>2.2.9</b> para Windows · se descarga desde el enlace del correo de entrega. No requiere instalación</td></tr>
         <tr><th>Documentación</th><td><b>Guía del Configurador</b> y <b>Guía de Funcionalidades</b>, adjuntas en el mismo correo</td></tr>
       </tbody>
     </table>
+
     <div class="adv">
-      <div class="t">Una entrega corresponde a una línea de equipo</div>
-      <p>El paquete de firmware está emitido para los equipos de <b>línea protegida</b>. Si se intenta cargar en un equipo de otra línea, el propio equipo <b>rechaza el archivo</b> y sigue funcionando con su versión anterior. No hay riesgo de dejar una unidad inservible por equivocar el paquete.</p>
+      <div class="t">El equipo comprueba el paquete antes de aplicarlo</div>
+      <p>El archivo de firmware va <b>firmado</b>, y el equipo verifica esa firma antes de instalarlo. Si el paquete no le corresponde o llegó incompleto, <b>lo rechaza</b> y sigue funcionando con su versión anterior. No hay riesgo de dejar una unidad inservible por cargar un archivo equivocado.</p>
     </div>
   </div>
 
@@ -58,11 +59,11 @@
     </div>
     <div class="adv">
       <div class="t">Cuánto tarda, medido</div>
-      <p>Sobre un equipo de línea protegida: la configuración principal <b>7 s</b>, el <b>paquete completo de seis archivos 29 s</b>, y leer la configuración entera del equipo <b>5 s</b>. Cada archivo se verifica releyéndolo del dispositivo.</p>
+      <p>Medido sobre un equipo real: la configuración principal <b>7 s</b>, el <b>paquete completo de seis archivos 29 s</b>, y leer la configuración entera del equipo <b>5 s</b>. Cada archivo se verifica releyéndolo del dispositivo.</p>
     </div>
   </div>
 
-  <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Nota de versión y uso</div><div>Página 1 de 2</div></div>
+  <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Nota de versión y uso</div><div>Página 1 de 3</div></div>
 </section>
 
 <!-- ═══════════════ 2 · LIMITACIONES Y SOPORTE ═══════════════ -->
@@ -70,14 +71,14 @@
   <div class="hd">
     <img src="../assets/logo-metrican.png" alt="MetriCAN" />
     <div class="mid">Nota de versión y uso · <b>Qué cambia en esta versión</b></div>
-    <div class="rt">DOC <b>NV-MC-2026</b><br />REV <b>02 · OCT 2026</b></div>
+    <div class="rt">DOC <b>NV-MC-2026</b><br />REV <b>03 · OCT 2026</b></div>
   </div>
   <div class="rule"></div>
 
   <div class="sec">
     <div class="kick">— 03 / Qué cambia en esta versión</div>
     <h2 class="display">Lo que se resolvió</h2>
-    <p class="lead">Las dos limitaciones de la entrega anterior <b>están resueltas</b> y verificadas sobre un equipo de línea protegida. No hay que cambiar la forma de trabajar ni evitar ninguna operación.</p>
+    <p class="lead">Las dos limitaciones de la entrega anterior <b>están resueltas</b> y verificadas sobre un equipo real. No hay que cambiar la forma de trabajar ni evitar ninguna operación.</p>
 
     <div class="box">
       <div class="h">01 · La carga de la configuración completa</div>
@@ -105,11 +106,33 @@
       </ul>
     </div>
 
+    <div class="box" style="margin-top:10px">
+      <div class="h">04 · Preparado para equipos con credencial de sesión</div>
+      <ul>
+        <li><b>Qué es.</b> Los equipos de producción podrán exigir una credencial para que sólo el Configurador oficial pueda leer su configuración o modificarla. Esta versión ya la lleva incorporada.</li>
+        <li><b>Qué cambia para ti.</b> Nada: la identificación es automática al conectar, se renueva sola si la jornada se alarga y se cierra al desconectar.</li>
+        <li><b>Compatibilidad.</b> El mismo Configurador sigue funcionando con equipos que no exigen credencial, así que no hace falta una versión distinta para cada caso.</li>
+      </ul>
+    </div>
+
     <div class="adv">
-      <div class="t">Una entrega corresponde a una línea de equipo</div>
-      <p>El paquete de firmware está emitido para equipos de <b>línea protegida</b>. En un equipo de otra línea, el propio equipo <b>rechaza el archivo</b> y sigue funcionando con su versión anterior. No hay riesgo de dejar una unidad inservible por equivocar el paquete.</p>
+      <div class="t">El equipo comprueba el paquete antes de aplicarlo</div>
+      <p>El archivo de firmware va <b>firmado</b>, y el equipo verifica esa firma antes de instalarlo. Si el paquete no le corresponde o llegó incompleto, <b>lo rechaza</b> y sigue funcionando con su versión anterior. No hay riesgo de dejar una unidad inservible por cargar un archivo equivocado.</p>
     </div>
   </div>
+
+  <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Qué cambia en esta versión</div><div>Página 2 de 3</div></div>
+</section>
+
+
+<!-- ═══════════════ 3 · SOPORTE ═══════════════ -->
+<section class="page manual" data-screen-label="3 · Soporte">
+  <div class="hd">
+    <img src="../assets/logo-metrican.png" alt="MetriCAN" />
+    <div class="mid">Nota de versión y uso · <b>Soporte</b></div>
+    <div class="rt">DOC <b>NV-MC-2026</b><br />REV <b>03 · OCT 2026</b></div>
+  </div>
+  <div class="rule"></div>
 
   <div class="sec">
     <div class="kick">— 04 / Soporte</div>
@@ -129,6 +152,7 @@
   </div>
 
   <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Santiago · Chile</div><div>NV-MC-2026 · REV 01</div><div>Página 2 de 2</div></div>
+  <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Santiago · Chile</div><div>NV-MC-2026 · REV 03</div><div>Página 3 de 3</div></div>
 </section>
 
 </doc-page>
