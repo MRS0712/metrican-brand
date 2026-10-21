@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MetriCAN — Nota de versión y uso</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../assets/doc.css" />
+</head>
+<body>
+<doc-page size="a4">
+
+<!-- ═══════════════ 1 · LA ENTREGA Y CÓMO CONFIGURAR ═══════════════ -->
+<section class="page manual" data-screen-label="1 · Entrega y configuración">
+  <div class="hd">
+    <img src="../assets/logo-metrican.png" alt="MetriCAN" />
+    <div class="mid">Nota de versión y uso · <b>Firmware 2.8.6</b></div>
+    <div class="rt">DOC <b>NV-MC-2026</b><br />REV <b>01 · OCT 2026</b></div>
+  </div>
+  <div class="rule"></div>
+
+  <div class="title">
+    <div>
+      <div class="kick">— Firmware 2.8.6</div>
+      <h1 class="display">Nota de versión y uso</h1>
+      <div class="sub">Qué incluye esta entrega, cómo configurar un equipo y qué evitar en esta versión.</div>
+      <p class="lead">Esta entrega permite <b>configurar equipos MetriCAN de línea protegida</b> —los que salen de fábrica con la memoria cifrada— y mantenerlos al día por actualización remota. El procedimiento de configuración recomendado está <b>verificado sobre un equipo de esa misma línea</b>. Las dos limitaciones conocidas están en la página siguiente, con el camino alternativo para cada una.</p>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="kick">— 01 / Contenido de la entrega</div>
+    <h2 class="display">Qué incluye</h2>
+    <table class="tbl">
+      <thead><tr><th>Componente</th><th>Detalle</th></tr></thead>
+      <tbody>
+        <tr><th>Firmware</th><td><b>2.8.6</b> · archivo <span class="mono">fw_metrican_v2.8.6.mtfw</span> — paquete firmado para equipos de <b>línea protegida</b>. Se carga por actualización remota o desde el Configurador</td></tr>
+        <tr><th>Configurador</th><td><b>2.2.7</b> para Windows · se descarga desde el enlace del correo de entrega. No requiere instalación</td></tr>
+        <tr><th>Documentación</th><td><b>Guía del Configurador</b> y <b>Guía de Funcionalidades</b>, adjuntas en el mismo correo</td></tr>
+      </tbody>
+    </table>
+    <div class="adv">
+      <div class="t">Una entrega corresponde a una línea de equipo</div>
+      <p>El paquete de firmware está emitido para los equipos de <b>línea protegida</b>. Si se intenta cargar en un equipo de otra línea, el propio equipo <b>rechaza el archivo</b> y sigue funcionando con su versión anterior. No hay riesgo de dejar una unidad inservible por equivocar el paquete.</p>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="kick">— 02 / Procedimiento recomendado</div>
+    <h2 class="display">Cómo configurar un equipo</h2>
+    <div class="steps">
+      <div class="step"><span class="sh">Conectar y leer</span>Abrir el Configurador y conectarse al equipo. <b>Leer primero</b> la configuración que tiene cargada: es la base sobre la que se trabaja y el respaldo si algo hay que deshacer.</div>
+      <div class="step"><span class="sh">Editar por campos</span>Modificar los valores que correspondan <b>en el editor, campo por campo</b>. El equipo valida cada valor al recibirlo y, si lo rechaza, indica el motivo.</div>
+      <div class="step"><span class="sh">Guardar</span>Guardar la configuración en el equipo. Si algún campo fue rechazado, <b>la operación no se guarda a medias</b>.</div>
+      <div class="step"><span class="sh">Reiniciar y comprobar</span>Algunos parámetros se aplican al reiniciar — el Configurador lo indica cuando corresponde. Tras el reinicio, <b>volver a leer</b> la configuración y verificar que los valores son los esperados.</div>
+    </div>
+    <div class="adv">
+      <div class="t">Por qué campo por campo</div>
+      <p>Es el camino verificado en esta versión, y además el que da el mejor diagnóstico: un valor fuera de rango se informa <b>con su motivo</b> en el momento de escribirlo, en lugar de aparecer como un fallo genérico al final.</p>
+    </div>
+  </div>
+
+  <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Nota de versión y uso</div><div>Página 1 de 2</div></div>
+</section>
+
+<!-- ═══════════════ 2 · LIMITACIONES Y SOPORTE ═══════════════ -->
+<section class="page manual" data-screen-label="2 · Limitaciones conocidas">
+  <div class="hd">
+    <img src="../assets/logo-metrican.png" alt="MetriCAN" />
+    <div class="mid">Nota de versión y uso · <b>Limitaciones conocidas</b></div>
+    <div class="rt">DOC <b>NV-MC-2026</b><br />REV <b>01 · OCT 2026</b></div>
+  </div>
+  <div class="rule"></div>
+
+  <div class="sec">
+    <div class="kick">— 03 / Limitaciones conocidas</div>
+    <h2 class="display">Dos cosas a tener en cuenta</h2>
+    <p class="lead">Las dos están identificadas, tienen un camino alternativo y su corrección ya está en desarrollo para la próxima versión. Ninguna de las dos produce daño permanente en el equipo.</p>
+
+    <div class="box">
+      <div class="h">01 · Carga del archivo de configuración completo</div>
+      <ul>
+        <li><b>Qué ocurre.</b> Enviar el archivo de configuración completo en una sola operación puede provocar que el equipo se reinicie antes de terminar.</li>
+        <li><b>Qué hacer.</b> Usar la <b>edición por campos</b> descrita en la página anterior. Ese camino está verificado y no reinicia el equipo.</li>
+        <li><b>Si ocurre.</b> El equipo arranca de nuevo con su configuración anterior intacta. No queda a medio configurar: se vuelve a conectar y se continúa por campos.</li>
+      </ul>
+    </div>
+
+    <div class="box" style="margin-top:10px">
+      <div class="h">02 · Mensaje de verificación al terminar de guardar</div>
+      <ul>
+        <li><b>Qué ocurre.</b> Al cerrar una escritura, el Configurador puede informar que la operación <b>no se completó</b> aunque en el equipo sí haya quedado correcta.</li>
+        <li><b>Qué hacer.</b> Antes de repetir la operación, <b>volver a leer</b> la configuración del equipo. Si los valores son los esperados, la escritura fue correcta y el aviso es incorrecto.</li>
+        <li><b>Qué no hacer.</b> No repetir la carga varias veces seguidas por ese aviso: el equipo ya tiene los valores.</li>
+      </ul>
+    </div>
+
+    <div class="adv">
+      <div class="t">La regla corta</div>
+      <p>Configurar <b>por campos</b>, y <b>comprobar releyendo</b> en vez de confiar en el mensaje final. Con esos dos hábitos las dos limitaciones de esta versión quedan cubiertas.</p>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="kick">— 04 / Soporte</div>
+    <h2 class="display">Ante cualquier duda</h2>
+    <table class="tbl">
+      <thead><tr><th>Situación</th><th>Qué enviar</th></tr></thead>
+      <tbody>
+        <tr><th>El equipo no toma un valor</th><td>El <b>motivo</b> que informó el Configurador al rechazarlo, y el nombre del campo</td></tr>
+        <tr><th>El equipo se reinicia al configurar</th><td>Qué operación se estaba haciendo y, si se tiene, la configuración que se intentaba cargar</td></tr>
+        <tr><th>Duda sobre una variable</th><td>El nombre de la variable y el modelo de equipo donde está instalado</td></tr>
+      </tbody>
+    </table>
+    <div class="adv">
+      <div class="t">Canal de soporte</div>
+      <p>Escribir a <b>soporte@metrican.cl</b>. Las actualizaciones de firmware, configurador y documentación llegan siempre por ese mismo canal.</p>
+    </div>
+  </div>
+
+  <div class="ft"><div><span class="dot"></span><b>MetriCAN</b> · Santiago · Chile</div><div>NV-MC-2026 · REV 01</div><div>Página 2 de 2</div></div>
+</section>
+
+</doc-page>
+<script src="../assets/doc-page.js"></script>
+</body>
+</html>
